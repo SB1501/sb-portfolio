@@ -18,7 +18,7 @@ export function middleware(req: NextRequest) {
     const user = process.env.CV_USER || "";
     const pass = process.env.CV_PASS || "";
 
-    // If you forget to set env vars, fail closed.
+    // Fail closed if not configured
     if (!user || !pass) return unauthorized();
 
     const auth = req.headers.get("authorization");
