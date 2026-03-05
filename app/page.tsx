@@ -1,32 +1,38 @@
-import Link from "next/link";
 import { getUpdates } from "@/lib/updates";
+
+function formatDate(iso: string) {
+  // Expecting YYYY-MM-DD; this keeps it simple and consistent
+  const d = new Date(iso);
+  return d.toLocaleDateString("en-GB", {
+    day: "2-digit",
+    month: "short",
+    year: "numeric",
+  });
+}
 
 export default function Home() {
   const updates = getUpdates();
 
   return (
     <main className="mx-auto max-w-3xl px-6 py-10">
-      <header className="mb-10">
+      <header className="mb-8">
         <h1 className="text-3xl font-bold">Shane Bunting</h1>
-        <p className="mt-2 text-sm text-neutral-600">
-          Developer portfolio + micro updates.
+        <p className="mt-2 text-neutral-600">
+          Porftolio Website — Developer, projects, and updates.
         </p>
-
-        <nav className="mt-4 flex gap-4 text-sm">
-          <Link className="underline" href="/projects">Projects</Link>
-          <Link className="underline" href="/cv">CV</Link>
-        </nav>
       </header>
 
       <section>
-        <h2 className="text-xl font-semibold">Updates</h2>
+        <h1 className="text-xl font-semibold">Updates</h1>
 
         <ul className="mt-4 space-y-4">
           {updates.map((u) => (
             <li key={u.slug} className="rounded-lg border p-4">
               <div className="flex items-baseline justify-between gap-4">
-                <h3 className="font-medium">{u.title}</h3>
-                <time className="text-xs text-neutral-500">{u.date}</time>
+                <h2 className="font-medium">{u.title}</h2>
+                <time className="text-xs text-neutral-500">
+                  {formatDate(u.date)}
+                </time>
               </div>
 
               {u.excerpt && (
