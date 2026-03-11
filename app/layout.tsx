@@ -16,8 +16,33 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Shane Bunting — Developer",
-  description: "Developer portfolio, projects, and updates",
+  title: "Shane Bunting - Developer",
+  description: "Software developer portfolio, projects, updates and technical notes.",
+
+  metadataBase: new URL("https://shanebunting.dev"),
+
+  openGraph: {
+    title: "Shane Bunting - Portfolio",
+    description: "Software developer portfolio, projects, updates and technical notes.",
+    url: "https://shanebunting.dev",
+    siteName: "shanebunting.dev",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Shane Bunting Portfolio Open Graph Image",
+      }
+    ],
+    type: "website",
+  },
+
+  twitter: {
+    card: "summary_large_image",
+    title: "Shane Bunting",
+    description: "Software developer portfolio, projects, updates and technical notes.",
+    images: ["/og-image.png"],
+  },
 };
 
 export default function RootLayout({

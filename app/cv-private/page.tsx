@@ -1,19 +1,37 @@
-export default function CvPrivatePage() {
+import fs from "fs"
+import path from "path"
+import matter from "gray-matter"
+import { remark } from "remark"
+import html from "remark-html"
+
+export default async function CvPrivatePage() {
+
+    const filePath = path.join(process.cwd(), "content/cv-private.md")
+    const fileContent = fs.readFileSync(filePath, "utf8")
+
+    const { content } = matter(fileContent)
+
+    const processed = await remark()
+        .use(html)
+        .process(content)
+
+    const contentHtml = processed.toString()
+
     return (
         <main className="mx-auto max-w-3xl px-6 py-10">
-            <h1 className="text-3xl font-bold">CV (Private)</h1>
-            <p className="mt-2 text-neutral-600">
-                Detailed CV and references — shared by password on request.
-            </p>
+            <article
+                className="prose prose-neutral"
+                dangerouslySetInnerHTML={{ __html: contentHtml }}
+            />
 
-            <section className="mt-8 space-y-3 text-neutral-800">
-                <h2 className="text-xl font-semibold">Details</h2>
-                <ul className="list-disc pl-5">
-                    <li>Full work history</li>
-                    <li>References (names/contact details)</li>
-                    <li>Private notes for employers</li>
-                </ul>
-            </section>
+            <div className="mt-10 border-t pt-6">
+                <a
+                    href="/cv/shane-bunting-cv.pdf"
+                    className="rounded bg-black px-4 py-2 text-white hover:bg-neutral-800"
+                >
+                    Download PDF Version
+                </a>
+            </div>
         </main>
-    );
+    )
 }
