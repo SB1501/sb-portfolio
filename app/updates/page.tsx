@@ -22,7 +22,9 @@ export default function UpdatesPage() {
                         <div className="flex justify-between gap-4">
                             <div>
                                 <Link href={`/updates/${u.slug}`}>
-                                    <h2 className="font-medium hover:underline">{u.title}</h2>
+                                    <h2 className="font-medium hover:underline">
+                                        {u.title}
+                                    </h2>
                                 </Link>
 
                                 {u.excerpt && (
