@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { getUpdates } from "@/lib/updates";
 
 function formatDate(date: string) {
@@ -18,16 +19,28 @@ export default function UpdatesPage() {
             <ul className="mt-6 space-y-4">
                 {updates.map((u) => (
                     <li key={u.slug} className="border rounded-lg p-4">
-                        <div className="flex justify-between">
-                            <h2 className="font-medium">{u.title}</h2>
-                            <time className="text-xs text-neutral-500">
+                        <div className="flex justify-between gap-4">
+                            <div>
+                                <Link href={`/updates/${u.slug}`}>
+                                    <h2 className="font-medium hover:underline">{u.title}</h2>
+                                </Link>
+
+                                {u.excerpt && (
+                                    <p className="mt-2 text-sm text-neutral-700">{u.excerpt}</p>
+                                )}
+
+                                <Link
+                                    href={`/updates/${u.slug}`}
+                                    className="mt-3 inline-block text-sm text-neutral-600 hover:underline"
+                                >
+                                    Read more →
+                                </Link>
+                            </div>
+
+                            <time className="text-xs text-neutral-500 whitespace-nowrap">
                                 {formatDate(u.date)}
                             </time>
                         </div>
-
-                        {u.excerpt && (
-                            <p className="mt-2 text-sm text-neutral-700">{u.excerpt}</p>
-                        )}
                     </li>
                 ))}
             </ul>

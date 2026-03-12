@@ -42,6 +42,6 @@ export function getUpdates(): Update[] {
     });
 
     // newest first (ISO date strings sort correctly)
-    updates.sort((a, b) => b.date.localeCompare(a.date));
-    return updates;
+    return updates.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
+    );
 }
