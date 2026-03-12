@@ -1,7 +1,7 @@
+import Link from "next/link";
 import { getUpdates } from "@/lib/updates";
 
 function formatDate(iso: string) {
-  // Expecting YYYY-MM-DD; this keeps it simple and consistent
   const d = new Date(iso);
   return d.toLocaleDateString("en-GB", {
     day: "2-digit",
@@ -18,7 +18,7 @@ export default function Home() {
       <header className="mb-8">
         <h1 className="text-3xl font-bold">Shane Bunting</h1>
         <p className="mt-2 text-neutral-600">
-          Porftolio Website — Developer, projects, and updates.
+          Portfolio Website — Developer, projects, and updates.
         </p>
       </header>
 
@@ -29,8 +29,13 @@ export default function Home() {
           {updates.map((u) => (
             <li key={u.slug} className="rounded-lg border p-4">
               <div className="flex items-baseline justify-between gap-4">
-                <h2 className="font-medium">{u.title}</h2>
-                <time className="text-xs text-neutral-500">
+                <div>
+                  <Link href={`/updates/${u.slug}`}>
+                    <h2 className="font-medium hover:underline">{u.title}</h2>
+                  </Link>
+                </div>
+
+                <time className="text-xs text-neutral-500 whitespace-nowrap">
                   {formatDate(u.date)}
                 </time>
               </div>
@@ -38,6 +43,13 @@ export default function Home() {
               {u.excerpt && (
                 <p className="mt-2 text-sm text-neutral-700">{u.excerpt}</p>
               )}
+
+              <Link
+                href={`/updates/${u.slug}`}
+                className="mt-3 inline-block text-sm text-neutral-600 hover:underline"
+              >
+                Read more →
+              </Link>
 
               {u.tags.length > 0 && (
                 <div className="mt-3 flex flex-wrap gap-2">
