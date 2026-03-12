@@ -23,7 +23,6 @@ export default async function UpdatePage({
     params: Promise<{ slug: string }>;
 }) {
     const { slug } = await params;
-
     const fullPath = path.join(UPDATES_DIR, `${slug}.md`);
 
     if (!fs.existsSync(fullPath)) {
@@ -33,15 +32,23 @@ export default async function UpdatePage({
     const raw = fs.readFileSync(fullPath, "utf8");
     const parsed = matter(raw);
 
+    const title = String(parsed.data.title ?? slug);
+    const date = parsed.data.date
+        ? new Date(parsed.data.date).toLocaleDateString("en-GB", {
+            day: "2-digit",
+            month: "short",
+            year: "numeric",
+        })
+        : "";
+
     const processed = await remark().use(html).process(parsed.content);
     const contentHtml = processed.toString();
 
     return (
         <main className="mx-auto max-w-3xl px-6 py-10">
             <article className="prose prose-neutral max-w-none">
-                <h1>{parsed.data.title}</h1>
-                <p className="text-sm text-neutral-500">{parsed.data.date}</p>
-
+                <h1>{title}</h1>
+                {date && <p className="text-sm text-neutral-500">{date}</p>}
                 <div dangerouslySetInnerHTML={{ __html: contentHtml }} />
             </article>
         </main>
