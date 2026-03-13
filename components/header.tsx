@@ -21,10 +21,7 @@ export default function Header() {
             Projects
           </Link>
 
-          <Link
-            href="/updates"
-            className="rounded-md px-3 py-2 hover:bg-neutral-100 dark:hover:bg-neutral-900"
-          >
+          <Link href="/">
             Updates
           </Link>
 
