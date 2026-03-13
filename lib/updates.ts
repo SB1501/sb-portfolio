@@ -49,7 +49,6 @@ export function getUpdates(): Update[] {
 
 export function getAllTags(): string[] {
     const tags = getUpdates().flatMap((update) => update.tags);
-
     return [...new Set(tags)].sort((a, b) => a.localeCompare(b));
 }
 
