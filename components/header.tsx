@@ -47,6 +47,7 @@ export default function Header() {
 
               <Link
                 href="/cv-private"
+                prefetch={false}
                 className="block rounded px-3 py-2 text-sm hover:bg-neutral-100 dark:hover:bg-neutral-900"
               >
                 Private CV
