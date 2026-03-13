@@ -41,7 +41,22 @@ export function getUpdates(): Update[] {
         return { slug, date, title, tags, excerpt };
     });
 
-    // newest first (ISO date strings sort correctly)
-    return updates.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
+    // newest first
+    return updates.sort(
+        (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
+    );
+}
+
+export function getAllTags(): string[] {
+    const tags = getUpdates().flatMap((update) => update.tags);
+
+    return [...new Set(tags)].sort((a, b) => a.localeCompare(b));
+}
+
+export function getUpdatesByTag(tag: string): Update[] {
+    const normalisedTag = tag.toLowerCase();
+
+    return getUpdates().filter((update) =>
+        update.tags.some((t) => t.toLowerCase() === normalisedTag)
     );
 }
