@@ -40,7 +40,7 @@ export default async function UpdatesPage({ searchParams }: UpdatesPageProps) {
       <section className="mb-8">
         <div className="flex flex-wrap gap-2">
           <Link
-            href="/updates"
+            href="/"
             className={`rounded-full border px-3 py-1 text-sm transition ${!selectedTag
               ? "border-neutral-900 bg-neutral-900 text-white"
               : "border-neutral-300 text-neutral-700 hover:border-neutral-500 hover:text-neutral-900"
@@ -55,7 +55,7 @@ export default async function UpdatesPage({ searchParams }: UpdatesPageProps) {
             return (
               <Link
                 key={tag}
-                href={`/updates?tag=${encodeURIComponent(tag)}`}
+                href={`/?tag=${encodeURIComponent(tag)}`}
                 className={`rounded-full border px-3 py-1 text-sm transition ${isActive
                   ? "border-neutral-900 bg-neutral-900 text-white"
                   : "border-neutral-300 text-neutral-700 hover:border-neutral-500 hover:text-neutral-900"
@@ -76,9 +76,7 @@ export default async function UpdatesPage({ searchParams }: UpdatesPageProps) {
                 <div className="flex items-baseline justify-between gap-4">
                   <div>
                     <Link href={`/updates/${u.slug}`}>
-                      <h2 className="font-medium hover:underline">
-                        {u.title}
-                      </h2>
+                      <h2 className="font-medium hover:underline">{u.title}</h2>
                     </Link>
                   </div>
 
@@ -96,7 +94,7 @@ export default async function UpdatesPage({ searchParams }: UpdatesPageProps) {
                     {u.tags.map((tag) => (
                       <Link
                         key={tag}
-                        href={`/updates?tag=${encodeURIComponent(tag)}`}
+                        href={`/?tag=${encodeURIComponent(tag)}`}
                         className="text-xs text-neutral-500 hover:text-neutral-900 hover:underline"
                       >
                         #{tag}
@@ -110,11 +108,10 @@ export default async function UpdatesPage({ searchParams }: UpdatesPageProps) {
         ) : (
           <div className="rounded-lg border p-4">
             <p className="text-sm text-neutral-700">
-              No updates found for{" "}
-              <span className="font-medium">{selectedTag}</span>.
+              No updates found for <span className="font-medium">{selectedTag}</span>.
             </p>
             <Link
-              href="/updates"
+              href="/"
               className="mt-2 inline-block text-sm text-neutral-600 hover:underline"
             >
               View all updates
