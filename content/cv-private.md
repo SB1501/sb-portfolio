@@ -62,7 +62,7 @@ Managed support contracts across internal accounts ensuring renewals and service
 ### Marketing & Communications Development Officer  
 *Global Horizon Skills — June 2018 – July 2019*
 
-- Developed company websites
+- Developed company websites (sadly since replaced)
 - Graphic design and digital marketing
 - Office 365 deployment
 - Excel data analysis
