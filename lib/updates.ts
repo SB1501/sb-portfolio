@@ -33,10 +33,13 @@ export function getUpdates(): Update[] {
 
         // simple excerpt: first non-empty line of content
         const excerpt =
-            parsed.content
-                .split("\n")
-                .map((l) => l.trim())
-                .filter(Boolean)[0] ?? "";
+            String(parsed.data.excerpt ?? "") ||
+            (
+                parsed.content
+                    .split("\n")
+                    .map((l) => l.trim())
+                    .filter((l) => l && !l.startsWith("#") && !l.startsWith("!["))[0] ?? ""
+            );
 
         return { slug, date, title, tags, excerpt };
     });
