@@ -5,7 +5,7 @@ tags: ["technologies", "website", "portfolio", "nodejs", "react", "typescript", 
 excerpt: "A more in-depth look at the technology stack used on my portfolio site."
 ---
 
-# An in depth look at this Portfolio Website
+## An in depth look at this Portfolio Website
 I decided after writing the initial post covering the tech stack that I'd write more about what exactly each bit of each notable file does as this was my key learning whilst putting together this site. 
 
 ![Tech Stack Diagram](/images/website-tech-stack.png)

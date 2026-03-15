@@ -46,7 +46,7 @@ export default async function UpdatePage({
 
     return (
         <main className="mx-auto max-w-3xl px-6 py-10">
-            <article className="prose prose-neutral max-w-none">
+            <article className="prose prose-neutral max-w-none prose-img:mx-auto prose-img:max-w-xl">
                 <h1>{title}</h1>
                 {date && <p className="text-sm text-neutral-500">{date}</p>}
                 <div dangerouslySetInnerHTML={{ __html: contentHtml }} />
