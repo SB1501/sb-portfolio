@@ -1,7 +1,7 @@
 ---
 title: "Building an outage detector on AWS"
 date: "2026-03-15"
-tags: ["tag1", "tag2", "tag3"]
+tags: ["aws", "EventBridge", "Lambda", "resiliance", "project", "architecture", "SNS", "DynamoDB"]
 excerpt: "Short one sentence summary of the post."
 ---
 
@@ -17,7 +17,7 @@ This week I have started studying for the AWS Cloud Practitioner certificate. As
 
 The project uses the below services, all except one are tools I've never used before in any capacity: 
 
-- Event Bridge 
+- EventBridge 
 - Lambda
 - DynamoDB
 - SNS Simple Notification Service
@@ -25,7 +25,7 @@ The project uses the below services, all except one are tools I've never used be
 
 
 ## How it Works
-Every five minutes AWS will check for a 200 status from shanebunting.dev - if it gets anything but this response then it will fire an email to me to alert me that it's offline. The Event Bridge defines and acts on this interval, Lambda holds the Python code block that actually defines the functions and performs the check for the status code itself. DynamoDB is set up with the most basic, simple record keeping time and event description. Simple Notification Service is what sends the email out to me. 
+Every five minutes AWS will check for a 200 status from shanebunting.dev - if it gets anything but this response then it will fire an email to me to alert me that it's offline. The EventBridge defines and acts on this interval, Lambda holds the Python code block that actually defines the functions and performs the check for the status code itself. DynamoDB is set up with the most basic, simple record keeping time and event description. Simple Notification Service is what sends the email out to me. 
 
 ### CloudWatch Panel
 ![CloudWatch Panel](/images/cloudwatch-panel.png)
