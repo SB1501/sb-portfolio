@@ -43,7 +43,6 @@ As I had mentioned above I hadn't used AWS personally outside of work so being a
 
 ### Links
 
-Example link:
 
 [Visit my GitHub](https://github.com/SB1501)
 
