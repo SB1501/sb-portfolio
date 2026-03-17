@@ -1,4 +1,6 @@
 import Link from "next/link";
+import Logo from "@/components/logo";
+
 
 export default function Header() {
   return (
@@ -6,10 +8,12 @@ export default function Header() {
       <div className="mx-auto flex max-w-5xl items-center justify-between px-6 py-4">
 
         <Link
-          href="/"
-          className="text-sm font-semibold tracking-tight transition hover:opacity-80"
+          href="/" className="group flex flex-col items-start leading-none transition hover:opacity-80"
         >
-          Shane Bunting
+          <Logo className="h-8 w-auto text-neutral-950 transition duration-300 group-hover:-translate-y-0.5 dark:text-white" />
+          <span className="mt-1 text-[10px] font-semibold tracking-[0.28em] text-neutral-950 dark:text-white">
+            SHANE BUNTING
+          </span>
         </Link>
 
         <nav className="flex items-center gap-2 text-sm">

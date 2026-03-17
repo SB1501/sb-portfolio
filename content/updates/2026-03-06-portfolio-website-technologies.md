@@ -5,7 +5,7 @@ tags: ["technologies", "website", "portfolio", "nodejs", "react", "typescript", 
 excerpt: "A quick look at the technology stack used on my portfolio site."
 ---
 
-# Introduction
+## Introduction
 This portfolio site was an opportunity to explore some technologies I had not previously used, notably Node.js, React and the tooling required to deploy a modern web application. Although it will grow and evolve over time, it's deliberately simple for now. It's more important to me that I understand how everything works and can expand it as I learn more. That's why I didn't use WordPress or one of the off-the-shelf DIY website builders. Where's the fun in that?
 
 ## Next.js
