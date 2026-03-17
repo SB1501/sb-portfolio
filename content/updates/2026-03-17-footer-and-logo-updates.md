@@ -2,7 +2,7 @@
 title: "Footer & Logo Updates"
 date: "2026-03-17"
 tags: ["web", "development", "branding", "support", "React"]
-excerpt: "Short one sentence summary of the post."
+excerpt: "Learning React Inline SVG Image usage."
 ---
 
 ## Discovering inline SVG logos in React
@@ -40,7 +40,7 @@ On the bottom right of the footer I have a 'Buy Me a Coffee' support donation li
 
 ### Links
 
-[Visit my GitHub](https://github.com/SB1501)
-[Why not Buy Me A Coffee?](https://buymeacoffee.com/shanebunting)
+- [Visit my GitHub](https://github.com/SB1501)
+- [Why not Buy Me A Coffee?](https://buymeacoffee.com/shanebunting)
 
 ---
