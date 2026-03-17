@@ -2,7 +2,7 @@
 title: "Building an outage detector on AWS"
 date: "2026-03-15"
 tags: ["aws", "EventBridge", "Lambda", "resiliance", "project", "architecture", "SNS", "DynamoDB"]
-excerpt: "Short one sentence summary of the post."
+excerpt: "Building an outate detector on AWS"
 ---
 
 ## Monitoring outages with AWS
