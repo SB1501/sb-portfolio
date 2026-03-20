@@ -32,7 +32,7 @@ export default async function UpdatesPage({ searchParams }: UpdatesPageProps) {
     <main className="mx-auto max-w-3xl px-6 py-10">
       <header className="mb-10">
         <h1 className="text-3xl font-bold">Updates</h1>
-        <p className="mt-2 text-neutral-600">
+        <p className="mt-2 text-neutral-700 dark:text-neutral-300">
           Notes, progress updates, and development logs.
         </p>
       </header>
