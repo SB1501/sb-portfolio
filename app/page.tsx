@@ -43,7 +43,7 @@ export default async function UpdatesPage({ searchParams }: UpdatesPageProps) {
             href="/"
             className={`rounded-full border px-3 py-1 text-sm transition ${!selectedTag
               ? "border-neutral-900 bg-neutral-900 text-white"
-              : "border-neutral-300 text-neutral-700 hover:border-neutral-500 hover:text-neutral-900"
+              : "border-neutral-300 text-neutral-700 dark:text-neutral-300 hover:border-neutral-500 hover:text-neutral-900 dark:hover:text-white"
               }`}
           >
             All
@@ -58,7 +58,7 @@ export default async function UpdatesPage({ searchParams }: UpdatesPageProps) {
                 href={`/?tag=${encodeURIComponent(tag)}`}
                 className={`rounded-full border px-3 py-1 text-sm transition ${isActive
                   ? "border-neutral-900 bg-neutral-900 text-white"
-                  : "border-neutral-300 text-neutral-700 hover:border-neutral-500 hover:text-neutral-900"
+                  : "border-neutral-300 text-neutral-700 dark:text-neutral-300 hover:border-neutral-500 hover:text-neutral-900 dark:hover:text-white"
                   }`}
               >
                 {formatTag(tag)}
@@ -80,13 +80,13 @@ export default async function UpdatesPage({ searchParams }: UpdatesPageProps) {
                     </Link>
                   </div>
 
-                  <time className="whitespace-nowrap text-xs text-neutral-500">
+                  <time className="whitespace-nowrap text-xs text-neutral-500 dark:text-neutral-400">
                     {formatDate(u.date)}
                   </time>
                 </div>
 
                 {u.excerpt && (
-                  <p className="mt-2 text-sm text-neutral-700">{u.excerpt}</p>
+                  <p className="mt-2 text-sm text-neutral-700 dark:text-neutral-300">{u.excerpt}</p>
                 )}
 
                 {u.tags.length > 0 && (
@@ -95,7 +95,7 @@ export default async function UpdatesPage({ searchParams }: UpdatesPageProps) {
                       <Link
                         key={tag}
                         href={`/?tag=${encodeURIComponent(tag)}`}
-                        className="text-xs text-neutral-500 hover:text-neutral-900 hover:underline"
+                        className="text-xs text-neutral-500 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white hover:underline"
                       >
                         #{tag}
                       </Link>
@@ -107,7 +107,7 @@ export default async function UpdatesPage({ searchParams }: UpdatesPageProps) {
           </ul>
         ) : (
           <div className="rounded-lg border p-4">
-            <p className="text-sm text-neutral-700">
+            <p className="text-sm text-neutral-700 dark:text-neutral-300">
               No updates found for <span className="font-medium">{selectedTag ? formatTag(selectedTag) : ""}</span>.
             </p>
             <Link

@@ -8,7 +8,7 @@ export default function CvPage() {
 
             <section className="mt-8 space-y-2">
                 <h2 className="text-xl font-semibold">Skills</h2>
-                <ul className="list-disc pl-5 text-neutral-700">
+                <ul className="list-disc pl-5 text-neutral-700 dark:text-neutral-300">
                     <li>TypeScript / JavaScript</li>
                     <li>Next.js / React</li>
                     <li>Django / Python</li>
