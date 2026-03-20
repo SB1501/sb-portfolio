@@ -18,14 +18,17 @@ function normalizeTag(tag: string): string {
 
 function getTagLabel(tag: string): string {
     const labels: Record<string, string> = {
-        react: "React",
+        "react": "React",
         "next.js": "Next.js",
+        "nextjs": "Next.js",
         "typescript": "TypeScript",
         "aws": "AWS",
         "javascript": "JavaScript",
         "node.js": "Node.js",
+        "nodejs": "Node.js",
         "css": "CSS",
         "html": "HTML",
+        "dynamodb": "DynamoDB",
     };
 
     const normalized = normalizeTag(tag);

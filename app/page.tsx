@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { getAllTags, getUpdates, getUpdatesByTag, formatTag } from "@/lib/updates";
+import SidebarCard from "@/components/sidebar-card";
 
 function formatDate(iso: string) {
   return new Date(iso).toLocaleDateString("en-GB", {
@@ -29,96 +30,114 @@ export default async function UpdatesPage({ searchParams }: UpdatesPageProps) {
   const updates = selectedTag ? getUpdatesByTag(selectedTag) : getUpdates();
 
   return (
-    <main className="mx-auto max-w-3xl px-6 py-10">
-      <header className="mb-10">
-        <h1 className="text-3xl font-bold">Updates</h1>
-        <p className="mt-2 text-neutral-700 dark:text-neutral-300">
-          Notes, progress updates, and development logs.
-        </p>
-      </header>
 
-      <section className="mb-8">
-        <div className="flex flex-wrap gap-2">
-          <Link
-            href="/"
-            className={`rounded-full border px-3 py-1 text-sm transition ${!selectedTag
-              ? "border-neutral-900 bg-neutral-900 text-white"
-              : "border-neutral-300 text-neutral-700 dark:text-neutral-300 hover:border-neutral-500 hover:text-neutral-900 dark:hover:text-white"
-              }`}
-          >
-            All
-          </Link>
+    <main className="mx-auto max-w-6xl px-6 py-10">
+      <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_280px]">
 
-          {tags.map((tag) => {
-            const isActive = selectedTag?.toLowerCase() === tag;
 
-            return (
+        <div className="min-w-0">
+          <header className="mb-10">
+
+            <h1 className="text-3xl font-bold">Updates</h1>
+            <p className="mt-2 text-neutral-700 dark:text-neutral-300">
+              Notes, progress updates, and development logs.
+            </p>
+          </header>
+
+          <section>
+            {updates.length > 0 ? (
+              <ul className="space-y-4">
+                {updates.map((u) => (
+                  <li key={u.slug} className="rounded-lg border p-4">
+                    <div className="flex items-baseline justify-between gap-4">
+                      <div>
+                        <Link href={`/updates/${u.slug}`}>
+                          <h2 className="font-medium hover:underline">{u.title}</h2>
+                        </Link>
+                      </div>
+
+                      <time className="whitespace-nowrap text-xs text-neutral-500 dark:text-neutral-400">
+                        {formatDate(u.date)}
+                      </time>
+                    </div>
+
+                    {u.excerpt && (
+                      <p className="mt-2 text-sm text-neutral-700 dark:text-neutral-300">{u.excerpt}</p>
+                    )}
+
+                    {u.tags.length > 0 && (
+                      <div className="mt-3 flex flex-wrap gap-2">
+                        {u.tags.map((tag) => (
+                          <Link
+                            key={tag}
+                            href={`/?tag=${encodeURIComponent(tag)}`}
+                            className="text-xs text-neutral-500 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white hover:underline"
+                          >
+                            #{formatTag(tag)}
+                          </Link>
+                        ))}
+                      </div>
+                    )}
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              <div className="rounded-lg border p-4">
+                <p className="text-sm text-neutral-700 dark:text-neutral-300">
+                  No updates found for <span className="font-medium">{selectedTag ? formatTag(selectedTag) : ""}</span>.
+                </p>
+                <Link
+                  href="/"
+                  className="mt-2 inline-block text-sm text-neutral-600 dark:text-neutral-300 hover:underline"
+                >
+                  View all updates
+                </Link>
+              </div>
+            )}
+          </section>
+        </div>
+
+        <aside className="space-y-6">
+          <SidebarCard title="About">
+            <p className="text-sm text-neutral-700 dark:text-neutral-300">
+              This is a collection of my personal updates, notes, and development logs. I use it to share progress on projects, jot down thoughts, and document learnings.
+            </p>
+          </SidebarCard>
+
+          <SidebarCard title="Tags">
+            <div className="flex flex-wrap gap-2">
               <Link
-                key={tag}
-                href={`/?tag=${encodeURIComponent(tag)}`}
-                className={`rounded-full border px-3 py-1 text-sm transition ${isActive
+                href="/"
+                className={`rounded-full border px-3 py-1 text-sm transition ${!selectedTag
                   ? "border-neutral-900 bg-neutral-900 text-white"
-                  : "border-neutral-300 text-neutral-700 dark:text-neutral-300 hover:border-neutral-500 hover:text-neutral-900 dark:hover:text-white"
+                  : "border-neutral-300 text-neutral-700 hover:border-neutral-500 hover:text-neutral-900 dark:border-neutral-700 dark:text-neutral-300 dark:hover:border-neutral-500 dark:hover:text-white"
                   }`}
               >
-                {formatTag(tag)}
+                All
               </Link>
-            );
-          })}
-        </div>
-      </section>
 
-      <section>
-        {updates.length > 0 ? (
-          <ul className="space-y-4">
-            {updates.map((u) => (
-              <li key={u.slug} className="rounded-lg border p-4">
-                <div className="flex items-baseline justify-between gap-4">
-                  <div>
-                    <Link href={`/updates/${u.slug}`}>
-                      <h2 className="font-medium hover:underline">{u.title}</h2>
-                    </Link>
-                  </div>
+              {tags.map((tag) => {
+                const isActive = selectedTag?.toLowerCase() === tag;
 
-                  <time className="whitespace-nowrap text-xs text-neutral-500 dark:text-neutral-400">
-                    {formatDate(u.date)}
-                  </time>
-                </div>
+                return (
+                  <Link
+                    key={tag}
+                    href={`/?tag=${encodeURIComponent(tag)}`}
+                    className={`rounded-full border px-3 py-1 text-sm transition ${isActive
+                      ? "border-neutral-900 bg-neutral-900 text-white"
+                      : "border-neutral-300 text-neutral-700 hover:border-neutral-500 hover:text-neutral-900 dark:border-neutral-700 dark:text-neutral-300 dark:hover:border-neutral-500 dark:hover:text-white"
+                      }`}
+                  >
+                    {formatTag(tag)}
+                  </Link>
+                );
+              })}
+            </div>
+          </SidebarCard>
+        </aside>
 
-                {u.excerpt && (
-                  <p className="mt-2 text-sm text-neutral-700 dark:text-neutral-300">{u.excerpt}</p>
-                )}
+      </div >
+    </main >
 
-                {u.tags.length > 0 && (
-                  <div className="mt-3 flex flex-wrap gap-2">
-                    {u.tags.map((tag) => (
-                      <Link
-                        key={tag}
-                        href={`/?tag=${encodeURIComponent(tag)}`}
-                        className="text-xs text-neutral-500 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white hover:underline"
-                      >
-                        #{tag}
-                      </Link>
-                    ))}
-                  </div>
-                )}
-              </li>
-            ))}
-          </ul>
-        ) : (
-          <div className="rounded-lg border p-4">
-            <p className="text-sm text-neutral-700 dark:text-neutral-300">
-              No updates found for <span className="font-medium">{selectedTag ? formatTag(selectedTag) : ""}</span>.
-            </p>
-            <Link
-              href="/"
-              className="mt-2 inline-block text-sm text-neutral-600 hover:underline"
-            >
-              View all updates
-            </Link>
-          </div>
-        )}
-      </section>
-    </main>
   );
 }
