@@ -12,10 +12,28 @@
   --font-mono: var(--font-geist-mono);
 }
 
+.prose {
+  --tw-prose-body: #374151;
+  --tw-prose-headings: #111827;
+  --tw-prose-links: #111827;
+  --tw-prose-bold: #111827;
+  --tw-prose-bullets: #6b7280;
+  --tw-prose-counters: #6b7280;
+}
+
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
     --foreground: #ededed;
+  }
+
+  .prose {
+    --tw-prose-body: #d1d5db;
+    --tw-prose-headings: #f9fafb;
+    --tw-prose-links: #ffffff;
+    --tw-prose-bold: #f9fafb;
+    --tw-prose-bullets: #9ca3af;
+    --tw-prose-counters: #9ca3af;
   }
 }
 

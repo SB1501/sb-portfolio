@@ -12,6 +12,27 @@ export type Update = {
 
 const UPDATES_DIR = path.join(process.cwd(), "content", "updates");
 
+function normalizeTag(tag: string): string {
+    return tag.trim().toLowerCase();
+}
+
+function getTagLabel(tag: string): string {
+    const labels: Record<string, string> = {
+        react: "React",
+        "next.js": "Next.js",
+        "typescript": "TypeScript",
+        "aws": "AWS",
+        "javascript": "JavaScript",
+        "node.js": "Node.js",
+        "css": "CSS",
+        "html": "HTML",
+    };
+
+    const normalized = normalizeTag(tag);
+    return labels[normalized] ?? tag.trim();
+
+}
+
 export function getUpdates(): Update[] {
     const files = fs.readdirSync(UPDATES_DIR).filter((f) => f.endsWith(".md"));
 
@@ -24,12 +45,15 @@ export function getUpdates(): Update[] {
         const date = String(parsed.data.date ?? "");
         const title = String(parsed.data.title ?? slug);
         const tagsRaw = parsed.data.tags ?? [];
+
         const tags = Array.isArray(tagsRaw)
             ? tagsRaw.map(String)
             : String(tagsRaw)
                 .split(",")
                 .map((t) => t.trim())
                 .filter(Boolean);
+
+        const normalizedUniqueTags = [...new Set(tags.map(normalizeTag))];
 
         // simple excerpt: first non-empty line of content
         const excerpt =
@@ -41,7 +65,7 @@ export function getUpdates(): Update[] {
                     .filter((l) => l && !l.startsWith("#") && !l.startsWith("!["))[0] ?? ""
             );
 
-        return { slug, date, title, tags, excerpt };
+        return { slug, date, title, tags: normalizedUniqueTags, excerpt };
     });
 
     // newest first
@@ -56,9 +80,13 @@ export function getAllTags(): string[] {
 }
 
 export function getUpdatesByTag(tag: string): Update[] {
-    const normalisedTag = tag.toLowerCase();
+    const normalizedTag = normalizeTag(tag);
 
     return getUpdates().filter((update) =>
-        update.tags.some((t) => t.toLowerCase() === normalisedTag)
+        update.tags.includes(normalizedTag)
     );
+}
+
+export function formatTag(tag: string) {
+    return getTagLabel(tag);
 }

@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { getAllTags, getUpdates, getUpdatesByTag } from "@/lib/updates";
+import { getAllTags, getUpdates, getUpdatesByTag, formatTag } from "@/lib/updates";
 
 function formatDate(iso: string) {
   return new Date(iso).toLocaleDateString("en-GB", {
@@ -50,7 +50,7 @@ export default async function UpdatesPage({ searchParams }: UpdatesPageProps) {
           </Link>
 
           {tags.map((tag) => {
-            const isActive = selectedTag?.toLowerCase() === tag.toLowerCase();
+            const isActive = selectedTag?.toLowerCase() === tag;
 
             return (
               <Link
@@ -61,7 +61,7 @@ export default async function UpdatesPage({ searchParams }: UpdatesPageProps) {
                   : "border-neutral-300 text-neutral-700 hover:border-neutral-500 hover:text-neutral-900"
                   }`}
               >
-                {tag}
+                {formatTag(tag)}
               </Link>
             );
           })}
@@ -108,7 +108,7 @@ export default async function UpdatesPage({ searchParams }: UpdatesPageProps) {
         ) : (
           <div className="rounded-lg border p-4">
             <p className="text-sm text-neutral-700">
-              No updates found for <span className="font-medium">{selectedTag}</span>.
+              No updates found for <span className="font-medium">{selectedTag ? formatTag(selectedTag) : ""}</span>.
             </p>
             <Link
               href="/"
