@@ -19,6 +19,13 @@ export default function Header() {
         <nav className="flex items-center gap-2 text-sm">
 
           <Link
+            href="/"
+            className="rounded-md px-3 py-2 hover:bg-neutral-100 dark:hover:bg-neutral-900"
+          >
+            Updates
+          </Link>
+
+          <Link
             href="/projects"
             className="rounded-md px-3 py-2 hover:bg-neutral-100 dark:hover:bg-neutral-900"
           >
@@ -26,10 +33,10 @@ export default function Header() {
           </Link>
 
           <Link
-            href="/"
+            href="https://github.com/SB1501"
             className="rounded-md px-3 py-2 hover:bg-neutral-100 dark:hover:bg-neutral-900"
           >
-            Updates
+            GitHub
           </Link>
 
           <div className="relative group">
