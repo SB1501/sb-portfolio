@@ -11,23 +11,23 @@ export default function ProjectsPage() {
 
             <section className="mt-10 space-y-6">
 
-                <article className="overflow-hidden rounded-3xl border border-white/10 shadow-xl">
+                <article className="overflow-hidden rounded-3xl border border-black/10 shadow-xl">
 
                     <div className="bg-gradient-to-br from-[#00fbcf] to-[#73ffff] p-8 md:p-10">
 
                         <div className="grid gap-8 md:grid-cols-2 md:items-center">
 
                             <div>
-                                <p className="text-sm font-medium uppercase tracking-[0.2em] text-white/80">
+                                <p className="text-sm font-medium uppercase tracking-[0.2em] text-black/80">
                                     Featured Project
                                 </p>
-                                <h2 className="mt-3 text-3xl font-bold tracking-tight text-white md:text-4xl">
+                                <h2 className="mt-3 text-3xl font-bold tracking-tight text-black md:text-4xl">
                                     Mindful Check-In
                                 </h2>
-                                <p className="mt-4 max-w-xl text-base leading-7 text-white/90">
+                                <p className="mt-4 max-w-xl text-base leading-7 text-black/90">
                                     A privacy-focused iPhone app designed to help users reflect on how they feel, notice patterns and build awareness of small daily factors that affect wellbeing.
                                 </p>
-                                <ul className="mt-6 space-y-3 text-sm text-white/90">
+                                <ul className="mt-6 space-y-3 text-sm text-black/90">
                                     <li>- Quick Mindful Check-In Surveys</li>
                                     <li>- Privacy-friendly on device approach</li>
                                     <li>- Trend pattern and awareness over time</li>
@@ -35,9 +35,9 @@ export default function ProjectsPage() {
                                 </ul>
 
                                 <div className="mt-6 flex flex-wrap gap-2">
-                                    <span className="rounded-full bg-white/20 px-3 py-1 text-xs font-medium text-white">SwiftUI</span>
-                                    <span className="rounded-full bg-white/20 px-3 py-1 text-xs font-medium text-white">Swift</span>
-                                    <span className="rounded-full bg-white/20 px-3 py-1 text-xs font-medium text-white">iOS</span>
+                                    <span className="rounded-full bg-white/20 px-3 py-1 text-xs font-medium text-black">SwiftUI</span>
+                                    <span className="rounded-full bg-white/20 px-3 py-1 text-xs font-medium text-black">Swift</span>
+                                    <span className="rounded-full bg-white/20 px-3 py-1 text-xs font-medium text-black">iOS</span>
                                 </div>
 
                                 <div className="mt-8 flex flex-wrap gap-3">
@@ -47,7 +47,7 @@ export default function ProjectsPage() {
                                     </a>
 
                                     <a href="https://github.com/SB1501/Mindful-CheckIn-iOS-App"
-                                        className="inline-flex items-center rounded-full border border-white/40 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-white/10">
+                                        className="inline-flex items-center rounded-full border border-white/40 px-5 py-2.5 text-sm font-semibold text-black transition hover:bg-white/10">
                                         View Git Repository
                                     </a>
                                 </div>
@@ -55,9 +55,16 @@ export default function ProjectsPage() {
                             </div>
 
                             <div className="flex justify-center md:justify-end">
-                                <div className="w-full max-w-[260px] rounded-[2rem] bg-white/15 p-3 shadow-2xl backdrop-blur-sm">
-                                    <div className="aspect-[9/19] rounded-[1.5rem] bg-white/20">
-                                        <img src="/images/mindful-check-in.gif" alt="Mindful Check-In App Screenshot" className="h-full w-full rounded-[1.5rem] object-cover" />
+                                <div className="w-full max-w-[260px] rounded-[2.5rem] border border-black/10 bg-neutral-900 p-2 shadow-[0_20px_60px_rgba(0,0,0,0.35)]">
+                                    <div className="aspect-[9/19] overflow-hidden rounded-[2rem] bg-black">
+                                        <video
+                                            src="/images/mindful-check-in.mp4"
+                                            autoPlay
+                                            loop
+                                            muted
+                                            playsInline
+                                            className="h-full w-full object-cover"
+                                        />
                                     </div>
                                 </div>
                             </div>
@@ -83,7 +90,7 @@ export default function ProjectsPage() {
                             <span className="rounded-full bg-white/10 px-3 py-1 text-xs text-white">Swift</span>
                         </div>
                         <div className="mt-6 flex gap-3">
-                            <a href="https://apps.apple.com/gb/app/magic-8-ball-watch/id6744827735" className="text-sm font-semibold text-white underline underline-offset-4">
+                            <a href="https://apps.apple.com/gb/app/magic-8-ball-watch/id6744827735" target="_blank" rel="noopener noreferrer" className="text-sm font-semibold text-black underline underline-offset-4">
                                 View on the App Store
                             </a>
                         </div>
@@ -102,7 +109,7 @@ export default function ProjectsPage() {
                             <span className="rounded-full bg-white/15 px-3 py-1 text-xs text-white">Swift</span>
                         </div>
                         <div className="mt-6 flex gap-3">
-                            <a href="https://apps.apple.com/gb/app/wisdom-watch-app/id6744831375" className="text-sm font-semibold text-white underline underline-offset-4">
+                            <a href="https://apps.apple.com/gb/app/wisdom-watch-app/id6744831375" target="_blank" rel="noopener noreferrer" className="text-sm font-semibold text-black underline underline-offset-4">
                                 View on the App Store
                             </a>
                         </div>
