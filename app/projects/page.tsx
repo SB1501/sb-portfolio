@@ -47,7 +47,7 @@ export default function ProjectsPage() {
                                     </a>
 
                                     <a href="https://github.com/SB1501/Mindful-CheckIn-iOS-App"
-                                        className="inline-flex items-center rounded-full border border-white/40 px-5 py-2.5 text-sm font-semibold text-black transition hover:bg-white/10">
+                                        className="inline-flex items-center rounded-full border border-white/40 px-5 py-2.5 text-sm font-semibold text-black transition hover:bg-white/30">
                                         View Git Repository
                                     </a>
                                 </div>
