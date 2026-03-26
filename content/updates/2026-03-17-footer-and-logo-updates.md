@@ -33,7 +33,7 @@ This involved placing the text. Converting to curves. And overlaying parts with 
 Contrary to me thinking that it was just a matter of placing the .svg file into the site's storage and referencing it in HTML as I had done in the past, there is an inline React component way of handling it. A new file in components/logo.tsx defines the properties of the logo, right down to the fillColor element and math that draws the shapes. This enables it to behave like a part of React's UI and be controlled stylistically with Tailwind's CSS styling such as colour and even the little animation when hovered over. This path-based logo makes my personal 'brand' (if you could call it that) a working component of this site as a project and is something that will scale better and suit web use much more effectively. I found it pretty cool to know how this worked as on many 'big company' professional websites would do. 
 
 ## Digital Begging made Easy
-On the bottom right of the footer I have a 'Buy Me a Coffee' support donation link. I made this last week to put into the Mindful Check-In app, which is free and always will be, but as a donation hidden in settings. Of course, Apple want a 30% cut, so it's had to be removed but since the page is set up... why not add it here? 
+On the bottom right of the footer I have a 'Buy Me a Coffee' support link. I made this last week to put into the Mindful Check-In app, which is free and always will be, but as a support option hidden in settings. Of course, Apple want a 30% cut, so it's had to be removed but since the page is set up... why not add it here? 
 
 
 ---
