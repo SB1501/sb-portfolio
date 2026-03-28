@@ -44,8 +44,26 @@ export default async function UpdatePage({
     const processed = await remark().use(html).process(parsed.content);
     const contentHtml = processed.toString();
 
+    const type = parsed.data.type === "video" ? "video" : "post";
+    const youtubeId = parsed.data.youtubeId ? String(parsed.data.youtubeId) : undefined;
+
+
     return (
         <main className="mx-auto max-w-3xl px-6 py-10">
+            {type === "video" && youtubeId && (
+                <div className="mb-6 overflow-hidden rounded-2xl border border-neutral-200 dark:border-neutral-800">
+                    <div className="aspect-video">
+                        <iframe
+                            className="h-full w-full"
+                            src={`https://www.youtube.com/embed/${youtubeId}`}
+                            title={title}
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowFullScreen
+                        />
+                    </div>
+                </div>
+            )}
+
             <article className="prose prose-neutral mx-auto max-w-2xl prose-img:mx-auto prose-img:max-h-[50vh] prose-img:w-auto prose-img:max-w-full">
                 <h1>{title}</h1>
                 {date && <p className="text-sm text-neutral-500 dark:text-neutral-400">{date}</p>}

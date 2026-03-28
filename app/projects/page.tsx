@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 export default function ProjectsPage() {
     return (
 
@@ -42,12 +44,12 @@ export default function ProjectsPage() {
 
                                 <div className="mt-8 flex flex-wrap gap-3">
                                     <a href="https://apps.apple.com/gb/app/mindful-check-in/id6758107607"
-                                        className="inline-flex items-center rounded-full bg-white px-5 py-2.5 text-sm font-semibold text-teal-700 transition hover:scale-[1.02]">
+                                        className="inline-flex items-center rounded-full border border-black/40 px-5 py-2.5 text-sm font-semibold text-white transition bg-black hover:bg-black/50">
                                         Download on the App Store
                                     </a>
 
                                     <a href="https://github.com/SB1501/Mindful-CheckIn-iOS-App"
-                                        className="inline-flex items-center rounded-full border border-white/40 px-5 py-2.5 text-sm font-semibold text-black transition hover:bg-white/30">
+                                        className="inline-flex items-center rounded-full border border-white/40 px-5 py-2.5 text-sm font-semibold text-black transition bg-white hover:bg-white/50">
                                         View Git Repository
                                     </a>
                                 </div>

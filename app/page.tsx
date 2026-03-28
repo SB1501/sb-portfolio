@@ -1,6 +1,9 @@
+import Image from "next/image";
 import Link from "next/link";
 import { getAllTags, getUpdates, getUpdatesByTag, formatTag } from "@/lib/updates";
 import SidebarCard from "@/components/sidebar-card";
+import { Video, FileText, Code2 } from "lucide-react";
+
 
 function formatDate(iso: string) {
   return new Date(iso).toLocaleDateString("en-GB", {
@@ -9,6 +12,17 @@ function formatDate(iso: string) {
     year: "numeric",
   });
 }
+
+function getUpdateIcon(type: string, tags: string[]) {
+  if (type === "video") return <Video className="h-4 w-4" />;
+
+  if (tags.includes("react") || tags.includes("typescript") || tags.includes("javascript")) {
+    return <Code2 className="h-4 w-4" />;
+  }
+
+  return <FileText className="h-4 w-4" />;
+}
+
 
 type UpdatesPageProps = {
   searchParams: Promise<{
@@ -29,6 +43,27 @@ export default async function UpdatesPage({ searchParams }: UpdatesPageProps) {
   const tags = getAllTags();
   const updates = selectedTag ? getUpdatesByTag(selectedTag) : getUpdates();
 
+  const featuredRepos = [
+    {
+      name: "Mindful Check-In App",
+      description: "iOS wellbeing app with guided check-ins and reflective summaries",
+      href: "https://github.com/SB1501/Mindful-CheckIn-iOS-App",
+      tech: ["Swift", "SwiftUI", "iOS"],
+    },
+    {
+      name: "Portfolio Website",
+      description: "This Next.js portfolio site with updates, projects and more",
+      href: "https://github.com/SB1501/sb-portfolio",
+      tech: ["Next.js", "TypeScript", "Tailwind CSS"],
+    },
+    {
+      name: "Harbour Haven Mall Website",
+      description: "A static modern website for a fictional shopping mall / college project",
+      href: "https://github.com/SB1501/Harbour-Haven-Mall",
+      tech: ["HTML", "CSS", "JavaScript"],
+    }
+  ];
+
   return (
 
     <main className="mx-auto max-w-6xl px-6 py-10">
@@ -38,48 +73,83 @@ export default async function UpdatesPage({ searchParams }: UpdatesPageProps) {
         <div className="min-w-0">
           <header className="mb-10">
 
-            <h1 className="text-3xl font-bold">Updates</h1>
+            <h1 className="text-3xl font-bold">Latest Updates</h1>
             <p className="mt-2 text-neutral-700 dark:text-neutral-300">
               Notes, progress updates, and development logs.
             </p>
+
+            {selectedTag && (
+              <p className="mt-2 text-sm text-neutral-500 dark:text-neutral-400">
+                Showing updates tagged #{formatTag(selectedTag)}
+              </p>
+            )}
+
           </header>
 
           <section>
+
             {updates.length > 0 ? (
               <ul className="space-y-4">
                 {updates.map((u) => (
-                  <li key={u.slug} className="rounded-lg border p-4">
-                    <div className="flex items-baseline justify-between gap-4">
-                      <div>
-                        <Link href={`/updates/${u.slug}`}>
-                          <h2 className="font-medium hover:underline">{u.title}</h2>
-                        </Link>
+                  <li key={u.slug}>
+                    <Link
+                      href={`/updates/${u.slug}`}
+                      className="block rounded-lg border p-4 transition hover:border-neutral-400 hover:bg-neutral-50 dark:hover:border-neutral-700 dark:hover:bg-neutral-900"
+                    >
+                      <div className="mb-4 flex items-center gap-3">
+                        <div className="flex h-10 w-10 items-center justify-center rounded-full bg-neutral-100 text-neutral-600 dark:bg-neutral-800 dark:text-neutral-300">
+                          {getUpdateIcon(u.type, u.tags)}
+                        </div>
+                        <p className="text-xs uppercase tracking-wide text-neutral-500 dark:text-neutral-400">
+                          {u.type === "video" ? "Video" : "Post"}
+                        </p>
                       </div>
 
-                      <time className="whitespace-nowrap text-xs text-neutral-500 dark:text-neutral-400">
-                        {formatDate(u.date)}
-                      </time>
-                    </div>
+                      {u.type === "video" && u.youtubeId && (
+                        <div className="mb-4 overflow-hidden rounded-2xl border border-neutral-200 dark:border-neutral-800">
+                          <div className="aspect-video">
+                            <iframe
+                              className="h-full w-full"
+                              src={`https://www.youtube.com/embed/${u.youtubeId}`}
+                              title={u.title}
+                              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                              allowFullScreen
+                            />
+                          </div>
+                        </div>
+                      )}
 
-                    {u.excerpt && (
-                      <p className="mt-2 text-sm text-neutral-700 dark:text-neutral-300">{u.excerpt}</p>
-                    )}
+                      <div className="flex items-baseline justify-between gap-4">
+                        <div>
+                          <h2 className="font-medium">{u.title}</h2>
+                        </div>
 
-                    {u.tags.length > 0 && (
-                      <div className="mt-3 flex flex-wrap gap-2">
-                        {u.tags.map((tag) => (
-                          <Link
-                            key={tag}
-                            href={`/?tag=${encodeURIComponent(tag)}`}
-                            className="text-xs text-neutral-500 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white hover:underline"
-                          >
-                            #{formatTag(tag)}
-                          </Link>
-                        ))}
+                        <time className="whitespace-nowrap text-xs text-neutral-500 dark:text-neutral-400">
+                          {formatDate(u.date)}
+                        </time>
                       </div>
-                    )}
+
+                      {u.excerpt && (
+                        <p className="mt-2 text-sm text-neutral-700 dark:text-neutral-300">{u.excerpt}</p>
+                      )}
+
+                      {u.tags.length > 0 && (
+                        <div className="mt-3 flex flex-wrap gap-2">
+                          {u.tags.map((tag) => (
+                            <span
+                              key={tag}
+                              className="text-xs text-neutral-500 dark:text-neutral-400"
+                            >
+                              #{formatTag(tag)}
+                            </span>
+                          ))}
+                        </div>
+                      )}
+                    </Link>
                   </li>
+
                 ))}
+
               </ul>
             ) : (
               <div className="rounded-lg border p-4">
@@ -97,12 +167,70 @@ export default async function UpdatesPage({ searchParams }: UpdatesPageProps) {
           </section>
         </div>
 
+
         <aside className="space-y-6">
-          <SidebarCard title="About">
-            <p className="text-sm text-neutral-700 dark:text-neutral-300">
-              This is a collection of my personal updates, notes, and development logs. I use it to share progress on projects, jot down thoughts, and document learnings.
-            </p>
+          <SidebarCard title="About Me">
+            <div className="space-y-4">
+              <div className="overflow-hidden rounded-2xl border border-neutral-200">
+                <Image
+                  src="/images/profile-photo.webp"
+                  alt="Photo of Shane Bunting"
+                  width={800}
+                  height={1000}
+                  className="h-auto w-full object-cover"
+                  priority
+                />
+              </div>
+
+              <div className="space-y-2">
+                <h3 className="text-base font-semibold text-neutral-900 dark:text-neutral-100">Shane Bunting</h3>
+
+                <p className="text-sm text-neutral-700 dark:text-neutral-300">
+                  This is a collection of my personal updates, notes, and development logs. I use it to share progress on projects, jot down thoughts, and document learnings.
+                </p>
+              </div>
+            </div>
           </SidebarCard>
+
+
+          <SidebarCard title="Selected Repos">
+            <div className="space-y-3">
+              {featuredRepos.map((repo) => (
+                <a
+                  key={repo.name}
+                  href={repo.href}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="block overflow-hidden rounded-2xl border border-neutral-200/80 bg-neutral-50/60 px-4 py-4 transition hover:border-neutral-300 hover:bg-neutral-100 dark:border-neutral-800 dark:bg-neutral-900/50 dark:hover:border-neutral-700 dark:hover:bg-neutral-900"
+                >
+                  <h3 className="text-sm font-semibold text-neutral-900 dark:text-neutral-100">
+                    {repo.name}
+                  </h3>
+                  <p className="mt-1 text-sm text-neutral-700 dark:text-neutral-300">
+                    {repo.description}
+                  </p>
+                  <div className="mt-2 flex flex-wrap gap-2">
+                    {repo.tech.map((item) => (
+                      <span
+                        key={item}
+                        className="inline-flex items-center rounded-full border border-neutral-300 bg-neutral-100 px-3 py-1.5 text-xs leading-none font-medium text-neutral-700 dark:border-neutral-700 dark:bg-neutral-800 dark:text-neutral-200"
+                      >
+                        {item}
+                      </span>
+
+                    ))}
+                  </div>
+
+                  <p className="mt-2 text-xs text-neutral-500 dark:text-neutral-400">
+                    View GitHub Repo
+                  </p>
+                </a>
+              ))}
+            </div>
+          </SidebarCard>
+
+
+
 
           <SidebarCard title="Tags">
             <div className="flex flex-wrap gap-2">

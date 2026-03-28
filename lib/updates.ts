@@ -2,13 +2,19 @@ import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
 
+export type UpdateType = "post" | "video";
+
 export type Update = {
     slug: string;
     date: string;
     title: string;
     tags: string[];
     excerpt: string;
+    type: UpdateType;
+    youtubeId?: string;
+    coverImage?: string;
 };
+
 
 const UPDATES_DIR = path.join(process.cwd(), "content", "updates");
 
@@ -69,7 +75,10 @@ export function getUpdates(): Update[] {
                     .filter((l) => l && !l.startsWith("#") && !l.startsWith("!["))[0] ?? ""
             );
 
-        return { slug, date, title, tags: normalizedUniqueTags, excerpt };
+        const type = parsed.data.type === "video" ? "video" : "post";
+        const youtubeId = parsed.data.youtubeId ? String(parsed.data.youtubeId) : undefined;
+
+        return { slug, date, title, tags: normalizedUniqueTags, excerpt, type, youtubeId };
     });
 
     // newest first
