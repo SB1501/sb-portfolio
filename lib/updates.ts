@@ -75,7 +75,7 @@ export function getUpdates(): Update[] {
                     .filter((l) => l && !l.startsWith("#") && !l.startsWith("!["))[0] ?? ""
             );
 
-        const type = parsed.data.type === "video" ? "video" : "post";
+        const type: UpdateType = parsed.data.type === "video" ? "video" : "post";
         const youtubeId = parsed.data.youtubeId ? String(parsed.data.youtubeId) : undefined;
 
         return { slug, date, title, tags: normalizedUniqueTags, excerpt, type, youtubeId };
