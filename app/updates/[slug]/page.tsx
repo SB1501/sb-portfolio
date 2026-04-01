@@ -4,6 +4,8 @@ import matter from "gray-matter";
 import { remark } from "remark";
 import html from "remark-html";
 import { notFound } from "next/navigation";
+import { FileText, Video, Code2 } from "lucide-react";
+
 
 const UPDATES_DIR = path.join(process.cwd(), "content", "updates");
 
@@ -15,6 +17,11 @@ export async function generateStaticParams() {
         .map((file) => ({
             slug: file.replace(/\.md$/, ""),
         }));
+}
+
+export function getUpdateIcon(type: string) {
+    if (type === "video") return Video;
+    return FileText;
 }
 
 export default async function UpdatePage({
@@ -47,28 +54,37 @@ export default async function UpdatePage({
     const type = parsed.data.type === "video" ? "video" : "post";
     const youtubeId = parsed.data.youtubeId ? String(parsed.data.youtubeId) : undefined;
 
+    const Icon = type === "video" ? Video : FileText;
 
     return (
-        <main className="mx-auto max-w-3xl px-6 py-10">
-            {type === "video" && youtubeId && (
-                <div className="mb-6 overflow-hidden rounded-2xl border border-neutral-200 dark:border-neutral-800">
-                    <div className="aspect-video">
-                        <iframe
-                            className="h-full w-full"
-                            src={`https://www.youtube.com/embed/${youtubeId}`}
-                            title={title}
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                            allowFullScreen
-                        />
-                    </div>
-                </div>
-            )}
 
-            <article className="prose prose-neutral mx-auto max-w-2xl prose-img:mx-auto prose-img:max-h-[50vh] prose-img:w-auto prose-img:max-w-full">
-                <h1>{title}</h1>
-                {date && <p className="text-sm text-neutral-500 dark:text-neutral-400">{date}</p>}
-                <div dangerouslySetInnerHTML={{ __html: contentHtml }} />
-            </article>
+        <main className="mx-auto max-w-3xl px-6 py-10">
+            <div className="min-w-0 rounded-2xl border border-neutral-200 p-6 bg-white/90 dark:border-neutral-800 dark:bg-neutral-950">
+
+                {type === "video" && youtubeId && (
+                    <div className="mb-6 overflow-hidden rounded-2xl border border-neutral-200 dark:border-neutral-800">
+                        <div className="aspect-video">
+                            <iframe
+                                className="h-full w-full"
+                                src={`https://www.youtube.com/embed/${youtubeId}`}
+                                title={title}
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowFullScreen
+                            />
+                        </div>
+                    </div>
+                )}
+
+                <article className="prose prose-neutral mx-auto max-w-2xl ...">
+                    <h1>{title}</h1>
+                    {date && <p className="text-sm text-neutral-500 dark:text-neutral-400">{date}</p>}
+                    <div dangerouslySetInnerHTML={{ __html: contentHtml }} />
+                </article>
+
+
+
+
+            </div>
         </main>
     );
 }

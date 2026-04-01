@@ -54,11 +54,28 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-        <Header />
-        {children}
-        <Footer />
+
+        <div className="fixed h-full w-full inset-0 -z-0 overflow-hidden">
+          <video
+            className="h-full w-full object-cover"
+            autoPlay
+            muted
+            loop
+            playsInline
+          >
+            <source src="/video/space-bg.mp4" type="video/mp4" />
+          </video>
+        </div>
+
+        <div className="relative z-10">
+          <Header />
+          {children}
+          <Footer />
+        </div>
         <Analytics />
+
       </body>
     </html>
   );

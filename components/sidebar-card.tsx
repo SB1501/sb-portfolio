@@ -5,7 +5,7 @@ type SidebarCardProps = {
 
 export default function SidebarCard({ title, children }: SidebarCardProps) {
     return (
-        <section className="rounded-xl border border-neutral-200 bg-white p-5 dark:border-neutral-800 dark:bg-neutral-950">
+        <section className="rounded-xl border border-neutral-200 bg-white/90 p-5 dark:border-neutral-800 dark:bg-neutral-950/90">
             {title ? (
                 <>
                     <h2 className="text-sm font-semibold text-neutral-900 dark:text-neutral-100">
