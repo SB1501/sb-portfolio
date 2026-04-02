@@ -3,6 +3,8 @@ title: "Friday Updates to the Portfolio Website"
 date: "2026-03-20"
 tags: ["website", "portfolio", "nodejs", "react", "typescript", "tailwind"]
 excerpt: "Sidebar Added, Width Extended and Tag Cloud Moved"
+type: "post"
+
 ---
 
 This post is less of a write-up, more of a change update. 

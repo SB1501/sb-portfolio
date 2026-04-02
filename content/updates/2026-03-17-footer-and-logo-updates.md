@@ -3,6 +3,8 @@ title: "Footer & Logo Updates"
 date: "2026-03-17"
 tags: ["web", "development", "branding", "support", "React"]
 excerpt: "Learning React Inline SVG Image usage."
+type: "post"
+
 ---
 
 ## Discovering inline SVG logos in React

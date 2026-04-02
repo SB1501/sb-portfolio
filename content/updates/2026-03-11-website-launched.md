@@ -3,6 +3,8 @@ title: "Launching My Portfolio Website"
 date: "2026-03-11"
 tags: ["portfolio", "nextjs", "vercel", "deployment"]
 excerpt: "Setting up my developer portfolio with Next.js, Vercel and automatic GitHub deployments."
+type: "post"
+
 ---
 
 Welcome to my portfolio website. This site is itself the first project I can post an update about, and it will serve as a place to document what I’m working on and learning.

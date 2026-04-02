@@ -3,6 +3,8 @@ title: "Website Video Posts and Sidebar Improvements"
 date: "2026-03-28"
 tags: ["portfolio", "nextjs", "typescript", "ui", "content"]
 excerpt: "Improved the updates page layout, added support for video posts, and refined the sidebar."
+type: "post"
+
 ---
 
 Tonight I spent some time refining the updates feed on the homepage and making it possible to post video updates as quite a lot of the time, I'd watch tutorials and learn a lot so keeping a record of what made each useful on here is something, alongside these updates, I wanted to be able to do. 

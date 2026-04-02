@@ -1,6 +1,7 @@
 import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
+import Link from "next/link";
 
 export type UpdateType = "post" | "video";
 
@@ -78,7 +79,10 @@ export function getUpdates(): Update[] {
         const type: UpdateType = parsed.data.type === "video" ? "video" : "post";
         const youtubeId = parsed.data.youtubeId ? String(parsed.data.youtubeId) : undefined;
 
-        return { slug, date, title, tags: normalizedUniqueTags, excerpt, type, youtubeId };
+        const coverImage = parsed.data.coverImage
+            ? String(parsed.data.coverImage)
+            : "/images/default-coverimage.webp";
+        return { slug, date, title, tags: normalizedUniqueTags, excerpt, type, youtubeId, coverImage };
     });
 
     // newest first

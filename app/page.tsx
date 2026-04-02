@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { getAllTags, getUpdates, getUpdatesByTag, formatTag } from "@/lib/updates";
 import SidebarCard from "@/components/sidebar-card";
-import { Video, FileText, Code2, Megaphone } from "lucide-react";
+import { Video, FileText, Megaphone, ArrowRight } from "lucide-react";
 
 
 function formatDate(iso: string) {
@@ -13,12 +13,8 @@ function formatDate(iso: string) {
   });
 }
 
-function getUpdateIcon(type: string, tags: string[]) {
+function getUpdateIcon(type: string) {
   if (type === "video") return <Video className="h-4 w-4" />;
-
-  if (tags.includes("react") || tags.includes("typescript") || tags.includes("javascript")) {
-    return <Code2 className="h-4 w-4" />;
-  }
 
   return <FileText className="h-4 w-4" />;
 }
@@ -102,57 +98,72 @@ export default async function UpdatesPage({ searchParams }: UpdatesPageProps) {
                       <li key={u.slug}>
                         <Link
                           href={`/updates/${u.slug}`}
-                          className="block rounded-lg border p-4 transition hover:border-neutral-400 hover:bg-neutral-50 dark:hover:border-neutral-700 dark:hover:bg-neutral-900/90"
+                          className="block rounded-lg border p-4 transition hover:border-black hover:bg-neutral-300 dark:hover:border-white dark:hover:bg-neutral-900/90"
                         >
-                          <div className="mb-4 flex items-center gap-3">
-                            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-neutral-100 text-neutral-600 dark:bg-neutral-800 dark:text-neutral-300">
-                              {getUpdateIcon(u.type, u.tags)}
-                            </div>
-                            <p className="text-xs uppercase tracking-wide text-neutral-500 dark:text-neutral-400">
-                              {u.type === "video" ? "Video" : "Post"}
-                            </p>
-                          </div>
-
-                          {u.type === "video" && u.youtubeId && (
-                            <div className="mb-4 overflow-hidden rounded-2xl border border-neutral-200 dark:border-neutral-800">
-                              <div className="aspect-video">
-                                <iframe
-                                  className="h-full w-full"
-                                  src={`https://www.youtube.com/embed/${u.youtubeId}`}
-                                  title={u.title}
-                                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                  allowFullScreen
+                          <div className="flex gap-4">
+                            {u.coverImage && (
+                              <div className="hidden sm:block shrink-0 overflow-hidden rounded-xl border border-neutral-200 dark:border-neutral-800">
+                                <Image
+                                  src={u.coverImage}
+                                  alt={u.title}
+                                  width={160}
+                                  height={90}
+                                  className="h-full w-full object-cover"
                                 />
                               </div>
-                            </div>
-                          )}
+                            )}
 
-                          <div className="flex items-baseline justify-between gap-4">
-                            <div>
-                              <h2 className="font-medium">{u.title}</h2>
+                            <div className="min-w-0 flex-1">
+                              <div className="mb-4 flex items-center gap-3">
+                                <div className="flex h-10 w-10 items-center justify-center rounded-full bg-neutral-100 text-neutral-600 dark:bg-neutral-800 dark:text-neutral-300">
+                                  {getUpdateIcon(u.type)}
+                                </div>
+                                <p className="text-xs uppercase tracking-wide text-neutral-500 dark:text-neutral-400">
+                                  {u.type === "video" ? "Video" : "Post"} | {formatDate(u.date)}
+                                </p>
+                              </div>
+
+                              {u.type === "video" && u.youtubeId && (
+                                <div className="mb-4 overflow-hidden rounded-2xl border border-neutral-200 dark:border-neutral-800">
+                                  <div className="aspect-video">
+                                    <iframe
+                                      className="h-full w-full"
+                                      src={`https://www.youtube.com/embed/${u.youtubeId}`}
+                                      title={u.title}
+                                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                      allowFullScreen
+                                    />
+                                  </div>
+                                </div>
+                              )}
+
+
+                              <h2 className="text-base font-medium text-neutral-900 dark:text-neutral-100">
+                                {u.title}
+                              </h2>
+
+                              {u.excerpt && (
+                                <p className="mt-2 text-sm text-neutral-700 dark:text-neutral-300">{u.excerpt}</p>
+                              )}
+
+                              {u.tags.length > 0 && (
+                                <div className="mt-3 flex flex-wrap gap-2">
+                                  {u.tags.map((tag) => (
+                                    <span
+                                      key={tag}
+                                      className="text-xs text-neutral-500 dark:text-neutral-400"
+                                    >
+                                      #{formatTag(tag)}
+                                    </span>
+                                  ))}
+                                </div>
+                              )}
                             </div>
 
-                            <time className="whitespace-nowrap text-xs text-neutral-500 dark:text-neutral-400">
-                              {formatDate(u.date)}
-                            </time>
+                            <div className="flex items-center text-neutral-400">
+                              <ArrowRight className="h-4 w-4" />
+                            </div>
                           </div>
-
-                          {u.excerpt && (
-                            <p className="mt-2 text-sm text-neutral-700 dark:text-neutral-300">{u.excerpt}</p>
-                          )}
-
-                          {u.tags.length > 0 && (
-                            <div className="mt-3 flex flex-wrap gap-2">
-                              {u.tags.map((tag) => (
-                                <span
-                                  key={tag}
-                                  className="text-xs text-neutral-500 dark:text-neutral-400"
-                                >
-                                  #{formatTag(tag)}
-                                </span>
-                              ))}
-                            </div>
-                          )}
                         </Link>
                       </li>
 
@@ -275,7 +286,7 @@ export default async function UpdatesPage({ searchParams }: UpdatesPageProps) {
 
         </div >
       </main >
-    </div>
+    </div >
 
   );
 }

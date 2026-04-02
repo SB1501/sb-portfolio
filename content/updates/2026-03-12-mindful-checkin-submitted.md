@@ -3,6 +3,8 @@ title: "Submitting Mindful Check-In to the App Store"
 date: "2026-03-12"
 tags: ["development", "ios", "swift", "swiftui", "mindfulness", "project", "app-development"]
 excerpt: "Mindful Check-In has been submitted to the App Store."
+type: "post"
+
 ---
 
 Very glad to announce that Mindful Check-In has finally reached submission to the Apple App Store! This is my first public-facing full featured app, from idea to reality.
