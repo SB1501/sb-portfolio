@@ -7,6 +7,8 @@ type: "post"
 coverImage: "/images/2026-04-01.webp"
 ---
 
+![New April 2026 Design](/images/portfolio-new-design.png)
+
 ### New Site Design & Style Live
 Starting from a very white, fairly plain structure, I have gradually added sections, pages and functionality to this website over its first few weeks. The intention was always to get the bones of it working first and then shape the design around that, otherwise I would have been stuck in a loop of styling something, breaking it, fixing functionality, then styling it again. The visual direction you're seeing now, with the galaxy background and darker outer shell, is much closer to what I had in mind all along and something I had never really managed to pull off properly in older WordPress attempts.
 
@@ -17,7 +19,11 @@ I licensed this background from Envato back in 2021 for an older website idea an
 
 One thing I had not really appreciated until now was that the design is not just the background. What makes it work is the contrast between that moving outer layer and the actual content areas sitting on top of it. Most of the content now lives inside rounded cards with light borders and slightly softened backgrounds, so the text remains clean and readable while the site still keeps the drama of the video behind it. In a way, the layout now feels a bit like glass panels placed in front of the background rather than content simply floating over it. That has helped the site feel cleaner, more intentional and easier to scan.
 
+![Light / Dark Mode](/images/light-to-dark-new-design.gif)
+
 The header and footer are deliberately kept dark at all times. I did think about making the whole site far more aggressively responsive to light and dark mode, or even just going dark-mode only, but keeping those sections black helps frame the page consistently and suits the overall look much better. It also means that people who use dark mode constantly are not suddenly hit with big bright slabs at the top and bottom of the screen. The site still supports light and dark styling within the content itself, but the surrounding shell now has a much more fixed identity.
+
+![Light / Dark Mode](/images/new-icons.png)
 
 I have also slowly started introducing more icons, not only because they look nice, but because they help break up repeated blocks of text and make sections quicker to understand at a glance. A small amount of logic now determines which icon appears on update posts and other areas, and although that is a small technical detail, it contributes quite a lot to the visual rhythm of the page.
 
