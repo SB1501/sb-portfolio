@@ -4,6 +4,7 @@ date: "2026-03-15"
 tags: ["aws", "EventBridge", "Lambda", "resiliance", "project", "architecture", "SNS", "DynamoDB"]
 excerpt: "Building an outate detector on AWS"
 type: "post"
+coverImage: "/images/2026-03-15.webp"
 
 ---
 

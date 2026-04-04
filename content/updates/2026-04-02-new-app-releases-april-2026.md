@@ -4,7 +4,8 @@ date: "2026-04-02"
 tags: ["app", "release", "production", "appstore", "watch", "iOS"]
 excerpt: "New apps and versions approved for distribution!"
 type: "post"
-coverImage: "/images/2026-04-02-cover.webp"
+coverImage: "/images/2026-04-02.webp"
+
 ---
 ### Wisdom Watch 2.0 is released
 ![Wisdom Watch 2.0](/images/wisdomwatch-app-store-listing.jpeg)

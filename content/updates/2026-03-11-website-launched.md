@@ -4,6 +4,8 @@ date: "2026-03-11"
 tags: ["portfolio", "nextjs", "vercel", "deployment"]
 excerpt: "Setting up my developer portfolio with Next.js, Vercel and automatic GitHub deployments."
 type: "post"
+coverImage: "/images/2026-03-11.webp"
+
 
 ---
 

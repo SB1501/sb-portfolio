@@ -1,9 +1,10 @@
 ---
 title: "The Tech Stack of this Portfolio Website"
-date: "2026-03-13"
+date: "2026-03-06"
 tags: ["technologies", "website", "portfolio", "nodejs", "react", "typescript", "tailwind", "markdown"]
 excerpt: "A quick look at the technology stack used on my portfolio site."
 type: "post"
+coverImage: "/images/2026-03-06.webp"
 
 ---
 

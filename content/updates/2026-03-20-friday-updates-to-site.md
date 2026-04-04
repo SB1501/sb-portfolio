@@ -4,6 +4,7 @@ date: "2026-03-20"
 tags: ["website", "portfolio", "nodejs", "react", "typescript", "tailwind"]
 excerpt: "Sidebar Added, Width Extended and Tag Cloud Moved"
 type: "post"
+coverImage: "/images/2026-03-20.webp"
 
 ---
 

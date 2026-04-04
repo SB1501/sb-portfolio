@@ -4,6 +4,7 @@ date: "2026-03-28"
 tags: ["portfolio", "nextjs", "typescript", "ui", "content"]
 excerpt: "Improved the updates page layout, added support for video posts, and refined the sidebar."
 type: "post"
+coverImage: "/images/2026-03-28.webp"
 
 ---
 

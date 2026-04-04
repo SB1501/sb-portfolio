@@ -4,6 +4,7 @@ date: "2026-03-17"
 tags: ["web", "development", "branding", "support", "React"]
 excerpt: "Learning React Inline SVG Image usage."
 type: "post"
+coverImage: "/images/2026-03-17.webp"
 
 ---
 
