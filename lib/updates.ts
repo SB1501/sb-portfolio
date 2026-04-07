@@ -37,6 +37,9 @@ function getTagLabel(tag: string): string {
         "html": "HTML",
         "dynamodb": "DynamoDB",
         "ios": "iOS",
+        "csharp": "C#",
+        "dotnet": ".NET",
+        "sql": "SQL",
     };
 
     const normalized = normalizeTag(tag);

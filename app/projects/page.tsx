@@ -1,6 +1,6 @@
 import Image from "next/image";
-import { FolderKanban, FlaskConical } from "lucide-react";
-
+import { FolderKanban, FlaskConical, Code } from "lucide-react";
+import Link from "next/link";
 
 export default function ProjectsPage() {
     return (
@@ -13,11 +13,11 @@ export default function ProjectsPage() {
                     <FolderKanban className="h-7 w-7 text-black dark:text-white" />
                     <h1 className="text-3xl font-bold">Project Portfolio</h1>
                 </div>
-                <p className="mt-2 max-w-2xl text-neutral-700 dark:text-neutral-300">
+                <p className="mt-2 text-neutral-700 dark:text-neutral-300">
                     A selection of apps and software projects that I have built. Mindful Check-In is my latest public release.
                 </p>
 
-                <section className="mt-10 space-y-6">
+                <section className="mt-7 space-y-6">
 
                     <article className="overflow-hidden rounded-3xl border border-black/10 shadow-xl">
 
@@ -117,7 +117,7 @@ export default function ProjectsPage() {
 
                                     <h2 className="mt-3 text-2xl font-bold text-white">8BallWatch</h2>
                                     <p className="mt-3 text-sm leading-6 text-white/80">
-                                        My first ever app project, built as an early step into designing and shipping a complete mobile experience.
+                                        My first ever app project, built as an early step into designing and shipping a complete experience.
                                     </p>
                                 </div>
                             </div>
@@ -187,10 +187,162 @@ export default function ProjectsPage() {
 
             <div className="mt-6 min-w-0 rounded-2xl border border-neutral-200 p-6 bg-white/90 dark:border-neutral-800 dark:bg-neutral-950">
                 <div className="flex items-center gap-3">
+                    <Code className="h-7 w-7 text-black dark:text-white" />
+                    <h1 className="text-3xl font-bold">Academic Projects</h1>
+                </div>
+                <p className="mt-2 text-neutral-700 dark:text-neutral-300">
+                    Here are some projects I've worked on during my Software Development HLA that I thought were worth showing on here.
+                </p>
+
+
+                <section className="mt-7 space-y-6">
+
+                    <article className="overflow-hidden rounded-3xl border border-black/10 shadow-xl">
+
+                        <div className="bg-[#0c537f] p-8 md:p-10">
+
+                            <div className="grid gap-8 md:grid-cols-[minmax(0,1fr)_minmax(320px,420px)] md:items-start">
+
+                                <div>
+
+                                    <p className="text-sm font-medium uppercase tracking-[0.2em] text-white/80">
+                                        College Project
+                                    </p>
+
+                                    <div className="mt-4 inline-grid gap-3 rounded-3xl bg-white px-4 py-3 md:grid-cols-[auto_1fr] md:items-center">
+
+                                        <Image
+                                            src="/images/nwvmainlogo.webp"
+                                            alt="Northwest Veterinary Logo"
+                                            width={100}
+                                            height={100}
+                                            className="mx-auto h-auto w-auto object-cover md:mx-0"
+                                        />
+
+
+                                        <Image
+                                            src="/images/nwvtextlogo.webp"
+                                            alt="Northwest Veterinary Text Logo"
+                                            width={200}
+                                            height={100}
+                                            className="h-auto w-auto object-cover justify-self-start"
+                                        />
+
+                                    </div>
+
+                                    <p className="mt-4 max-w-xl text-base leading-7 text-white/90">
+                                        An information management system for a fictional veterinary practice, co-developed with a classmate as a Windows Forms application in C# using .NET Framework 4.7.2 and SQL Server LocalDB. Built with ADO.NET and a centralized DatabaseHelper, it supports appointment scheduling, customer and pet records, invoicing and payment tracking, inventory and supplier management, and searchable reporting workflows.
+                                    </p>
+                                    <div className="mt-6 flex flex-wrap gap-2">
+                                        <span className="rounded-full border border-[#1b76c6] bg-[#1b76c6] px-3 py-1 text-sm text-white transition hover:bg-[#155f9f]">
+                                            Customer Management
+                                        </span>
+                                        <span className="rounded-full border border-[#1b76c6] bg-[#1b76c6] px-3 py-1 text-sm text-white transition hover:bg-[#155f9f]">
+                                            Appointment Scheduling
+                                        </span>
+                                        <span className="rounded-full border border-[#1b76c6] bg-[#1b76c6] px-3 py-1 text-sm text-white transition hover:bg-[#155f9f]">
+                                            Pet Health Records
+                                        </span>
+                                        <span className="rounded-full border border-[#1b76c6] bg-[#1b76c6] px-3 py-1 text-sm text-white transition hover:bg-[#155f9f]">
+                                            Stock & Suppliers
+                                        </span>
+                                        <span className="rounded-full border border-[#1b76c6] bg-[#1b76c6] px-3 py-1 text-sm text-white transition hover:bg-[#155f9f]">
+                                            Invoicing & Payments
+                                        </span>
+                                        <span className="rounded-full border border-[#1b76c6] bg-[#1b76c6] px-3 py-1 text-sm text-white transition hover:bg-[#155f9f]">
+                                            Reporting
+                                        </span>
+                                        <span className="rounded-full border border-[#1b76c6] bg-[#1b76c6] px-3 py-1 text-sm text-white transition hover:bg-[#155f9f]">
+                                            Search, Filter & Sort
+                                        </span>
+                                    </div>
+
+
+                                    <div className="mt-6 flex flex-wrap gap-2">
+                                        <span className="rounded-full border border-[#a5d0e6] bg-[#a5d0e6] px-3 py-1 text-xs font-medium text-[#0c537f]">C#</span>
+                                        <span className="rounded-full border border-[#a5d0e6] bg-[#a5d0e6] px-3 py-1 text-xs font-medium text-[#0c537f]">Windows Forms</span>
+                                        <span className="rounded-full border border-[#a5d0e6] bg-[#a5d0e6] px-3 py-1 text-xs font-medium text-[#0c537f]">.NET Framework</span>
+                                        <span className="rounded-full border border-[#a5d0e6] bg-[#a5d0e6] px-3 py-1 text-xs font-medium text-[#0c537f]">SQL Database</span>
+                                    </div>
+
+                                    <div className="mt-8 flex flex-wrap gap-3">
+
+                                        <Link href="/updates/2026-04-06-nwv-project/"
+                                            className="inline-flex items-center rounded-md border border-black/40 px-5 py-2.5 text-sm font-semibold text-white transition bg-black hover:bg-black/80">
+                                            Read Project Write-Up
+                                        </Link>
+                                    </div>
+
+
+                                </div>
+
+                                <div className="md:mt-[3.25rem]">
+                                    <div className="mb-4 flex items-center justify-between gap-3">
+                                        <p className="text-sm font-medium uppercase tracking-[0.2em] text-white/75">
+                                            Screenshots
+                                        </p>
+                                        <p className="text-xs text-white/60">
+                                            Hover to pause scrolling
+                                        </p>
+                                    </div>
+                                    <div className="nwv-scroll-mask nwv-scroll-container h-[30rem] overflow-hidden rounded-[1.5rem] bg-white/10 p-2">
+                                        <div className="nwv-scroll-track flex flex-col gap-3 motion-reduce:animate-none">
+                                            {[
+                                                { src: "/images/nwvlogin.webp", alt: "Northwest Veterinary login screen" },
+                                                { src: "/images/nwvmain.webp", alt: "Northwest Veterinary main dashboard" },
+                                                { src: "/images/nwvmainscreen.webp", alt: "Northwest Veterinary appointment overview" },
+                                                { src: "/images/nwvmanagement.webp", alt: "Northwest Veterinary management panel" },
+                                                { src: "/images/nwvorderadd.webp", alt: "Northwest Veterinary add order screen" },
+                                                { src: "/images/nwvorders.webp", alt: "Northwest Veterinary orders list" },
+                                                { src: "/images/nwvordersummary.webp", alt: "Northwest Veterinary order summary" },
+                                                { src: "/images/nwvstafflist.webp", alt: "Northwest Veterinary staff list" },
+                                                { src: "/images/nwvsupplierlist.webp", alt: "Northwest Veterinary supplier list" },
+                                                { src: "/images/nwvtreatmentlist.webp", alt: "Northwest Veterinary treatment list" },
+                                                { src: "/images/nwvlogin.webp", alt: "Northwest Veterinary login screen" },
+                                                { src: "/images/nwvmain.webp", alt: "Northwest Veterinary main dashboard" },
+                                                { src: "/images/nwvmainscreen.webp", alt: "Northwest Veterinary appointment overview" },
+                                                { src: "/images/nwvmanagement.webp", alt: "Northwest Veterinary management panel" },
+                                                { src: "/images/nwvorderadd.webp", alt: "Northwest Veterinary add order screen" },
+                                                { src: "/images/nwvorders.webp", alt: "Northwest Veterinary orders list" },
+                                                { src: "/images/nwvordersummary.webp", alt: "Northwest Veterinary order summary" },
+                                                { src: "/images/nwvstafflist.webp", alt: "Northwest Veterinary staff list" },
+                                                { src: "/images/nwvsupplierlist.webp", alt: "Northwest Veterinary supplier list" },
+                                                { src: "/images/nwvtreatmentlist.webp", alt: "Northwest Veterinary treatment list" },
+                                            ].map((screenshot, index) => (
+                                                <div
+                                                    key={`${screenshot.src}-${index}`}
+                                                    className="overflow-hidden rounded-2xl border border-white/15 bg-white/80 shadow-[0_12px_30px_rgba(0,0,0,0.18)]"
+                                                >
+                                                    <Image
+                                                        src={screenshot.src}
+                                                        alt={screenshot.alt}
+                                                        width={1600}
+                                                        height={1240}
+                                                        className="h-auto w-full object-cover transition duration-300 hover:scale-[1.02]"
+                                                    />
+                                                </div>
+                                            ))}
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </article>
+
+                </section>
+
+            </div>
+
+
+            <div className="mt-6 min-w-0 rounded-2xl border border-neutral-200 p-6 bg-white/90 dark:border-neutral-800 dark:bg-neutral-950">
+                <div className="flex items-center gap-3">
                     <FlaskConical className="h-7 w-7 text-black dark:text-white" />
                     <h1 className="text-3xl font-bold">Future Projects</h1>
-                </div>                <p className="mt-2 max-w-2xl text-neutral-700 dark:text-neutral-300">
-                    Check back here for details on in-progress projects I%apos;m working on or planning.
+                </div>                <p className="mt-2 text-neutral-700 dark:text-neutral-300">
+                    Check back here for details on in-progress projects I'm working on or planning.
                 </p>
             </div>
 

@@ -43,4 +43,27 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
+.nwv-scroll-mask {
+  mask-image: linear-gradient(to bottom, transparent 0%, black 10%, black 90%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 10%, black 90%, transparent 100%);
+}
+
+.nwv-scroll-track {
+  animation: nwv-scroll-vertical 42s linear infinite;
+}
+
+.nwv-scroll-container:hover .nwv-scroll-track {
+  animation-play-state: paused;
+}
+
+@keyframes nwv-scroll-vertical {
+  from {
+    transform: translateY(0);
+  }
+
+  to {
+    transform: translateY(-50%);
+  }
+}
+
 @plugin "@tailwindcss/typography";
