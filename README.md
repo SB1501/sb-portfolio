@@ -1,4 +1,4 @@
-# SB Portfolio
+# SB Portfolio Website
 
 Developer portfolio built with Next.js and Tailwind.
 
@@ -20,5 +20,10 @@ Developer portfolio built with Next.js and Tailwind.
 ## Development
 
 Run locally:
-
 npm run dev
+
+## Status
+Active
+
+## Links
+www.shanebunting.dev/
