@@ -4,8 +4,9 @@ import matter from "gray-matter";
 import { remark } from "remark";
 import html from "remark-html";
 import { notFound } from "next/navigation";
-import { FileText, Video, ArrowLeft } from "lucide-react";
+import { FileText, Video, ArrowLeft, MessageSquareMore } from "lucide-react";
 import Link from "next/link";
+import type { UpdateType } from "@/lib/updates";
 
 const UPDATES_DIR = path.join(process.cwd(), "content", "updates");
 
@@ -19,10 +20,18 @@ export async function generateStaticParams() {
         }));
 }
 
-export function getUpdateIcon(type: string) {
-    if (type === "video") return Video;
-    return FileText;
+function getUpdateIcon(type: string) {
+  if (type === "video") return <Video className="h-4 w-4" />;
+  if (type === "status") return <MessageSquareMore className="h-4 w-4" />;
+  return <FileText className="h-4 w-4" />;
 }
+
+function getUpdateLabel(type: string) {
+  if (type === "video") return "Video";
+  if (type === "status") return "Status";
+  return "Post";
+}
+
 
 export default async function UpdatePage({
     params,
@@ -51,14 +60,15 @@ export default async function UpdatePage({
     const processed = await remark().use(html).process(parsed.content);
     const contentHtml = processed.toString();
 
-    const type = parsed.data.type === "video" ? "video" : "post";
-    const youtubeId = parsed.data.youtubeId ? String(parsed.data.youtubeId) : undefined;
+    const rawType = parsed.data.type;
+                const type: UpdateType = 
+                    rawType === "video" || rawType === "status" || rawType === "post"
+                    ? rawType : "post";
+                const youtubeId = parsed.data.youtubeId ? String(parsed.data.youtubeId) : undefined;
 
     return (
 
         <main className="mx-auto max-w-3xl px-6 py-10">
-
-
 
             <div className="min-w-0 rounded-2xl border border-neutral-200 p-6 bg-white/90 dark:border-neutral-800 dark:bg-neutral-950">
 
@@ -94,10 +104,13 @@ export default async function UpdatePage({
 
                     <div className="mb-6 flex items-center gap-3 not-prose">
                         <div className="flex h-10 w-10 items-center justify-center rounded-full bg-neutral-100 text-neutral-600 dark:bg-neutral-800 dark:text-neutral-300">
-                            {type === "video" ? <Video className="h-4 w-4" /> : <FileText className="h-4 w-4" />}
+                            {getUpdateIcon(type)}
+
                         </div>
                         <p className="text-xs uppercase tracking-wide text-neutral-500 dark:text-neutral-400">
-                            {type === "video" ? "Video" : "Post"} {date && `| ${date}`}
+                            {getUpdateLabel(type)} {date && `| ${date}`}
+
+
                         </p>
                     </div>
 

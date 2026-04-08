@@ -2,7 +2,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { getAllTags, getUpdates, getUpdatesByTag, formatTag } from "@/lib/updates";
 import SidebarCard from "@/components/sidebar-card";
-import { Video, FileText, Megaphone, ArrowRight } from "lucide-react";
+import { Video, FileText, Megaphone, ArrowRight, MessageSquareMore } from "lucide-react";
+
 
 
 function formatDate(iso: string) {
@@ -15,9 +16,16 @@ function formatDate(iso: string) {
 
 function getUpdateIcon(type: string) {
   if (type === "video") return <Video className="h-4 w-4" />;
-
+  if (type === "status") return <MessageSquareMore className="h-4 w-4"/>;
   return <FileText className="h-4 w-4" />;
 }
+
+function getUpdateLabel(type: string) {
+  if (type === "video") return "Video";
+  if (type === "status") return "Status";
+  return "Post";
+}
+
 
 
 type UpdatesPageProps = {
@@ -94,80 +102,104 @@ export default async function UpdatesPage({ searchParams }: UpdatesPageProps) {
 
                 {updates.length > 0 ? (
                   <ul className="space-y-4">
-                    {updates.map((u) => (
-                      <li key={u.slug}>
-                        <Link
-                          href={`/updates/${u.slug}`}
-                          className="block rounded-lg border p-4 transition hover:border-black hover:bg-neutral-300 dark:hover:border-white dark:hover:bg-neutral-900/90"
-                        >
-                          <div className="flex gap-4">
-                            {u.coverImage && (
-                              <div className="hidden sm:block shrink-0 overflow-hidden rounded-xl border border-neutral-200 dark:border-neutral-800">
-                                <Image
-                                  src={u.coverImage}
-                                  alt={u.title}
-                                  width={160}
-                                  height={90}
-                                  className="h-full w-full object-cover"
-                                />
+                    {updates.map((u) => {
+                      const isStatus = u.type === "status";
+
+                      const cardContent = (
+                        <div className="flex gap-4">
+                          {u.coverImage && (
+                            <div className="hidden sm:block shrink-0 overflow-hidden rounded-xl border border-neutral-200 dark:border-neutral-800">
+                              <Image
+                                src={u.coverImage}
+                                alt={u.title}
+                                width={160}
+                                height={90}
+                                className="h-full w-full object-cover"
+                              />
+                            </div>
+                          )}
+
+                          <div className="min-w-0 flex-1">
+                            <div className={`flex items-center gap-3 ${isStatus ? "mb-2" : "mb-4"}`}>
+                              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-neutral-100 text-neutral-600 dark:bg-neutral-800 dark:text-neutral-300">
+                                {getUpdateIcon(u.type)}
+                              </div>
+                              <p className="text-xs uppercase tracking-wide text-neutral-500 dark:text-neutral-400">
+                                {getUpdateLabel(u.type)} | {formatDate(u.date)}
+                              </p>
+                            </div>
+
+                            {u.type === "video" && u.youtubeId && (
+                              <div className="mb-4 overflow-hidden rounded-2xl border border-neutral-200 dark:border-neutral-800">
+                                <div className="aspect-video">
+                                  <iframe
+                                    className="h-full w-full"
+                                    src={`https://www.youtube.com/embed/${u.youtubeId}`}
+                                    title={u.title}
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                    allowFullScreen
+                                  />
+                                </div>
                               </div>
                             )}
 
-                            <div className="min-w-0 flex-1">
-                              <div className="mb-4 flex items-center gap-3">
-                                <div className="flex h-10 w-10 items-center justify-center rounded-full bg-neutral-100 text-neutral-600 dark:bg-neutral-800 dark:text-neutral-300">
-                                  {getUpdateIcon(u.type)}
-                                </div>
-                                <p className="text-xs uppercase tracking-wide text-neutral-500 dark:text-neutral-400">
-                                  {u.type === "video" ? "Video" : "Post"} | {formatDate(u.date)}
-                                </p>
-                              </div>
+                            {isStatus ? (
+                              <p className="mt-1 text-base leading-7 text-neutral-800 dark:text-neutral-200">
+                                {u.excerpt}
+                              </p>
+                            ) : (
+                              <>
+                                <h2 className="text-base font-medium text-neutral-900 dark:text-neutral-100">
+                                  {u.title}
+                                </h2>
 
-                              {u.type === "video" && u.youtubeId && (
-                                <div className="mb-4 overflow-hidden rounded-2xl border border-neutral-200 dark:border-neutral-800">
-                                  <div className="aspect-video">
-                                    <iframe
-                                      className="h-full w-full"
-                                      src={`https://www.youtube.com/embed/${u.youtubeId}`}
-                                      title={u.title}
-                                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                      allowFullScreen
-                                    />
+                                {u.excerpt && (
+                                  <p className="mt-2 text-sm text-neutral-700 dark:text-neutral-300">
+                                    {u.excerpt}
+                                  </p>
+                                )}
+
+                                {u.tags.length > 0 && (
+                                  <div className="mt-3 flex flex-wrap gap-2">
+                                    {u.tags.map((tag) => (
+                                      <span
+                                        key={tag}
+                                        className="text-xs text-neutral-500 dark:text-neutral-400"
+                                      >
+                                        #{formatTag(tag)}
+                                      </span>
+                                    ))}
                                   </div>
-                                </div>
-                              )}
+                                )}
+                              </>
+                            )}
+                          </div>
 
-
-                              <h2 className="text-base font-medium text-neutral-900 dark:text-neutral-100">
-                                {u.title}
-                              </h2>
-
-                              {u.excerpt && (
-                                <p className="mt-2 text-sm text-neutral-700 dark:text-neutral-300">{u.excerpt}</p>
-                              )}
-
-                              {u.tags.length > 0 && (
-                                <div className="mt-3 flex flex-wrap gap-2">
-                                  {u.tags.map((tag) => (
-                                    <span
-                                      key={tag}
-                                      className="text-xs text-neutral-500 dark:text-neutral-400"
-                                    >
-                                      #{formatTag(tag)}
-                                    </span>
-                                  ))}
-                                </div>
-                              )}
-                            </div>
-
+                          {!isStatus && (
                             <div className="flex items-center text-neutral-400">
                               <ArrowRight className="h-4 w-4" />
                             </div>
-                          </div>
-                        </Link>
-                      </li>
+                          )}
+                        </div>
+                      );
 
-                    ))}
+                      return (
+                        <li key={u.slug}>
+                          {isStatus ? (
+                            <div className="rounded-lg border border-neutral-200 bg-neutral-50/70 p-3 dark:border-neutral-800 dark:bg-neutral-900/60">
+                              {cardContent}
+                            </div>
+                          ) : (
+                            <Link
+                              href={`/updates/${u.slug}`}
+                              className="block rounded-lg border p-4 transition hover:border-black hover:bg-neutral-300 dark:hover:border-white dark:hover:bg-neutral-900/90"
+                            >
+                              {cardContent}
+                            </Link>
+                          )}
+                        </li>
+                      );
+                    })}
 
                   </ul>
                 ) : (

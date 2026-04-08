@@ -191,7 +191,7 @@ export default function ProjectsPage() {
                     <h1 className="text-3xl font-bold">Academic Projects</h1>
                 </div>
                 <p className="mt-2 text-neutral-700 dark:text-neutral-300">
-                    Here are some projects I've worked on during my Software Development HLA that I thought were worth showing on here.
+                    Here are some projects I&apos;ve worked on during my Software Development HLA that I thought were worth showing on here.
                 </p>
 
 
@@ -342,7 +342,7 @@ export default function ProjectsPage() {
                     <FlaskConical className="h-7 w-7 text-black dark:text-white" />
                     <h1 className="text-3xl font-bold">Future Projects</h1>
                 </div>                <p className="mt-2 text-neutral-700 dark:text-neutral-300">
-                    Check back here for details on in-progress projects I'm working on or planning.
+                    Check back here for details on in-progress projects I&apos;m working on or planning.
                 </p>
             </div>
 
