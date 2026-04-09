@@ -5,7 +5,7 @@ import SidebarCard from "@/components/sidebar-card";
 import { Video, FileText, Megaphone, ArrowRight, MessageSquareMore } from "lucide-react";
 
 
-
+// Shared date formatting keeps card metadata consistent across the homepage feed.
 function formatDate(iso: string) {
   return new Date(iso).toLocaleDateString("en-GB", {
     day: "2-digit",
@@ -20,6 +20,7 @@ function getUpdateIcon(type: string) {
   return <FileText className="h-4 w-4" />;
 }
 
+// This mirrors the icon helper so each update type can render a short label in the card metadata row.
 function getUpdateLabel(type: string) {
   if (type === "video") return "Video";
   if (type === "status") return "Status";
@@ -37,6 +38,7 @@ type UpdatesPageProps = {
 export default async function UpdatesPage({ searchParams }: UpdatesPageProps) {
   const params = await searchParams;
 
+  // Query params can arrive as a string or array, so this normalizes down to a single active tag.
   const selectedTag =
     typeof params.tag === "string"
       ? params.tag
@@ -44,9 +46,11 @@ export default async function UpdatesPage({ searchParams }: UpdatesPageProps) {
         ? params.tag[0]
         : undefined;
 
+  // The sidebar always shows all tags, while the feed itself can be filtered by the active tag.
   const tags = getAllTags();
   const updates = selectedTag ? getUpdatesByTag(selectedTag) : getUpdates();
 
+  // These sidebar links are hand-curated rather than pulled from markdown content.
   const featuredRepos = [
     {
       name: "Mindful Check-In App",
@@ -72,12 +76,14 @@ export default async function UpdatesPage({ searchParams }: UpdatesPageProps) {
 
     <div>
 
+      {/* Main homepage shell: primary update feed on the left, supporting sidebar on the right. */}
       <main className="relative mx-auto max-w-6xl px-6 py-10" >
 
         <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_280px]">
 
 
           <div className="min-w-0">
+            {/* Feed container for the latest updates list. */}
             <div className="min-w-0 rounded-2xl border border-neutral-200 p-6 bg-white/90 dark:border-neutral-800 dark:bg-neutral-950">
               <header className="mb-10">
 
@@ -103,14 +109,39 @@ export default async function UpdatesPage({ searchParams }: UpdatesPageProps) {
                 {updates.length > 0 ? (
                   <ul className="space-y-4">
                     {updates.map((u) => {
+                      // Status updates are intentionally shown as feed snippets rather than linked article cards.
                       const isStatus = u.type === "status";
+                      // Video cards already embed their media, so only non-video cards use the side thumbnail.
+                      const coverImage = u.type !== "video" ? u.coverImage : undefined;
 
-                      const cardContent = (
+                      const cardContent = isStatus ? (
+                        // Status cards use a stacked layout:
+                        // `flex flex-col` stacks the text and footer vertically,
+                        // `justify-between` pins them to the top and bottom of the card,
+                        // `min-h-[10rem]` gives enough height for that separation to read clearly,
+                        // and `gap-4` keeps a modest space between the two sections.
+                        <div className="flex min-h-[10rem] flex-col justify-between gap-4">
+                          <p className="text-lg leading-8 text-neutral-800 dark:text-neutral-200 sm:text-xl">
+                            {u.excerpt}
+                          </p>
+
+                          {/* The footer metadata is separated by a top border so the status text leads visually. */}
+                          <div className="flex items-center gap-3 border-t border-neutral-200 pt-2 dark:border-neutral-800">
+                            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-neutral-100 text-neutral-600 dark:bg-neutral-800 dark:text-neutral-300">
+                              {getUpdateIcon(u.type)}
+                            </div>
+                            <p className="text-xs uppercase tracking-wide text-neutral-500 dark:text-neutral-400">
+                              {getUpdateLabel(u.type)} | {formatDate(u.date)}
+                            </p>
+                          </div>
+                        </div>
+                      ) : (
+                        // Posts and videos keep the original linked-card layout and can add media above the text.
                         <div className="flex gap-4">
-                          {u.coverImage && (
-                            <div className="hidden sm:block shrink-0 overflow-hidden rounded-xl border border-neutral-200 dark:border-neutral-800">
+                          {coverImage && (
+                            <div className="hidden shrink-0 overflow-hidden rounded-xl border border-neutral-200 dark:border-neutral-800 sm:block">
                               <Image
-                                src={u.coverImage}
+                                src={coverImage}
                                 alt={u.title}
                                 width={160}
                                 height={90}
@@ -120,7 +151,7 @@ export default async function UpdatesPage({ searchParams }: UpdatesPageProps) {
                           )}
 
                           <div className="min-w-0 flex-1">
-                            <div className={`flex items-center gap-3 ${isStatus ? "mb-2" : "mb-4"}`}>
+                            <div className="mb-4 flex items-center gap-3">
                               <div className="flex h-10 w-10 items-center justify-center rounded-full bg-neutral-100 text-neutral-600 dark:bg-neutral-800 dark:text-neutral-300">
                                 {getUpdateIcon(u.type)}
                               </div>
@@ -129,6 +160,7 @@ export default async function UpdatesPage({ searchParams }: UpdatesPageProps) {
                               </p>
                             </div>
 
+                            {/* Video cards embed YouTube directly, which is why they no longer need the side thumbnail. */}
                             {u.type === "video" && u.youtubeId && (
                               <div className="mb-4 overflow-hidden rounded-2xl border border-neutral-200 dark:border-neutral-800">
                                 <div className="aspect-video">
@@ -143,53 +175,45 @@ export default async function UpdatesPage({ searchParams }: UpdatesPageProps) {
                               </div>
                             )}
 
-                            {isStatus ? (
-                              <p className="mt-1 text-base leading-7 text-neutral-800 dark:text-neutral-200">
+                            <h2 className="text-base font-medium text-neutral-900 dark:text-neutral-100">
+                              {u.title}
+                            </h2>
+
+                            {u.excerpt && (
+                              <p className="mt-2 text-sm text-neutral-700 dark:text-neutral-300">
                                 {u.excerpt}
                               </p>
-                            ) : (
-                              <>
-                                <h2 className="text-base font-medium text-neutral-900 dark:text-neutral-100">
-                                  {u.title}
-                                </h2>
+                            )}
 
-                                {u.excerpt && (
-                                  <p className="mt-2 text-sm text-neutral-700 dark:text-neutral-300">
-                                    {u.excerpt}
-                                  </p>
-                                )}
-
-                                {u.tags.length > 0 && (
-                                  <div className="mt-3 flex flex-wrap gap-2">
-                                    {u.tags.map((tag) => (
-                                      <span
-                                        key={tag}
-                                        className="text-xs text-neutral-500 dark:text-neutral-400"
-                                      >
-                                        #{formatTag(tag)}
-                                      </span>
-                                    ))}
-                                  </div>
-                                )}
-                              </>
+                            {u.tags.length > 0 && (
+                              <div className="mt-3 flex flex-wrap gap-2">
+                                {u.tags.map((tag) => (
+                                  <span
+                                    key={tag}
+                                    className="text-xs text-neutral-500 dark:text-neutral-400"
+                                  >
+                                    #{formatTag(tag)}
+                                  </span>
+                                ))}
+                              </div>
                             )}
                           </div>
 
-                          {!isStatus && (
-                            <div className="flex items-center text-neutral-400">
-                              <ArrowRight className="h-4 w-4" />
-                            </div>
-                          )}
+                          <div className="flex items-center text-neutral-400">
+                            <ArrowRight className="h-4 w-4" />
+                          </div>
                         </div>
                       );
 
                       return (
                         <li key={u.slug}>
                           {isStatus ? (
+                            // Status cards are display-only on the homepage and do not navigate away.
                             <div className="rounded-lg border border-neutral-200 bg-neutral-50/70 p-3 dark:border-neutral-800 dark:bg-neutral-900/60">
                               {cardContent}
                             </div>
                           ) : (
+                            // Posts and videos stay clickable so they can open their full detail pages.
                             <Link
                               href={`/updates/${u.slug}`}
                               className="block rounded-lg border p-4 transition hover:border-black hover:bg-neutral-300 dark:hover:border-white dark:hover:bg-neutral-900/90"
@@ -203,6 +227,7 @@ export default async function UpdatesPage({ searchParams }: UpdatesPageProps) {
 
                   </ul>
                 ) : (
+                  // Empty state for tag filters that currently have no matching updates.
                   <div className="rounded-lg border p-4">
                     <p className="text-sm text-neutral-700 dark:text-neutral-300">
                       No updates found for <span className="font-medium">{selectedTag ? formatTag(selectedTag) : ""}</span>.
@@ -219,7 +244,7 @@ export default async function UpdatesPage({ searchParams }: UpdatesPageProps) {
             </div>
           </div>
 
-
+          {/* Supporting sidebar content sits beside the feed instead of interrupting it. */}
           <aside className="space-y-6">
             <SidebarCard title="About Me">
               <div className="space-y-4">
@@ -244,7 +269,7 @@ export default async function UpdatesPage({ searchParams }: UpdatesPageProps) {
               </div>
             </SidebarCard>
 
-
+            {/* Project links give some longer-lived context beyond the more time-based update stream. */}
             <SidebarCard title="Selected Repos">
               <div className="space-y-3">
                 {featuredRepos.map((repo) => (
@@ -280,10 +305,7 @@ export default async function UpdatesPage({ searchParams }: UpdatesPageProps) {
                 ))}
               </div>
             </SidebarCard>
-
-
-
-
+            {/* Tag chips work by reloading this page with a `?tag=` query string filter. */}
             <SidebarCard title="Tags">
               <div className="flex flex-wrap gap-2">
                 <Link

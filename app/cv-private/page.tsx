@@ -9,15 +9,22 @@ import html from "remark-html";
 import Logo from "@/components/logo";
 
 export default async function CvPrivatePage() {
-    const filePath = path.join(process.cwd(), "content/cv-private.md");
-    const fileContent = fs.readFileSync(filePath, "utf8");
-    const { content } = matter(fileContent);
+    // Keep the private CV source outside tracked content so the protected route
+    // does not rely on a markdown file committed to the public repository.
+    const filePath = path.join(process.cwd(), "private-content", "cv-private.md");
+    const hasPrivateCv = fs.existsSync(filePath);
+    let contentHtml = "";
 
-    const processed = await remark()
-        .use(html)
-        .process(content);
+    if (hasPrivateCv) {
+        const fileContent = fs.readFileSync(filePath, "utf8");
+        const { content } = matter(fileContent);
 
-    const contentHtml = processed.toString();
+        const processed = await remark()
+            .use(html)
+            .process(content);
+
+        contentHtml = processed.toString();
+    }
 
     return (
         <main className="mx-auto max-w-4xl px-6 py-10">
@@ -53,13 +60,6 @@ export default async function CvPrivatePage() {
                                     <LinkIcon className="h-4 w-4" />
                                     Public CV
                                 </a>
-                                <a
-                                    href="/cv/shane-bunting-cv.pdf"
-                                    className="inline-flex items-center gap-2 rounded-full border border-neutral-900 bg-neutral-900 px-4 py-2 text-sm font-semibold text-white transition hover:bg-neutral-800 dark:border-white dark:bg-white dark:text-neutral-950 dark:hover:bg-neutral-200"
-                                >
-                                    <Download className="h-4 w-4" />
-                                    Download PDF
-                                </a>
                             </div>
                         </div>
 
@@ -91,10 +91,22 @@ export default async function CvPrivatePage() {
                         <h2 className="text-xl font-semibold">Full CV</h2>
                     </div>
 
-                    <article
-                        className="prose prose-neutral mt-6 max-w-none prose-headings:tracking-tight prose-p:text-neutral-700 prose-li:text-neutral-700 prose-strong:text-neutral-950 prose-a:text-neutral-900 dark:prose-invert dark:prose-p:text-neutral-300 dark:prose-li:text-neutral-300 dark:prose-strong:text-white dark:prose-a:text-white"
-                        dangerouslySetInnerHTML={{ __html: contentHtml }}
-                    />
+                    {hasPrivateCv ? (
+                        <article
+                            className="prose prose-neutral mt-6 max-w-none prose-headings:tracking-tight prose-p:text-neutral-700 prose-li:text-neutral-700 prose-strong:text-neutral-950 prose-a:text-neutral-900 dark:prose-invert dark:prose-p:text-neutral-300 dark:prose-li:text-neutral-300 dark:prose-strong:text-white dark:prose-a:text-white"
+                            dangerouslySetInnerHTML={{ __html: contentHtml }}
+                        />
+                    ) : (
+                        <div className="mt-6 rounded-2xl border border-amber-300 bg-amber-50 p-4 text-sm text-amber-900 dark:border-amber-900/60 dark:bg-amber-950/40 dark:text-amber-100">
+                            <p>
+                                Private CV content is not available in this environment.
+                            </p>
+                            <p className="mt-2">
+                                Add your markdown to <code>private-content/cv-private.md</code> using the structure
+                                from <code>content/cv-private.example.md</code>.
+                            </p>
+                        </div>
+                    )}
                 </section>
             </div>
         </main>

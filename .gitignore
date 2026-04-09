@@ -42,3 +42,6 @@ next-env.d.ts
 
 # templates 
 content/templates/*
+
+# private content
+/private-content/
