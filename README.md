@@ -1,29 +1,45 @@
 # SB Portfolio Website
 
-Developer portfolio built with Next.js and Tailwind.
+Personal portfolio site built with Next.js, TypeScript, Tailwind CSS, and markdown-driven content.
 
-## Features
+## What This Repo Contains
 
-- Micro update feed
-- Projects showcase
+- Updates feed on the homepage
+- Individual update pages from markdown
+- Project showcase
 - Public CV
-- Password protected detailed CV
-- Markdown content system
+- Basic-auth protected private CV
 
-## Tech stack
+## Stack
 
-- Next.js
+- Next.js 16 App Router
+- React 19
 - TypeScript
-- Tailwind CSS
-- Markdown
+- Tailwind CSS 4
+- `gray-matter` for frontmatter parsing
+- `remark` + `remark-html` for markdown rendering
+- Vercel Analytics
+
+## Docs
+
+- Engineering docs index: [`docs/README.md`](/Users/shanebunting/Developer/sb-portfolio/docs/README.md)
+- System overview: [`docs/system-overview.md`](/Users/shanebunting/Developer/sb-portfolio/docs/system-overview.md)
+- Routes and rendering: [`docs/routes-and-rendering.md`](/Users/shanebunting/Developer/sb-portfolio/docs/routes-and-rendering.md)
+- Content model: [`docs/content-model.md`](/Users/shanebunting/Developer/sb-portfolio/docs/content-model.md)
+- Operations: [`docs/operations.md`](/Users/shanebunting/Developer/sb-portfolio/docs/operations.md)
 
 ## Development
 
-Run locally:
+```bash
 npm run dev
+```
 
-## Status
-Active
+## Production Notes
 
-## Links
-www.shanebunting.dev/
+- Update posts live in `content/updates`
+- Private CV auth uses `CV_USER` and `CV_PASS`
+- Private CV markdown is expected at `private-content/cv-private.md`
+
+## Link
+
+https://www.shanebunting.dev/

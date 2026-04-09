@@ -23,7 +23,7 @@ function getUpdateIcon(type: string) {
 // This mirrors the icon helper so each update type can render a short label in the card metadata row.
 function getUpdateLabel(type: string) {
   if (type === "video") return "Video";
-  if (type === "status") return "Status";
+  if (type === "status") return "Status Update";
   return "Post";
 }
 
@@ -120,14 +120,14 @@ export default async function UpdatesPage({ searchParams }: UpdatesPageProps) {
                         // `justify-between` pins them to the top and bottom of the card,
                         // `min-h-[10rem]` gives enough height for that separation to read clearly,
                         // and `gap-4` keeps a modest space between the two sections.
-                        <div className="flex min-h-[10rem] flex-col justify-between gap-4">
+                        <div className="flex min-h-[5rem] flex-col justify-between gap-4">
                           <p className="text-lg leading-8 text-neutral-800 dark:text-neutral-200 sm:text-xl">
                             {u.excerpt}
                           </p>
 
                           {/* The footer metadata is separated by a top border so the status text leads visually. */}
                           <div className="flex items-center gap-3 border-t border-neutral-200 pt-2 dark:border-neutral-800">
-                            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-neutral-100 text-neutral-600 dark:bg-neutral-800 dark:text-neutral-300">
+                            <div className="flex h-10 w-10 items-center justify-center rounded-full dark:bg-neutral-100 dark:text-neutral-600 bg-neutral-800 text-neutral-300">
                               {getUpdateIcon(u.type)}
                             </div>
                             <p className="text-xs uppercase tracking-wide text-neutral-500 dark:text-neutral-400">
@@ -152,7 +152,7 @@ export default async function UpdatesPage({ searchParams }: UpdatesPageProps) {
 
                           <div className="min-w-0 flex-1">
                             <div className="mb-4 flex items-center gap-3">
-                              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-neutral-100 text-neutral-600 dark:bg-neutral-800 dark:text-neutral-300">
+                              <div className="flex h-10 w-10 items-center justify-center rounded-full dark:bg-neutral-100 dark:text-neutral-600 bg-neutral-800 text-neutral-300">
                                 {getUpdateIcon(u.type)}
                               </div>
                               <p className="text-xs uppercase tracking-wide text-neutral-500 dark:text-neutral-400">
