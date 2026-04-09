@@ -14,6 +14,10 @@ export type Update = {
     coverImage?: string;
 };
 
+//Helper logic for reading and shaping content such as update posts...
+
+//This file looks inside content/updates, reads each .md file, pulls out frontmatter like title/date/type/tags and creates a consistent JavaScript object for each update.
+// 'frontmatter' is the metadata at the top of markdown files, which this reads using the gray-matter library. It also normalizes tags and provides helper functions for filtering updates by tag and getting all unique tags for the sidebar.
 
 const UPDATES_DIR = path.join(process.cwd(), "content", "updates");
 
@@ -78,14 +82,16 @@ export function getUpdates(): Update[] {
             );
 
         const rawType = parsed.data.type;
-        const type: UpdateType = 
-            rawType === "video" || rawType === "status" || rawType === "post"
-            ? rawType : "post";
-        const youtubeId = parsed.data.youtubeId ? String(parsed.data.youtubeId) : undefined;
+        const type: UpdateType =
+            rawType === "video" || rawType === "status" || rawType === "post" //defines three custom update types
+                ? rawType : "post";
+        const youtubeId = parsed.data.youtubeId ? String(parsed.data.youtubeId) : undefined; //optional
 
         const coverImage = parsed.data.coverImage
             ? String(parsed.data.coverImage)
-            : type === "status" ? undefined : "/images/default-coverimage.webp";
+            : type === "status" ? undefined : "/images/default-coverimage.webp"; //optionally specified, otherwise update. unless a status which has nothing render
+
+
         return { slug, date, title, tags: normalizedUniqueTags, excerpt, type, youtubeId, coverImage };
     });
 

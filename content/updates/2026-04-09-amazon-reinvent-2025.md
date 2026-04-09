@@ -1,7 +1,7 @@
 ---
-title: "Mindful Check-In Demo"
+title: "Watching AWS Re:Invent 2025"
 date: "2026-04-09"
-tags: ["ios", "swift", "video"]
+tags: ["aws", "ai", "event"]
 excerpt: "Thoughts on AWS Reinvent 2025"
 type: "video"
 youtubeId: "prVdCIHlipg"

@@ -4,6 +4,7 @@ import { getAllTags, getUpdates, getUpdatesByTag, formatTag } from "@/lib/update
 import SidebarCard from "@/components/sidebar-card";
 import { Video, FileText, Megaphone, ArrowRight, MessageSquareMore } from "lucide-react";
 
+//app/page.tsx - homepage of the portfolio. Reads tag filter, uses helper functions for updates and tags, decides how to render content for each update card as well as the sidebar.
 
 // Shared date formatting keeps card metadata consistent across the homepage feed.
 function formatDate(iso: string) {
@@ -16,7 +17,7 @@ function formatDate(iso: string) {
 
 function getUpdateIcon(type: string) {
   if (type === "video") return <Video className="h-4 w-4" />;
-  if (type === "status") return <MessageSquareMore className="h-4 w-4"/>;
+  if (type === "status") return <MessageSquareMore className="h-4 w-4" />;
   return <FileText className="h-4 w-4" />;
 }
 
@@ -29,26 +30,32 @@ function getUpdateLabel(type: string) {
 
 
 
+// A `type` in TypeScript describes the expected shape of some data.
+// This page receives a prop called `searchParams`.
+// That prop resolves to an object which may contain a `tag`.
 type UpdatesPageProps = {
   searchParams: Promise<{
     tag?: string | string[];
   }>;
 };
 
+//MAIN PAGE FUNCTION FOR HOMEPAGE
+// `async` means this function is allowed to wait for asynchronous work using `await`.
 export default async function UpdatesPage({ searchParams }: UpdatesPageProps) {
   const params = await searchParams;
 
-  // Query params can arrive as a string or array, so this normalizes down to a single active tag.
+  // FILTER BY TAG: Query params can arrive as a string or array. This normalizes down to a single active tag.
   const selectedTag =
+    // `===` is strict equality, meaning both the value and the type must match.
     typeof params.tag === "string"
       ? params.tag
-      : Array.isArray(params.tag)
+      : Array.isArray(params.tag) //arrays used to auto handle things like nodejs appearing as Node.js
         ? params.tag[0]
         : undefined;
 
   // The sidebar always shows all tags, while the feed itself can be filtered by the active tag.
-  const tags = getAllTags();
-  const updates = selectedTag ? getUpdatesByTag(selectedTag) : getUpdates();
+  const tags = getAllTags(); //fetch all tags for the sidebar .. 
+  const updates = selectedTag ? getUpdatesByTag(selectedTag) : getUpdates(); //if one is selected only show matching updates otherwise show all
 
   // These sidebar links are hand-curated rather than pulled from markdown content.
   const featuredRepos = [
@@ -72,7 +79,7 @@ export default async function UpdatesPage({ searchParams }: UpdatesPageProps) {
     }
   ];
 
-  return (
+  return ( //HTML RETURNED NOW TO RENDER PAGE
 
     <div>
 
@@ -110,6 +117,7 @@ export default async function UpdatesPage({ searchParams }: UpdatesPageProps) {
                   <ul className="space-y-4">
                     {updates.map((u) => {
                       // Status updates are intentionally shown as feed snippets rather than linked article cards.
+                      // This is another exact string check using strict equality.
                       const isStatus = u.type === "status";
                       // Video cards already embed their media, so only non-video cards use the side thumbnail.
                       const coverImage = u.type !== "video" ? u.coverImage : undefined;
@@ -166,6 +174,7 @@ export default async function UpdatesPage({ searchParams }: UpdatesPageProps) {
                                 <div className="aspect-video">
                                   <iframe
                                     className="h-full w-full"
+                                    // Backticks create a template literal so we can insert `${u.youtubeId}` into the URL string.
                                     src={`https://www.youtube.com/embed/${u.youtubeId}`}
                                     title={u.title}
                                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -215,6 +224,7 @@ export default async function UpdatesPage({ searchParams }: UpdatesPageProps) {
                           ) : (
                             // Posts and videos stay clickable so they can open their full detail pages.
                             <Link
+                              // This uses backticks for the same reason: it builds the URL using the current slug.
                               href={`/updates/${u.slug}`}
                               className="block rounded-lg border p-4 transition hover:border-black hover:bg-neutral-300 dark:hover:border-white dark:hover:bg-neutral-900/90"
                             >
