@@ -22,11 +22,11 @@ Personal portfolio site built with Next.js, TypeScript, Tailwind CSS, and markdo
 
 ## Docs
 
-- Engineering docs index: [`docs/README.md`](/Users/shanebunting/Developer/sb-portfolio/docs/README.md)
-- System overview: [`docs/system-overview.md`](/Users/shanebunting/Developer/sb-portfolio/docs/system-overview.md)
-- Routes and rendering: [`docs/routes-and-rendering.md`](/Users/shanebunting/Developer/sb-portfolio/docs/routes-and-rendering.md)
-- Content model: [`docs/content-model.md`](/Users/shanebunting/Developer/sb-portfolio/docs/content-model.md)
-- Operations: [`docs/operations.md`](/Users/shanebunting/Developer/sb-portfolio/docs/operations.md)
+- Engineering docs index: [`docs/README.md`](docs/README.md)
+- System overview: [`docs/system-overview.md`](docs/system-overview.md)
+- Routes and rendering: [`docs/routes-and-rendering.md`](docs/routes-and-rendering.md)
+- Content model: [`docs/content-model.md`](docs/content-model.md)
+- Operations: [`docs/operations.md`](docs/operations.md)
 
 ## Development
 

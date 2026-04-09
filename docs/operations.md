@@ -11,7 +11,7 @@ npm install
 npm run dev
 ```
 
-Useful scripts from [`package.json`](/Users/shanebunting/Developer/sb-portfolio/package.json):
+Useful scripts from [`package.json`](../package.json):
 
 - `npm run dev`
 - `npm run build`

@@ -13,12 +13,12 @@ This document is written for the next developer asked to maintain or extend the 
 
 Read these files in this order:
 
-1. [`app/layout.tsx`](/Users/shanebunting/Developer/sb-portfolio/app/layout.tsx)
-2. [`lib/updates.ts`](/Users/shanebunting/Developer/sb-portfolio/lib/updates.ts)
-3. [`app/page.tsx`](/Users/shanebunting/Developer/sb-portfolio/app/page.tsx)
-4. [`app/updates/[slug]/page.tsx`](/Users/shanebunting/Developer/sb-portfolio/app/updates/[slug]/page.tsx)
-5. [`middleware.ts`](/Users/shanebunting/Developer/sb-portfolio/middleware.ts)
-6. [`app/cv-private/page.tsx`](/Users/shanebunting/Developer/sb-portfolio/app/cv-private/page.tsx)
+1. [`app/layout.tsx`](../app/layout.tsx)
+2. [`lib/updates.ts`](../lib/updates.ts)
+3. [`app/page.tsx`](../app/page.tsx)
+4. [`app/updates/[slug]/page.tsx`](../app/updates/%5Bslug%5D/page.tsx)
+5. [`middleware.ts`](../middleware.ts)
+6. [`app/cv-private/page.tsx`](../app/cv-private/page.tsx)
 
 ## Common Maintenance Tasks
 
@@ -31,23 +31,23 @@ Read these files in this order:
 
 ### Change homepage layout
 
-- Work mainly in [`app/page.tsx`](/Users/shanebunting/Developer/sb-portfolio/app/page.tsx)
+- Work mainly in [`app/page.tsx`](../app/page.tsx)
 - Be careful not to break special rendering for `status` and `video` items
 - Verify tag filtering still works
 
 ### Change project entries
 
-- Work in [`app/projects/page.tsx`](/Users/shanebunting/Developer/sb-portfolio/app/projects/page.tsx)
+- Work in [`app/projects/page.tsx`](../app/projects/page.tsx)
 - This page is currently curated directly in JSX
 
 ### Change CV content
 
-- Public CV: edit [`app/cv/page.tsx`](/Users/shanebunting/Developer/sb-portfolio/app/cv/page.tsx)
+- Public CV: edit [`app/cv/page.tsx`](../app/cv/page.tsx)
 - Private CV: edit local markdown at `private-content/cv-private.md`
 
 ### Change private access
 
-- Work in [`middleware.ts`](/Users/shanebunting/Developer/sb-portfolio/middleware.ts)
+- Work in [`middleware.ts`](../middleware.ts)
 - Avoid changing auth behaviour without checking the deployment environment variables
 
 ## Known Sharp Edges

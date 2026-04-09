@@ -6,7 +6,7 @@ This document maps each route to its implementation and explains how the page is
 
 ### Root layout
 
-- File: [`app/layout.tsx`](/Users/shanebunting/Developer/sb-portfolio/app/layout.tsx)
+- File: [`app/layout.tsx`](../app/layout.tsx)
 - Responsibilities:
   - imports global CSS
   - loads Google fonts
@@ -20,7 +20,7 @@ Everything rendered by page routes sits inside this shared shell.
 
 ### `/`
 
-- File: [`app/page.tsx`](/Users/shanebunting/Developer/sb-portfolio/app/page.tsx)
+- File: [`app/page.tsx`](../app/page.tsx)
 - Role: homepage and canonical updates feed
 - Behaviour:
   - reads all updates via `lib/updates.ts`
@@ -33,14 +33,14 @@ Everything rendered by page routes sits inside this shared shell.
 
 ### `/updates`
 
-- File: [`app/updates/page.tsx`](/Users/shanebunting/Developer/sb-portfolio/app/updates/page.tsx)
+- File: [`app/updates/page.tsx`](../app/updates/page.tsx)
 - Role: compatibility redirect
 - Behaviour:
   - redirects to `/`
 
 ### `/updates/[slug]`
 
-- File: [`app/updates/[slug]/page.tsx`](/Users/shanebunting/Developer/sb-portfolio/app/updates/[slug]/page.tsx)
+- File: [`app/updates/[slug]/page.tsx`](../app/updates/%5Bslug%5D/page.tsx)
 - Role: detail page for a markdown update
 - Behaviour:
   - statically enumerates available slugs from markdown files
@@ -51,7 +51,7 @@ Everything rendered by page routes sits inside this shared shell.
 
 ### `/projects`
 
-- File: [`app/projects/page.tsx`](/Users/shanebunting/Developer/sb-portfolio/app/projects/page.tsx)
+- File: [`app/projects/page.tsx`](../app/projects/page.tsx)
 - Role: curated portfolio page
 - Behaviour:
   - mostly static JSX
@@ -60,7 +60,7 @@ Everything rendered by page routes sits inside this shared shell.
 
 ### `/cv`
 
-- File: [`app/cv/page.tsx`](/Users/shanebunting/Developer/sb-portfolio/app/cv/page.tsx)
+- File: [`app/cv/page.tsx`](../app/cv/page.tsx)
 - Role: public CV page
 - Behaviour:
   - static structured content defined directly in the route file
@@ -68,8 +68,8 @@ Everything rendered by page routes sits inside this shared shell.
 
 ### `/cv-private`
 
-- File: [`app/cv-private/page.tsx`](/Users/shanebunting/Developer/sb-portfolio/app/cv-private/page.tsx)
-- Protected by: [`middleware.ts`](/Users/shanebunting/Developer/sb-portfolio/middleware.ts)
+- File: [`app/cv-private/page.tsx`](../app/cv-private/page.tsx)
+- Protected by: [`middleware.ts`](../middleware.ts)
 - Role: private expanded CV
 - Behaviour:
   - checks for local markdown file `private-content/cv-private.md`
@@ -78,12 +78,12 @@ Everything rendered by page routes sits inside this shared shell.
 
 ### Not found handling
 
-- File: [`app/not-found.tsx`](/Users/shanebunting/Developer/sb-portfolio/app/not-found.tsx)
+- File: [`app/not-found.tsx`](../app/not-found.tsx)
 - Role: shared 404 experience
 
 ### Sitemap
 
-- File: [`app/sitemap.ts`](/Users/shanebunting/Developer/sb-portfolio/app/sitemap.ts)
+- File: [`app/sitemap.ts`](../app/sitemap.ts)
 - Role: exposes a small sitemap
 - Current limitation:
   - only includes `/`, `/projects`, and `/updates`
@@ -111,9 +111,9 @@ When changing a route, understand which kind of change you are making:
 
 ## Highest-Risk Route Areas
 
-- [`app/page.tsx`](/Users/shanebunting/Developer/sb-portfolio/app/page.tsx)
+- [`app/page.tsx`](../app/page.tsx)
   Large homepage file with mixed rendering rules for multiple update types
-- [`app/updates/[slug]/page.tsx`](/Users/shanebunting/Developer/sb-portfolio/app/updates/[slug]/page.tsx)
+- [`app/updates/[slug]/page.tsx`](../app/updates/%5Bslug%5D/page.tsx)
   Owns markdown rendering and dynamic route generation
-- [`middleware.ts`](/Users/shanebunting/Developer/sb-portfolio/middleware.ts)
+- [`middleware.ts`](../middleware.ts)
   Defines the only route protection in the app

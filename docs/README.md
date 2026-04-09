@@ -4,12 +4,12 @@ This folder is the working documentation set for the portfolio site. It is writt
 
 ## Reading Order
 
-1. [`system-overview.md`](/Users/shanebunting/Developer/sb-portfolio/docs/system-overview.md)
-2. [`stack-map.md`](/Users/shanebunting/Developer/sb-portfolio/docs/stack-map.md)
-3. [`routes-and-rendering.md`](/Users/shanebunting/Developer/sb-portfolio/docs/routes-and-rendering.md)
-4. [`content-model.md`](/Users/shanebunting/Developer/sb-portfolio/docs/content-model.md)
-5. [`operations.md`](/Users/shanebunting/Developer/sb-portfolio/docs/operations.md)
-6. [`handover-notes.md`](/Users/shanebunting/Developer/sb-portfolio/docs/handover-notes.md)
+1. [`system-overview.md`](system-overview.md)
+2. [`stack-map.md`](stack-map.md)
+3. [`routes-and-rendering.md`](routes-and-rendering.md)
+4. [`content-model.md`](content-model.md)
+5. [`operations.md`](operations.md)
+6. [`handover-notes.md`](handover-notes.md)
 
 ## Why This Exists
 
@@ -17,19 +17,19 @@ Inline code comments are best for local complexity. Repo understanding, system s
 
 ## Document Set
 
-- [`system-overview.md`](/Users/shanebunting/Developer/sb-portfolio/docs/system-overview.md)
+- [`system-overview.md`](system-overview.md)
   High-level system purpose, responsibilities, and architecture.
-- [`stack-map.md`](/Users/shanebunting/Developer/sb-portfolio/docs/stack-map.md)
+- [`stack-map.md`](stack-map.md)
   Main technologies, where they are used, and why they matter.
-- [`routes-and-rendering.md`](/Users/shanebunting/Developer/sb-portfolio/docs/routes-and-rendering.md)
+- [`routes-and-rendering.md`](routes-and-rendering.md)
   Page-by-page route map and rendering behaviour.
-- [`content-model.md`](/Users/shanebunting/Developer/sb-portfolio/docs/content-model.md)
+- [`content-model.md`](content-model.md)
   Markdown content structure, frontmatter, and data flow.
-- [`operations.md`](/Users/shanebunting/Developer/sb-portfolio/docs/operations.md)
+- [`operations.md`](operations.md)
   Setup, environment variables, deployment assumptions, and operational risks.
-- [`handover-notes.md`](/Users/shanebunting/Developer/sb-portfolio/docs/handover-notes.md)
+- [`handover-notes.md`](handover-notes.md)
   Practical guidance for the next developer maintaining the site.
-- [`decisions/0001-local-markdown-and-basic-auth.md`](/Users/shanebunting/Developer/sb-portfolio/docs/decisions/0001-local-markdown-and-basic-auth.md)
+- [`decisions/0001-local-markdown-and-basic-auth.md`](decisions/0001-local-markdown-and-basic-auth.md)
   Short architecture decision record for the current content/auth approach.
 
 ## Maintenance Rule

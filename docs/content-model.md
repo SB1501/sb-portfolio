@@ -8,9 +8,9 @@ This document describes how content is stored, parsed, and rendered.
 
 - Location: `content/updates/*.md`
 - Consumed by:
-  - [`lib/updates.ts`](/Users/shanebunting/Developer/sb-portfolio/lib/updates.ts)
-  - [`app/page.tsx`](/Users/shanebunting/Developer/sb-portfolio/app/page.tsx)
-  - [`app/updates/[slug]/page.tsx`](/Users/shanebunting/Developer/sb-portfolio/app/updates/[slug]/page.tsx)
+  - [`lib/updates.ts`](../lib/updates.ts)
+  - [`app/page.tsx`](../app/page.tsx)
+  - [`app/updates/[slug]/page.tsx`](../app/updates/%5Bslug%5D/page.tsx)
 
 Each markdown file becomes one update item. For `post` and `video` items, that also means a detail page under `/updates/[slug]`.
 
@@ -20,7 +20,7 @@ Each markdown file becomes one update item. For `post` and `video` items, that a
 
 - Location: `private-content/cv-private.md`
 - Consumed by:
-  - [`app/cv-private/page.tsx`](/Users/shanebunting/Developer/sb-portfolio/app/cv-private/page.tsx)
+  - [`app/cv-private/page.tsx`](../app/cv-private/page.tsx)
 
 This file is intentionally kept outside the public content area and is expected to exist only in environments where the private CV is needed.
 
@@ -92,7 +92,7 @@ youtubeId: "abcdefghijk"
 
 ## Important Conventions
 
-- Tag display labels are defined in [`lib/updates.ts`](/Users/shanebunting/Developer/sb-portfolio/lib/updates.ts)
+- Tag display labels are defined in [`lib/updates.ts`](../lib/updates.ts)
 - Tags are normalized internally even if the source markdown uses mixed casing
 - Status updates are intentionally displayed on the homepage as feed snippets, not navigable detail experiences
 

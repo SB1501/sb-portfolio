@@ -9,10 +9,10 @@ This document explains the technology choices in the repo and where each one app
 - Used as the main web framework
 - Provides the App Router, route files, layout system, metadata, redirects, sitemap support, and middleware
 - Main locations:
-  - [`app/layout.tsx`](/Users/shanebunting/Developer/sb-portfolio/app/layout.tsx)
-  - [`app/page.tsx`](/Users/shanebunting/Developer/sb-portfolio/app/page.tsx)
-  - [`app/updates/[slug]/page.tsx`](/Users/shanebunting/Developer/sb-portfolio/app/updates/[slug]/page.tsx)
-  - [`middleware.ts`](/Users/shanebunting/Developer/sb-portfolio/middleware.ts)
+  - [`app/layout.tsx`](../app/layout.tsx)
+  - [`app/page.tsx`](../app/page.tsx)
+  - [`app/updates/[slug]/page.tsx`](../app/updates/%5Bslug%5D/page.tsx)
+  - [`middleware.ts`](../middleware.ts)
 
 ## UI Layer
 
@@ -24,7 +24,7 @@ This document explains the technology choices in the repo and where each one app
 ### Tailwind CSS 4
 
 - Used for styling via utility classes
-- Imported in [`app/globals.css`](/Users/shanebunting/Developer/sb-portfolio/app/globals.css)
+- Imported in [`app/globals.css`](../app/globals.css)
 - Typography plugin is enabled for markdown-rendered pages
 
 ### Lucide React
@@ -37,12 +37,12 @@ This document explains the technology choices in the repo and where each one app
 ### TypeScript
 
 - Used throughout the app for route, component, and helper code
-- Path alias `@/*` is configured in [`tsconfig.json`](/Users/shanebunting/Developer/sb-portfolio/tsconfig.json)
+- Path alias `@/*` is configured in [`tsconfig.json`](../tsconfig.json)
 
 ### ESLint
 
 - Used for linting
-- Configured with Next.js core web vitals and TypeScript rules in [`eslint.config.mjs`](/Users/shanebunting/Developer/sb-portfolio/eslint.config.mjs)
+- Configured with Next.js core web vitals and TypeScript rules in [`eslint.config.mjs`](../eslint.config.mjs)
 
 ## Content And Parsing
 
@@ -55,9 +55,9 @@ This document explains the technology choices in the repo and where each one app
 
 - Parses frontmatter from markdown files
 - Used in:
-  - [`lib/updates.ts`](/Users/shanebunting/Developer/sb-portfolio/lib/updates.ts)
-  - [`app/updates/[slug]/page.tsx`](/Users/shanebunting/Developer/sb-portfolio/app/updates/[slug]/page.tsx)
-  - [`app/cv-private/page.tsx`](/Users/shanebunting/Developer/sb-portfolio/app/cv-private/page.tsx)
+  - [`lib/updates.ts`](../lib/updates.ts)
+  - [`app/updates/[slug]/page.tsx`](../app/updates/%5Bslug%5D/page.tsx)
+  - [`app/cv-private/page.tsx`](../app/cv-private/page.tsx)
 
 ### `remark` and `remark-html`
 
@@ -76,7 +76,7 @@ This document explains the technology choices in the repo and where each one app
 ### Vercel Analytics
 
 - Client-side analytics integration included in the root layout
-- Used in [`app/layout.tsx`](/Users/shanebunting/Developer/sb-portfolio/app/layout.tsx)
+- Used in [`app/layout.tsx`](../app/layout.tsx)
 
 ## Security
 
@@ -84,7 +84,7 @@ This document explains the technology choices in the repo and where each one app
 
 - Request protection for `/cv-private`
 - Credentials are read from environment variables
-- Implemented in [`middleware.ts`](/Users/shanebunting/Developer/sb-portfolio/middleware.ts)
+- Implemented in [`middleware.ts`](../middleware.ts)
 
 ## Hosting Shape
 
