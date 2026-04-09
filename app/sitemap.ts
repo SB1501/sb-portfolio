@@ -1,16 +1,20 @@
-export default function sitemap() {
-    return [
-        {
-            url: "https://shanebunting.dev",
-            lastModified: new Date(),
-        },
-        {
-            url: "https://shanebunting.dev/projects",
-            lastModified: new Date(),
-        },
-        {
-            url: "https://shanebunting.dev/updates",
-            lastModified: new Date(),
-        },
-    ]
+import type { MetadataRoute } from "next";
+import { getUpdates } from "@/lib/updates";
+
+const baseUrl = "https://shanebunting.dev";
+
+export default function sitemap(): MetadataRoute.Sitemap {
+  const staticRoutes = ["", "/projects", "/cv"];
+  const updateRoutes = getUpdates().map((update) => ({
+    url: `${baseUrl}/updates/${update.slug}`,
+    lastModified: new Date(update.date),
+  }));
+
+  return [
+    ...staticRoutes.map((route) => ({
+      url: `${baseUrl}${route}`,
+      lastModified: new Date(),
+    })),
+    ...updateRoutes,
+  ];
 }

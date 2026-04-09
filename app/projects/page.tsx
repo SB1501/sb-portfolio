@@ -1,6 +1,16 @@
 import Image from "next/image";
+import type { Metadata } from "next";
 import { FolderKanban, FlaskConical, Code } from "lucide-react";
 import Link from "next/link";
+import { SITE_URL } from "@/lib/site";
+
+export const metadata: Metadata = {
+    title: "Projects | Shane Bunting",
+    description: "A selection of apps, course work and software projects built by Shane Bunting.",
+    alternates: {
+        canonical: `${SITE_URL}/projects`,
+    },
+};
 
 export default function ProjectsPage() {
     return (
@@ -152,9 +162,9 @@ export default function ProjectsPage() {
 
                                 <div className="min-w-0 flex-1">
 
-                                    <h2 className="mt-3 text-2xl font-bold text-white">8BallWatch</h2>
+                                    <h2 className="mt-3 text-2xl font-bold text-white">Wisdom Watch</h2>
                                     <p className="mt-3 text-sm leading-6 text-white/80">
-                                        My first ever app project, built as an early step into designing and shipping a complete mobile experience.
+                                        Developed alongside 8BallWatch but instead focused on delivering instant mindful quotes on demand.
                                     </p>
                                 </div>
                             </div>

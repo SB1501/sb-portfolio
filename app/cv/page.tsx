@@ -1,4 +1,5 @@
 import Image from "next/image";
+import type { Metadata } from "next";
 import {
     BadgeCheck,
     BookOpen,
@@ -17,6 +18,15 @@ import {
 } from "lucide-react";
 
 import Logo from "@/components/logo";
+import { SITE_URL } from "@/lib/site";
+
+export const metadata: Metadata = {
+    title: "CV | Shane Bunting",
+    description: "Public CV and background information for Shane Bunting.",
+    alternates: {
+        canonical: `${SITE_URL}/cv`,
+    },
+};
 
 const skills = [
     "JavaScript / TypeScript",

@@ -1,63 +1,47 @@
 import Image from "next/image";
+import type { Metadata } from "next";
 import Link from "next/link";
-import { getAllTags, getUpdates, getUpdatesByTag, formatTag } from "@/lib/updates";
+import { Megaphone } from "lucide-react";
 import SidebarCard from "@/components/sidebar-card";
-import { Video, FileText, Megaphone, ArrowRight, MessageSquareMore } from "lucide-react";
+import TagFilter from "@/components/tag-filter";
+import UpdateCard from "@/components/update-card";
+import { formatTag, getAllTags, getUpdates, getUpdatesByTag } from "@/lib/updates";
+import { SITE_URL, UPDATES_PAGE_SIZE } from "@/lib/site";
 
-//app/page.tsx - homepage of the portfolio. Reads tag filter, uses helper functions for updates and tags, decides how to render content for each update card as well as the sidebar.
-
-// Shared date formatting keeps card metadata consistent across the homepage feed.
-function formatDate(iso: string) {
-  return new Date(iso).toLocaleDateString("en-GB", {
-    day: "2-digit",
-    month: "short",
-    year: "numeric",
-  });
-}
-
-function getUpdateIcon(type: string) {
-  if (type === "video") return <Video className="h-4 w-4" />;
-  if (type === "status") return <MessageSquareMore className="h-4 w-4" />;
-  return <FileText className="h-4 w-4" />;
-}
-
-// This mirrors the icon helper so each update type can render a short label in the card metadata row.
-function getUpdateLabel(type: string) {
-  if (type === "video") return "Video";
-  if (type === "status") return "Status Update";
-  return "Post";
-}
-
-
-
-// A `type` in TypeScript describes the expected shape of some data.
-// This page receives a prop called `searchParams`.
-// That prop resolves to an object which may contain a `tag`.
 type UpdatesPageProps = {
   searchParams: Promise<{
     tag?: string | string[];
+    page?: string | string[];
   }>;
 };
 
-//MAIN PAGE FUNCTION FOR HOMEPAGE
-// `async` means this function is allowed to wait for asynchronous work using `await`.
+export const metadata: Metadata = {
+  title: "Latest Updates | Shane Bunting",
+  description: "Notes, progress updates and development logs from Shane Bunting.",
+  alternates: {
+    canonical: SITE_URL,
+  },
+};
+
+function getQueryParam(value?: string | string[]) {
+  if (typeof value === "string") return value;
+  if (Array.isArray(value)) return value[0];
+  return undefined;
+}
+
 export default async function UpdatesPage({ searchParams }: UpdatesPageProps) {
   const params = await searchParams;
+  const selectedTag = getQueryParam(params.tag);
+  const selectedPage = Number(getQueryParam(params.page) ?? "1");
+  const currentPage = Number.isFinite(selectedPage) && selectedPage > 0 ? Math.floor(selectedPage) : 1;
 
-  // FILTER BY TAG: Query params can arrive as a string or array. This normalizes down to a single active tag.
-  const selectedTag =
-    // `===` is strict equality, meaning both the value and the type must match.
-    typeof params.tag === "string"
-      ? params.tag
-      : Array.isArray(params.tag) //arrays used to auto handle things like nodejs appearing as Node.js
-        ? params.tag[0]
-        : undefined;
+  const tags = getAllTags();
+  const filteredUpdates = selectedTag ? getUpdatesByTag(selectedTag) : getUpdates();
+  const totalPages = Math.max(1, Math.ceil(filteredUpdates.length / UPDATES_PAGE_SIZE));
+  const safePage = Math.min(currentPage, totalPages);
+  const startIndex = (safePage - 1) * UPDATES_PAGE_SIZE;
+  const updates = filteredUpdates.slice(startIndex, startIndex + UPDATES_PAGE_SIZE);
 
-  // The sidebar always shows all tags, while the feed itself can be filtered by the active tag.
-  const tags = getAllTags(); //fetch all tags for the sidebar .. 
-  const updates = selectedTag ? getUpdatesByTag(selectedTag) : getUpdates(); //if one is selected only show matching updates otherwise show all
-
-  // These sidebar links are hand-curated rather than pulled from markdown content.
   const featuredRepos = [
     {
       name: "Mindful Check-In App",
@@ -76,24 +60,24 @@ export default async function UpdatesPage({ searchParams }: UpdatesPageProps) {
       description: "A static modern website for a fictional shopping mall / college project",
       href: "https://github.com/SB1501/Harbour-Haven-Mall",
       tech: ["HTML", "CSS", "JavaScript"],
-    }
+    },
   ];
 
-  return ( //HTML RETURNED NOW TO RENDER PAGE
+  const buildPageHref = (page: number) => {
+    const query = new URLSearchParams();
+    if (selectedTag) query.set("tag", selectedTag);
+    if (page > 1) query.set("page", String(page));
+    const search = query.toString();
+    return search ? `/?${search}` : "/";
+  };
 
+  return (
     <div>
-
-      {/* Main homepage shell: primary update feed on the left, supporting sidebar on the right. */}
-      <main className="relative mx-auto max-w-6xl px-6 py-10" >
-
+      <main className="relative mx-auto max-w-6xl px-6 py-10">
         <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_280px]">
-
-
           <div className="min-w-0">
-            {/* Feed container for the latest updates list. */}
-            <div className="min-w-0 rounded-2xl border border-neutral-200 p-6 bg-white/90 dark:border-neutral-800 dark:bg-neutral-950">
+            <div className="min-w-0 rounded-2xl border border-neutral-200 bg-white/90 p-6 dark:border-neutral-800 dark:bg-neutral-950">
               <header className="mb-10">
-
                 <div className="flex items-center gap-3">
                   <Megaphone className="h-7 w-7 text-black dark:text-white" />
                   <h1 className="text-3xl font-bold">Latest Updates</h1>
@@ -108,153 +92,62 @@ export default async function UpdatesPage({ searchParams }: UpdatesPageProps) {
                     Showing updates tagged #{formatTag(selectedTag)}
                   </p>
                 )}
-
               </header>
 
               <section>
-
                 {updates.length > 0 ? (
                   <ul className="space-y-4">
-                    {updates.map((u) => {
-                      // Status updates are intentionally shown as feed snippets rather than linked article cards.
-                      // This is another exact string check using strict equality.
-                      const isStatus = u.type === "status";
-                      // Video cards already embed their media, so only non-video cards use the side thumbnail.
-                      const coverImage = u.type !== "video" ? u.coverImage : undefined;
-
-                      const cardContent = isStatus ? (
-                        // Status cards use a stacked layout:
-                        // `flex flex-col` stacks the text and footer vertically,
-                        // `justify-between` pins them to the top and bottom of the card,
-                        // `min-h-[10rem]` gives enough height for that separation to read clearly,
-                        // and `gap-4` keeps a modest space between the two sections.
-                        <div className="flex min-h-[5rem] flex-col justify-between gap-4">
-                          <p className="text-lg leading-8 text-neutral-800 dark:text-neutral-200 sm:text-xl">
-                            {u.excerpt}
-                          </p>
-
-                          {/* The footer metadata is separated by a top border so the status text leads visually. */}
-                          <div className="flex items-center gap-3 border-t border-neutral-200 pt-2 dark:border-neutral-800">
-                            <div className="flex h-10 w-10 items-center justify-center rounded-full dark:bg-neutral-100 dark:text-neutral-600 bg-neutral-800 text-neutral-300">
-                              {getUpdateIcon(u.type)}
-                            </div>
-                            <p className="text-xs uppercase tracking-wide text-neutral-500 dark:text-neutral-400">
-                              {getUpdateLabel(u.type)} | {formatDate(u.date)}
-                            </p>
-                          </div>
-                        </div>
-                      ) : (
-                        // Posts and videos keep the original linked-card layout and can add media above the text.
-                        <div className="flex gap-4">
-                          {coverImage && (
-                            <div className="hidden shrink-0 overflow-hidden rounded-xl border border-neutral-200 dark:border-neutral-800 sm:block">
-                              <Image
-                                src={coverImage}
-                                alt={u.title}
-                                width={160}
-                                height={90}
-                                className="h-full w-full object-cover"
-                              />
-                            </div>
-                          )}
-
-                          <div className="min-w-0 flex-1">
-                            <div className="mb-4 flex items-center gap-3">
-                              <div className="flex h-10 w-10 items-center justify-center rounded-full dark:bg-neutral-100 dark:text-neutral-600 bg-neutral-800 text-neutral-300">
-                                {getUpdateIcon(u.type)}
-                              </div>
-                              <p className="text-xs uppercase tracking-wide text-neutral-500 dark:text-neutral-400">
-                                {getUpdateLabel(u.type)} | {formatDate(u.date)}
-                              </p>
-                            </div>
-
-                            {/* Video cards embed YouTube directly, which is why they no longer need the side thumbnail. */}
-                            {u.type === "video" && u.youtubeId && (
-                              <div className="mb-4 overflow-hidden rounded-2xl border border-neutral-200 dark:border-neutral-800">
-                                <div className="aspect-video">
-                                  <iframe
-                                    className="h-full w-full"
-                                    // Backticks create a template literal so we can insert `${u.youtubeId}` into the URL string.
-                                    src={`https://www.youtube.com/embed/${u.youtubeId}`}
-                                    title={u.title}
-                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                    allowFullScreen
-                                  />
-                                </div>
-                              </div>
-                            )}
-
-                            <h2 className="text-base font-medium text-neutral-900 dark:text-neutral-100">
-                              {u.title}
-                            </h2>
-
-                            {u.excerpt && (
-                              <p className="mt-2 text-sm text-neutral-700 dark:text-neutral-300">
-                                {u.excerpt}
-                              </p>
-                            )}
-
-                            {u.tags.length > 0 && (
-                              <div className="mt-3 flex flex-wrap gap-2">
-                                {u.tags.map((tag) => (
-                                  <span
-                                    key={tag}
-                                    className="text-xs text-neutral-500 dark:text-neutral-400"
-                                  >
-                                    #{formatTag(tag)}
-                                  </span>
-                                ))}
-                              </div>
-                            )}
-                          </div>
-
-                          <div className="flex items-center text-neutral-400">
-                            <ArrowRight className="h-4 w-4" />
-                          </div>
-                        </div>
-                      );
-
-                      return (
-                        <li key={u.slug}>
-                          {isStatus ? (
-                            // Status cards are display-only on the homepage and do not navigate away.
-                            <div className="rounded-lg border border-neutral-200 bg-neutral-50/70 p-3 dark:border-neutral-800 dark:bg-neutral-900/60">
-                              {cardContent}
-                            </div>
-                          ) : (
-                            // Posts and videos stay clickable so they can open their full detail pages.
-                            <Link
-                              // This uses backticks for the same reason: it builds the URL using the current slug.
-                              href={`/updates/${u.slug}`}
-                              className="block rounded-lg border p-4 transition hover:border-black hover:bg-neutral-300 dark:hover:border-white dark:hover:bg-neutral-900/90"
-                            >
-                              {cardContent}
-                            </Link>
-                          )}
-                        </li>
-                      );
-                    })}
-
+                    {updates.map((update) => (
+                      <li key={update.slug}>
+                        <UpdateCard update={update} />
+                      </li>
+                    ))}
                   </ul>
                 ) : (
-                  // Empty state for tag filters that currently have no matching updates.
                   <div className="rounded-lg border p-4">
                     <p className="text-sm text-neutral-700 dark:text-neutral-300">
                       No updates found for <span className="font-medium">{selectedTag ? formatTag(selectedTag) : ""}</span>.
                     </p>
                     <Link
                       href="/"
-                      className="mt-2 inline-block text-sm text-neutral-600 dark:text-neutral-300 hover:underline"
+                      className="mt-2 inline-block text-sm text-neutral-600 hover:underline dark:text-neutral-300"
                     >
                       View all updates
                     </Link>
+                  </div>
+                )}
+
+                {filteredUpdates.length > UPDATES_PAGE_SIZE && (
+                  <div className="mt-8 flex items-center justify-between gap-4 border-t border-neutral-200 pt-6 dark:border-neutral-800">
+                    <p className="text-sm text-neutral-600 dark:text-neutral-300">
+                      Page {safePage} of {totalPages}
+                    </p>
+
+                    <div className="flex gap-2">
+                      {safePage > 1 && (
+                        <Link
+                          href={buildPageHref(safePage - 1)}
+                          className="rounded-full border border-neutral-300 px-4 py-2 text-sm text-neutral-700 transition hover:border-neutral-500 hover:text-neutral-900 dark:border-neutral-700 dark:text-neutral-300 dark:hover:border-neutral-500 dark:hover:text-white"
+                        >
+                          Previous
+                        </Link>
+                      )}
+
+                      {safePage < totalPages && (
+                        <Link
+                          href={buildPageHref(safePage + 1)}
+                          className="rounded-full border border-neutral-900 bg-neutral-900 px-4 py-2 text-sm text-white transition hover:bg-neutral-800 dark:border-white dark:bg-white dark:text-neutral-950 dark:hover:bg-neutral-200"
+                        >
+                          Next
+                        </Link>
+                      )}
+                    </div>
                   </div>
                 )}
               </section>
             </div>
           </div>
 
-          {/* Supporting sidebar content sits beside the feed instead of interrupting it. */}
           <aside className="space-y-6">
             <SidebarCard title="About Me">
               <div className="space-y-4">
@@ -279,7 +172,6 @@ export default async function UpdatesPage({ searchParams }: UpdatesPageProps) {
               </div>
             </SidebarCard>
 
-            {/* Project links give some longer-lived context beyond the more time-based update stream. */}
             <SidebarCard title="Selected Repos">
               <div className="space-y-3">
                 {featuredRepos.map((repo) => (
@@ -300,11 +192,10 @@ export default async function UpdatesPage({ searchParams }: UpdatesPageProps) {
                       {repo.tech.map((item) => (
                         <span
                           key={item}
-                          className="inline-flex items-center rounded-full border border-neutral-300 bg-neutral-100 px-3 py-1.5 text-xs leading-none font-medium text-neutral-700 dark:border-neutral-700 dark:bg-neutral-800 dark:text-neutral-200"
+                          className="inline-flex items-center rounded-full border border-neutral-300 bg-neutral-100 px-3 py-1.5 text-xs font-medium leading-none text-neutral-700 dark:border-neutral-700 dark:bg-neutral-800 dark:text-neutral-200"
                         >
                           {item}
                         </span>
-
                       ))}
                     </div>
 
@@ -315,42 +206,13 @@ export default async function UpdatesPage({ searchParams }: UpdatesPageProps) {
                 ))}
               </div>
             </SidebarCard>
-            {/* Tag chips work by reloading this page with a `?tag=` query string filter. */}
+
             <SidebarCard title="Tags">
-              <div className="flex flex-wrap gap-2">
-                <Link
-                  href="/"
-                  className={`rounded-full border px-3 py-1 text-sm transition ${!selectedTag
-                    ? "border-neutral-900 bg-neutral-900 text-white"
-                    : "border-neutral-300 text-neutral-700 hover:border-neutral-500 hover:text-neutral-900 dark:border-neutral-700 dark:text-neutral-300 dark:hover:border-neutral-500 dark:hover:text-white"
-                    }`}
-                >
-                  All
-                </Link>
-
-                {tags.map((tag) => {
-                  const isActive = selectedTag?.toLowerCase() === tag;
-
-                  return (
-                    <Link
-                      key={tag}
-                      href={`/?tag=${encodeURIComponent(tag)}`}
-                      className={`rounded-full border px-3 py-1 text-sm transition ${isActive
-                        ? "border-neutral-900 bg-neutral-900 text-white"
-                        : "border-neutral-300 text-neutral-700 hover:border-neutral-500 hover:text-neutral-900 dark:border-neutral-700 dark:text-neutral-300 dark:hover:border-neutral-500 dark:hover:text-white"
-                        }`}
-                    >
-                      {formatTag(tag)}
-                    </Link>
-                  );
-                })}
-              </div>
+              <TagFilter selectedTag={selectedTag} tags={tags} />
             </SidebarCard>
           </aside>
-
-        </div >
-      </main >
-    </div >
-
+        </div>
+      </main>
+    </div>
   );
 }
