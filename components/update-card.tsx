@@ -30,7 +30,7 @@ export default function UpdateCard({ update }: UpdateCardProps) {
         {update.excerpt}
       </p>
 
-      <div className="flex items-center gap-3 border-t border-neutral-200 pt-2 dark:border-neutral-800">
+      <div className="flex items-center gap-3  border-neutral-200 pt-2 dark:border-neutral-800">
         <div className="flex h-10 w-10 items-center justify-center rounded-full bg-neutral-800 text-neutral-300 dark:bg-neutral-100 dark:text-neutral-600">
           {getUpdateIcon(update.type)}
         </div>
@@ -109,7 +109,7 @@ export default function UpdateCard({ update }: UpdateCardProps) {
 
   if (isStatus) {
     return (
-      <div className="rounded-lg border border-neutral-200 bg-neutral-50/70 p-3 dark:border-neutral-800 dark:bg-neutral-900/60">
+      <div className="rounded-lg border border-neutral bg-neutral-50/70 p-3 dark:border-neutral-800 dark:bg-neutral-900/60">
         {cardContent}
       </div>
     );

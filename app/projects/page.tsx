@@ -1,6 +1,6 @@
 import Image from "next/image";
 import type { Metadata } from "next";
-import { FolderKanban, FlaskConical, Code } from "lucide-react";
+import { FolderKanban, FlaskConical, Code, ImageIcon, ExternalLink, PlayCircle } from "lucide-react";
 import Link from "next/link";
 import { SITE_URL } from "@/lib/site";
 
@@ -11,6 +11,222 @@ export const metadata: Metadata = {
         canonical: `${SITE_URL}/projects`,
     },
 };
+
+type AcademicWebsiteCardProps = {
+    label: string;
+    title: string;
+    description: string;
+    technologies: string[];
+    repoLinks: { label: string; href: string }[];
+    logoLabel: string;
+    logoSrc?: string;
+    videoTourLabel: string;
+    videoTourHref?: string;
+    accentClassName: string;
+    techPillClassName: string;
+    theme?: "default" | "zen" | "harbour";
+};
+
+function getYouTubeEmbedUrl(url?: string): string | null {
+    if (!url) return null;
+
+    try {
+        const parsedUrl = new URL(url);
+        const hostname = parsedUrl.hostname.replace(/^www\./, "");
+
+        if (hostname === "youtu.be") {
+            const videoId = parsedUrl.pathname.split("/").filter(Boolean)[0];
+            return videoId ? `https://www.youtube.com/embed/${videoId}` : null;
+        }
+
+        if (hostname === "youtube.com" || hostname === "m.youtube.com") {
+            if (parsedUrl.pathname === "/watch") {
+                const videoId = parsedUrl.searchParams.get("v");
+                return videoId ? `https://www.youtube.com/embed/${videoId}` : null;
+            }
+
+            if (parsedUrl.pathname.startsWith("/embed/")) {
+                return `https://www.youtube.com${parsedUrl.pathname}`;
+            }
+        }
+    } catch {
+        return null;
+    }
+
+    return null;
+}
+
+function AcademicWebsiteCard({
+    label,
+    title,
+    description,
+    technologies,
+    repoLinks,
+    logoLabel,
+    logoSrc,
+    videoTourLabel,
+    videoTourHref,
+    accentClassName,
+    techPillClassName,
+    theme = "default",
+}: AcademicWebsiteCardProps) {
+    const embedUrl = getYouTubeEmbedUrl(videoTourHref);
+    const isZenTheme = theme === "zen";
+    const isHarbourTheme = theme === "harbour";
+    const displayFontStyle = isZenTheme
+        ? { fontFamily: '"Playfair Display", Georgia, serif' }
+        : isHarbourTheme
+            ? { fontFamily: '"Big Shoulders Display", Impact, sans-serif' }
+            : undefined;
+    const labelClassName = isZenTheme
+        ? "text-[#f3ddca]/80"
+        : isHarbourTheme
+            ? "text-[#d8f7ef]/75"
+            : "text-white/75";
+    const logoIconClassName = isZenTheme ? "text-[#143d3c]/80" : isHarbourTheme ? "text-[#43525d]/80" : "text-white/80";
+    const logoLabelClassName = isZenTheme ? "text-[#143d3c]" : isHarbourTheme ? "text-[#43525d]" : "text-white";
+    const logoHintClassName = isZenTheme ? "text-[#143d3c]/75" : isHarbourTheme ? "text-[#43525d]/75" : "text-white/70";
+    const titleClassName = isZenTheme ? "text-[#f6dfc8]" : isHarbourTheme ? "text-[#d9f7f0]" : "text-white";
+    const descriptionClassName = isZenTheme ? "text-[#e6d8cb]" : isHarbourTheme ? "text-[#41535d]" : "text-white/85";
+    const repoButtonClassName = isZenTheme
+        ? "border-[#f3ddca]/40 bg-[#f3ddca] text-[#143d3c] hover:bg-[#f06d97] hover:text-[#143d3c]"
+        : isHarbourTheme
+            ? "border-[#d8f7ef]/35 bg-[#54616b] text-[#d8f7ef] hover:bg-[#d0ef79] hover:text-[#43525d]"
+            : "border-black/35 bg-black text-white hover:bg-black/80";
+    const videoFrameClassName = isZenTheme
+        ? "bg-[#0d2627] shadow-[0_16px_40px_rgba(0,0,0,0.32)]"
+        : isHarbourTheme
+            ? "bg-[#52616a] shadow-[0_16px_40px_rgba(0,0,0,0.24)]"
+            : "bg-black shadow-[0_16px_40px_rgba(0,0,0,0.25)]";
+    const videoTitleClassName = isZenTheme ? "text-[#f6dfc8]" : isHarbourTheme ? "text-[#d9f7f0]" : "text-white";
+    const videoDescriptionClassName = isZenTheme ? "text-[#e6d8cb]/85" : isHarbourTheme ? "text-[#43525d]/90" : "text-white/75";
+    const emptyStateClassName = isZenTheme
+        ? "border-[#f3ddca]/20 bg-[#0d2627]/30"
+        : isHarbourTheme
+            ? "border-[#d8f7ef]/20 bg-[#52616a]/25"
+            : "border-white/30 bg-black/10";
+    const emptyButtonClassName = isZenTheme
+        ? "border-[#f3ddca]/30 bg-[#f3ddca]/10 text-[#f6dfc8]/85"
+        : isHarbourTheme
+            ? "border-[#d8f7ef]/30 bg-[#d8f7ef]/10 text-[#d9f7f0]/85"
+            : "border-white/25 bg-white/10 text-white/80";
+
+    return (
+        <article className={`overflow-hidden rounded-3xl border border-black/10 shadow-xl ${accentClassName}`}>
+            <div className="flex h-full flex-col p-6 md:p-7">
+                <p className={`text-sm font-medium uppercase tracking-[0.2em] ${labelClassName}`}>
+                    {label}
+                </p>
+
+                <div className="mt-4 grid gap-5 md:grid-cols-[auto_minmax(0,1fr)] md:items-start">
+                    <div className="flex items-start justify-start">
+                        {logoSrc ? (
+                            <Image
+                                src={logoSrc}
+                                alt={`${logoLabel} logo`}
+                                width={180}
+                                height={180}
+                                className={`rounded-sm object-contain ${isZenTheme
+                                    ? "h-28 w-28 md:h-32 md:w-32"
+                                    : "h-24 w-24 md:h-28 md:w-28"
+                                    }`}
+                            />
+                        ) : (
+                            <div className="space-y-2 text-center">
+                                <ImageIcon className={`mx-auto h-8 w-8 ${logoIconClassName}`} />
+                                <p className={`text-sm font-semibold ${logoLabelClassName}`} style={displayFontStyle}>{logoLabel}</p>
+                                <p className={`text-xs ${logoHintClassName}`}>Logo placeholder</p>
+                            </div>
+                        )}
+                    </div>
+
+                    <div>
+                        <h2
+                            className={`text-2xl font-bold ${titleClassName} ${isZenTheme ? "text-[2.15rem] leading-none" : ""} ${isHarbourTheme ? "text-[2.1rem] uppercase tracking-[0.015em] leading-none font-medium" : ""}`}
+                            style={displayFontStyle}
+                        >
+                            {title}
+                        </h2>
+                        <p className={`mt-3 text-sm leading-6 ${descriptionClassName}`}>
+                            {description}
+                        </p>
+                    </div>
+                </div>
+
+                <div className="mt-5 flex flex-wrap gap-2">
+                    {technologies.map((technology) => (
+                        <span key={technology} className={techPillClassName}>
+                            {technology}
+                        </span>
+                    ))}
+                </div>
+
+                <div className="mt-6 flex flex-wrap gap-3">
+                    {repoLinks.map((repoLink) => (
+                        <a
+                            key={repoLink.href}
+                            href={repoLink.href}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className={`inline-flex items-center gap-2 rounded-md border px-4 py-2.5 text-sm font-semibold transition ${repoButtonClassName}`}
+                        >
+                            <ExternalLink className="h-4 w-4" />
+                            {repoLink.label}
+                        </a>
+                    ))}
+                </div>
+
+                <div className="mt-8">
+                    <div className="mb-3">
+                        <p className={`text-sm font-medium uppercase tracking-[0.2em] ${labelClassName}`}>
+                            Site Video Tour
+                        </p>
+                    </div>
+
+                    {embedUrl ? (
+                        <div className="space-y-4">
+                            <div className={`overflow-hidden rounded-[1.25rem] ${videoFrameClassName}`}>
+                                <div className="aspect-video">
+                                    <iframe
+                                        src={embedUrl}
+                                        title={videoTourLabel}
+                                        className="h-full w-full"
+                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                        referrerPolicy="strict-origin-when-cross-origin"
+                                        allowFullScreen
+                                    />
+                                </div>
+                            </div>
+
+                            <a
+                                href={videoTourHref}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className={`inline-flex items-center gap-2 rounded-md border px-4 py-2.5 text-sm font-semibold transition ${repoButtonClassName}`}
+                            >
+                                <PlayCircle className="h-4 w-4" />
+                                Watch on YouTube
+                            </a>
+                        </div>
+                    ) : (
+                        <div className={`flex min-h-28 items-center justify-between gap-4 rounded-[1.25rem] border border-dashed px-4 py-5 ${emptyStateClassName}`}>
+                            <div className="min-w-0">
+                                <p className={`mt-1 text-sm ${videoDescriptionClassName}`}>
+                                    Add a YouTube link here to embed a fly-through video directly in the card.
+                                </p>
+                            </div>
+
+                            <span className={`inline-flex shrink-0 items-center gap-2 rounded-md border px-4 py-2.5 text-sm font-semibold ${emptyButtonClassName}`}>
+                                <PlayCircle className="h-4 w-4" />
+                                Add Video Link
+                            </span>
+                        </div>
+                    )}
+                </div>
+            </div>
+        </article>
+    );
+}
 
 export default function ProjectsPage() {
     return (
@@ -341,6 +557,52 @@ export default function ProjectsPage() {
                         </div>
 
                     </article>
+
+                    <div className="grid gap-6 xl:grid-cols-2">
+                        <AcademicWebsiteCard
+                            label="Academic Project"
+                            title="Harbour Haven Mall"
+                            description="A fictional shopping centre website. The main goal was to become familiar with layout, styling and site structure. Showcasing stores, dining, parking and visitor information."
+                            technologies={["HTML", "CSS", "JavaScript", "Responsive Design"]}
+                            repoLinks={[
+                                {
+                                    label: "View Git Repository",
+                                    href: "https://github.com/SB1501/Harbour-Haven-Mall",
+                                },
+                            ]}
+                            logoLabel="Harbour Haven Mall"
+                            logoSrc="/images/hhm-logo.webp"
+                            videoTourLabel="Harbour Haven Mall Site Video Tour"
+                            videoTourHref="https://youtu.be/8xAFLgYXf4U"
+                            accentClassName="bg-[#95a6ae]"
+                            techPillClassName="rounded-full border border-[#d0ef79] bg-[#d0ef79] px-3 py-1 text-xs font-medium text-[#43525d]"
+                            theme="harbour"
+                        />
+
+                        <AcademicWebsiteCard
+                            label="Academic Project"
+                            title="Zen Flow Spa"
+                            description="A fictional Japanese-themed spa website built as an academic project, combining a calm customer-facing experience with booking, account access, and a supporting back-end data layer."
+                            technologies={["ASP.NET", "C#", "SQL Database", "Back-End Data Layer"]}
+                            repoLinks={[
+                                {
+                                    label: "View Site Repository",
+                                    href: "https://github.com/SB1501/SpaSite",
+                                },
+                                {
+                                    label: "View DB Repository",
+                                    href: "https://github.com/SB1501/SpaData",
+                                },
+                            ]}
+                            logoLabel="Zen Flow Spa"
+                            logoSrc="/images/zfs-logo.webp"
+                            videoTourLabel="Zen Flow Spa Site Video Tour"
+                            videoTourHref="https://youtu.be/uKJvGQn-Km4"
+                            accentClassName="bg-[#143d3c]"
+                            techPillClassName="rounded-full border border-[#f3c6d1] bg-[#f3c6d1] px-3 py-1 text-xs font-medium text-[#4d2134]"
+                            theme="zen"
+                        />
+                    </div>
 
                 </section>
 
