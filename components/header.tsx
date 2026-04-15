@@ -28,13 +28,13 @@ export default function Header() {
           </span>
         </Link>
 
-        <nav className="flex flex-wrap items-center gap-2 text-sm">
+        <nav className="flex flex-wrap items-center gap-2 text-xs uppercase tracking-[0.18em]">
           {navLinks.map((link) => (
             <Link
               key={link.href}
               href={link.href}
               prefetch={link.prefetch}
-              className="rounded-md px-3 py-2 hover:bg-neutral-900 dark:hover:bg-neutral-900"
+              className="rounded-md px-3 py-2 font-semibold hover:bg-neutral-900 dark:hover:bg-neutral-900"
             >
               {link.label}
             </Link>
@@ -44,7 +44,7 @@ export default function Header() {
             href="https://github.com/SB1501"
             target="_blank"
             rel="noreferrer"
-            className="rounded-md px-3 py-2 hover:bg-neutral-900 dark:hover:bg-neutral-900"
+            className="rounded-md px-3 py-2 font-semibold hover:bg-neutral-900 dark:hover:bg-neutral-900"
           >
             GitHub
           </Link>

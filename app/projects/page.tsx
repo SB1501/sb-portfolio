@@ -1,6 +1,7 @@
 import Image from "next/image";
 import type { Metadata } from "next";
-import { FolderKanban, FlaskConical, Code, ImageIcon, ExternalLink, PlayCircle } from "lucide-react";
+import type { ComponentType } from "react";
+import { FolderKanban, FlaskConical, Code, ImageIcon, ExternalLink, PlayCircle, Flower2, ReceiptText } from "lucide-react";
 import Link from "next/link";
 import { SITE_URL } from "@/lib/site";
 
@@ -12,7 +13,7 @@ export const metadata: Metadata = {
     },
 };
 
-type AcademicWebsiteCardProps = {
+type CollegeProjectCardProps = {
     label: string;
     title: string;
     description: string;
@@ -25,6 +26,17 @@ type AcademicWebsiteCardProps = {
     accentClassName: string;
     techPillClassName: string;
     theme?: "default" | "zen" | "harbour";
+};
+
+type FutureProjectCardProps = {
+    label: string;
+    title: string;
+    description: string;
+    status: string;
+    icon?: ComponentType<{ className?: string }>;
+    logoSrc?: string;
+    logoAlt?: string;
+    logoClassName?: string;
 };
 
 function getYouTubeEmbedUrl(url?: string): string | null {
@@ -56,7 +68,7 @@ function getYouTubeEmbedUrl(url?: string): string | null {
     return null;
 }
 
-function AcademicWebsiteCard({
+function CollegeProjectCard({
     label,
     title,
     description,
@@ -69,7 +81,7 @@ function AcademicWebsiteCard({
     accentClassName,
     techPillClassName,
     theme = "default",
-}: AcademicWebsiteCardProps) {
+}: CollegeProjectCardProps) {
     const embedUrl = getYouTubeEmbedUrl(videoTourHref);
     const isZenTheme = theme === "zen";
     const isHarbourTheme = theme === "harbour";
@@ -223,6 +235,51 @@ function AcademicWebsiteCard({
                         </div>
                     )}
                 </div>
+            </div>
+        </article>
+    );
+}
+
+function FutureProjectCard({
+    label,
+    title,
+    description,
+    status,
+    icon: Icon,
+    logoSrc,
+    logoAlt,
+    logoClassName,
+}: FutureProjectCardProps) {
+    return (
+        <article className="flex h-full flex-col rounded-3xl border border-neutral-200 bg-white p-6 shadow-sm dark:border-neutral-800 dark:bg-neutral-950">
+            <p className="text-xs font-medium uppercase tracking-[0.2em] text-black/65 dark:text-white/65">
+                {label}
+            </p>
+
+            {logoSrc ? (
+                <Image
+                    src={logoSrc}
+                    alt={logoAlt ?? `${title} logo`}
+                    width={160}
+                    height={160}
+                    className={`mt-4 h-16 w-auto object-contain ${logoClassName ?? ""}`}
+                />
+            ) : Icon ? (
+                <Icon className="mt-4 h-16 w-16 text-black dark:text-white" />
+            ) : null}
+
+            <h2 className="mt-5 text-2xl font-bold text-black dark:text-white">
+                {title}
+            </h2>
+
+            <p className="mt-3 flex-1 text-sm leading-6 text-black/75 dark:text-white/75">
+                {description}
+            </p>
+
+            <div className="mt-6">
+                <span className="inline-flex rounded-full bg-black px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-white dark:bg-white dark:text-black">
+                    {status}
+                </span>
             </div>
         </article>
     );
@@ -559,8 +616,8 @@ export default function ProjectsPage() {
                     </article>
 
                     <div className="grid gap-6 xl:grid-cols-2">
-                        <AcademicWebsiteCard
-                            label="Academic Project"
+                        <CollegeProjectCard
+                            label="College Project"
                             title="Harbour Haven Mall"
                             description="A fictional shopping centre website. The main goal was to become familiar with layout, styling and site structure. Showcasing stores, dining, parking and visitor information."
                             technologies={["HTML", "CSS", "JavaScript", "Responsive Design"]}
@@ -579,8 +636,8 @@ export default function ProjectsPage() {
                             theme="harbour"
                         />
 
-                        <AcademicWebsiteCard
-                            label="Academic Project"
+                        <CollegeProjectCard
+                            label="College Project"
                             title="Zen Flow Spa"
                             description="A fictional Japanese-themed spa website built as an academic project, combining a calm customer-facing experience with booking, account access, and a supporting back-end data layer."
                             technologies={["ASP.NET", "C#", "SQL Database", "Back-End Data Layer"]}
@@ -613,9 +670,38 @@ export default function ProjectsPage() {
                 <div className="flex items-center gap-3">
                     <FlaskConical className="h-7 w-7 text-black dark:text-white" />
                     <h1 className="text-3xl font-bold">Future Projects</h1>
-                </div>                <p className="mt-2 text-neutral-700 dark:text-neutral-300">
+                </div>
+                <p className="mt-2 text-neutral-700 dark:text-neutral-300">
                     Check back here for details on in-progress projects I&apos;m working on or planning.
                 </p>
+
+                <div className="mt-7 grid gap-4 xl:grid-cols-3">
+                    <FutureProjectCard
+                        label="Idea"
+                        title="Meditation Timer"
+                        description="A barebones meditation timer with Apple Intelligence local AI model suggestions to infinitely inspire focused mindful sessions without the fluff of subscriptions or in app purchases or making accounts."
+                        status="Planning"
+                        icon={Flower2}
+                    />
+
+                    <FutureProjectCard
+                        label="Idea"
+                        title="Freelance Expense Tracker"
+                        description="A financial tracking app for frequent use that prepares a simple, payable time saving package to send to your accountant each tax year."
+                        status="Planning"
+                        icon={ReceiptText}
+                    />
+
+                    <FutureProjectCard
+                        label="Upcoming Release"
+                        title="Mindful Check-In v.1.1 Update"
+                        description="A FaceID / passcode lock when opening the app if desired, optional daily check in reminder local notifications."
+                        status="In Development"
+                        logoSrc="/images/textlogo.svg"
+                        logoAlt="Mindful Check-In logo"
+                        logoClassName="h-15 self-start"
+                    />
+                </div>
             </div>
 
         </main>
