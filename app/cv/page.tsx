@@ -146,7 +146,10 @@ const courses = {
     future: [
         {
             name: "Check back for future updates!",
-            grade: "Coming Soon"
+            source: "",
+            date: "",
+            grade: "Coming Soon",
+            progress: "",
         }
     ],
 };
