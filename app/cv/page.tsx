@@ -41,7 +41,8 @@ const skills = [
     "Python",
     "SQL / REST APIs",
     "Technical communication",
-    "HTML / CSS"
+    "HTML / CSS",
+    "Amazon Web Services (AWS)"
 ];
 
 const experience = [
@@ -118,30 +119,35 @@ const education = [
 const courses = {
     past: [
         {
+            name: "AWS Cloud Practitioner",
+            source: "Amazon Web Services",
+            date: "April 2026",
+            grade: "PASS",
+            progress: "Studying and building small AWS projects alongside the material.",
+        },
+        {
             name: "Certified C# Developer",
             source: "W3 Schools",
             date: "April 2023",
             grade: "PASS",
             progress: "Initial self-guided learning in 2023 prior to my HLA at Fujitsu",
         },
+
     ],
     current: [
-        {
-            name: "AWS Cloud Practitioner",
-            source: "Amazon Web Services",
-            date: "Expected by May 2026",
-            grade: "In progress",
-            progress: "Studying and building small AWS projects alongside the material.",
-        },
-    ],
-    future: [
         {
             name: "Dynatrace Associate",
             source: "Dynatrace University",
             date: "Summer 2026",
-            grade: "Future course",
+            grade: "Commencing soon",
             progress: "Next certification for a tool used at Fujitsu.",
         },
+    ],
+    future: [
+        {
+            name: "Check back for future updates!",
+            grade: "Coming Soon"
+        }
     ],
 };
 
