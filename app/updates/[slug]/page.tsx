@@ -25,11 +25,37 @@ export async function generateMetadata({
     };
   }
 
+  const url = `${SITE_URL}/updates/${update.slug}`;
+  const image = update.coverImage ?? "/og-image.png";
+
   return {
     title: `${update.title} | Shane Bunting`,
     description: update.excerpt,
     alternates: {
-      canonical: `${SITE_URL}/updates/${update.slug}`,
+      canonical: url,
+    },
+    openGraph: {
+      title: update.title,
+      description: update.excerpt,
+      url,
+      siteName: "shanebunting.dev",
+      type: "article",
+      publishedTime: update.date,
+      tags: update.tags,
+      images: [
+        {
+          url: image,
+          width: 1200,
+          height: 630,
+          alt: `${update.title} - Shane Bunting`,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: update.title,
+      description: update.excerpt,
+      images: [image],
     },
   };
 }
@@ -63,7 +89,7 @@ export default async function UpdatePage({
   const date = update.date ? formatUpdateDate(update.date) : "";
 
   return (
-    <main className="mx-auto max-w-3xl px-6 py-10">
+    <main className="mx-auto max-w-4xl px-6 py-10">
       <div className="min-w-0 rounded-2xl border border-neutral-200 bg-white/90 p-6 dark:border-neutral-800 dark:bg-neutral-950">
         {update.type === "video" && update.youtubeId && (
           <div className="mb-6 overflow-hidden rounded-2xl border border-neutral-200 dark:border-neutral-800">
@@ -79,7 +105,7 @@ export default async function UpdatePage({
           </div>
         )}
 
-        <article className="prose prose-neutral mx-auto max-w-2xl">
+        <article className="prose prose-neutral mx-auto max-w-4xl">
           <div className="mb-3 flex items-center gap-4 not-prose">
             <Link
               href="/"
