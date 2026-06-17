@@ -25,12 +25,8 @@ export default function UpdateCard({ update }: UpdateCardProps) {
   const coverImage = update.type !== "video" ? update.coverImage : undefined;
 
   const cardContent = isStatus ? (
-    <div className="flex min-h-[5rem] flex-col justify-between gap-4">
-      <p className="text-lg leading-8 text-neutral-800 dark:text-neutral-200 sm:text-xl">
-        {update.excerpt}
-      </p>
-
-      <div className="flex items-center gap-3  border-neutral-200 pt-2 dark:border-neutral-800">
+    <div className="flex min-h-[5rem] flex-col gap-4">
+      <div className="flex items-center gap-3">
         <div className="flex h-10 w-10 items-center justify-center rounded-full bg-neutral-800 text-neutral-300 dark:bg-neutral-100 dark:text-neutral-600">
           {getUpdateIcon(update.type)}
         </div>
@@ -38,6 +34,10 @@ export default function UpdateCard({ update }: UpdateCardProps) {
           {getUpdateLabel(update.type)} | {formatUpdateDate(update.date)}
         </p>
       </div>
+
+      <p className="text-lg leading-8 text-neutral-800 dark:text-neutral-200 sm:text-xl">
+        {update.excerpt}
+      </p>
     </div>
   ) : (
     <div className="flex gap-4">
@@ -109,7 +109,7 @@ export default function UpdateCard({ update }: UpdateCardProps) {
 
   if (isStatus) {
     return (
-      <div className="rounded-lg border border-neutral bg-neutral-50/70 p-3 dark:border-neutral-800 dark:bg-neutral-900/60">
+      <div className="rounded-lg border p-4 bg-neutral-50/70 dark:bg-neutral-900/60">
         {cardContent}
       </div>
     );

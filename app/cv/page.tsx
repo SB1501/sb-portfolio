@@ -104,14 +104,16 @@ const education = [
         award: "Higher Level Apprenticeship in Software Development",
         institution: "North West Regional College",
         logoSrc: "/images/nwrc-logo.svg",
-        period: "In progress",
-        result: "Final year in progress, with earlier years passed at distinction level.",
+        period: "Completed",
+        dateRange: "2023-2026",
+        result: "Passed at Distinction Level",
     },
     {
         award: "BSc (Hons) Business Studies with Marketing",
         institution: "Ulster University",
         logoSrc: "/images/ulster-university-logo.svg",
         period: "Completed",
+        dateRange: "2016-2019",
         result: "First-class honours.",
     },
 ];
@@ -374,6 +376,12 @@ export default function CvPage() {
                                                     <CalendarDays className="h-3.5 w-3.5" />
                                                     {item.period}
                                                 </span>
+                                                {"dateRange" in item && (
+                                                    <span className="inline-flex items-center gap-1.5 rounded-full border border-neutral-200 bg-neutral-100 px-2.5 py-1 text-xs font-semibold text-neutral-700 dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-200">
+                                                        <CalendarDays className="h-3.5 w-3.5" />
+                                                        {item.dateRange}
+                                                    </span>
+                                                )}
                                             </div>
                                             <p className="mt-3 text-sm leading-7 text-neutral-700 dark:text-neutral-300">
                                                 {item.result}
