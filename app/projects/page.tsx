@@ -252,7 +252,7 @@ function FutureProjectCard({
 }: FutureProjectCardProps) {
     return (
         <article className="flex h-full flex-col rounded-3xl border border-neutral-200 bg-white p-6 shadow-sm dark:border-neutral-800 dark:bg-neutral-950">
-            <p className="text-xs font-medium uppercase tracking-[0.2em] text-black/65 dark:text-white/65">
+            <p className="text-sm font-medium uppercase tracking-[0.2em] text-black/65 dark:text-white/65">
                 {label}
             </p>
 
@@ -304,6 +304,106 @@ export default function ProjectsPage() {
 
                     <article className="overflow-hidden rounded-3xl border border-black/10 shadow-xl">
 
+                        <div className="bg-[#A9B8AA] p-6 md:p-8">
+
+                            <div className="grid gap-6 md:grid-cols-2 md:items-center">
+
+                                <div>
+                                    <p className="text-sm font-medium uppercase tracking-[0.2em] text-black/70">
+                                        Latest Release
+                                    </p>
+
+                                    <div className="mt-3 flex items-start gap-4">
+                                        <div className="flex h-16 w-16 shrink-0 items-center justify-center overflow-hidden rounded-2xl">
+                                            <Image
+                                                src="/images/iconforsite.webp"
+                                                alt="Mindful Timer Icon"
+                                                width={256}
+                                                height={256}
+                                                className="h-full w-full object-cover"
+                                            />
+                                        </div>
+
+                                        <div className="min-w-0 flex-1">
+                                            <Image
+                                                src="/images/mindfultimertextlogo.webp"
+                                                alt="Mindful Timer Logo"
+                                                width={180}
+                                                height={106}
+                                                className="h-16 w-auto object-contain"
+                                            />
+                                        </div>
+                                    </div>
+
+                                    <p className="mt-3 max-w-xl text-sm leading-6 text-black/80">
+                                        A meditation timer that allows 0-60 minutes of meditation with optional AI powered &lsquo;Focus Generator&rsquo;. This allows the user to enter a theme or idea and have a unique, concise focus statement appear for them to meditate on. The app also logs mindful minutes to Apple Health and can notify users when the timer is finished should they lock their phone during a session.
+                                    </p>
+
+                                    <div className="mt-5 flex flex-wrap gap-2">
+                                        <span className="rounded-full bg-black/10 px-3 py-1 text-xs font-medium text-black">
+                                            Simple Timer
+                                        </span>
+                                        <span className="rounded-full bg-black/10 px-3 py-1 text-xs font-medium text-black">
+                                            Apple Intelligence
+                                        </span>
+                                        <span className="rounded-full bg-black/10 px-3 py-1 text-xs font-medium text-black">
+                                            Apple Health Integration
+                                        </span>
+                                        <span className="rounded-full bg-black/10 px-3 py-1 text-xs font-medium text-black">
+                                            AI Focus Generator
+                                        </span>
+                                        <span className="rounded-full bg-black/10 px-3 py-1 text-xs font-medium text-black">
+                                            No Subscriptions or Ads
+                                        </span>
+                                        <span className="rounded-full bg-black/10 px-3 py-1 text-xs font-medium text-black">
+                                            Swift & SwiftUI
+                                        </span>
+                                        <span className="rounded-full bg-black/10 px-3 py-1 text-xs font-medium text-black">
+                                            iPhone & iPad
+                                        </span>
+                                    </div>
+
+                                    <div className="mt-6 flex flex-wrap gap-3">
+                                        <span className="inline-flex items-center rounded-md border border-black/30 bg-black/10 px-5 py-2.5 text-sm font-semibold text-black/70">
+                                            Coming Soon
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <div className="flex items-end justify-center gap-4 md:justify-end">
+                                    <div className="w-full max-w-[110px] rounded-[1rem] border border-[#3a3a3c] bg-[#111] p-[5px] shadow-[0_20px_50px_rgba(0,0,0,0.55),inset_0_1px_0_rgba(255,255,255,0.06)]">
+                                        <div className="aspect-[9/19] overflow-hidden rounded-[0.7rem] bg-black">
+                                            <Image
+                                                src="/images/simulator-screenshot-iphone-17-2026-06-16-at-14.17.37.webp"
+                                                alt="Mindful Timer iPhone screenshot"
+                                                width={920}
+                                                height={2000}
+                                                className="h-full w-full object-cover"
+                                            />
+                                        </div>
+                                    </div>
+
+                                    <div className="w-full max-w-[170px] rounded-[0.85rem] border border-[#3a3a3c] bg-[#111] p-[5px] shadow-[0_20px_50px_rgba(0,0,0,0.55),inset_0_1px_0_rgba(255,255,255,0.06)]">
+                                        <div className="aspect-[3/4] overflow-hidden rounded-[0.55rem] bg-black pt-2 pb-2">
+                                            <Image
+                                                src="/images/simulator-screenshot-ipad-air-11-inch-m4-2026-06-16-at-14.33.59.webp"
+                                                alt="Mindful Timer iPad screenshot"
+                                                width={1390}
+                                                height={2000}
+                                                className="h-full w-full object-cover object-top"
+                                            />
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </article>
+
+                    <article className="overflow-hidden rounded-3xl border border-black/10 shadow-xl">
+
                         <div className="bg-gradient-to-br from-[#00fbcf] to-[#73ffff] p-8 md:p-10">
 
                             <div className="grid gap-8 md:grid-cols-2 md:items-center">
@@ -312,28 +412,45 @@ export default function ProjectsPage() {
                                     <p className="text-sm font-medium uppercase tracking-[0.2em] text-black/80">
                                         Featured Project
                                     </p>
-                                    <Image
-                                        src="/images/textlogo.svg"
-                                        alt="Mindful Check-In Logo"
-                                        width={180}
-                                        height={154}
-                                        className="mt-4 h-auto w-auto object-cover"
-                                    />
-                                    <p className="mt-4 max-w-xl text-base leading-7 text-black/90">
+
+                                    <div className="mt-4 flex items-center gap-4">
+                                        <div className="flex h-16 w-16 shrink-0 items-center justify-center overflow-hidden rounded-2xl">
+                                            <Image
+                                                src="/images/appicon-ios-default-1024x10241x.webp"
+                                                alt="Mindful Check-In Icon"
+                                                width={256}
+                                                height={256}
+                                                className="h-full w-full object-cover"
+                                            />
+                                        </div>
+
+                                        <Image
+                                            src="/images/textlogo.svg"
+                                            alt="Mindful Check-In Logo"
+                                            width={180}
+                                            height={154}
+                                            className="h-16 w-auto object-contain"
+                                        />
+                                    </div>
+
+                                    <p className="mt-4 max-w-xl text-sm leading-6 text-black/90">
                                         A privacy-focused iPhone app designed to help users reflect on how they feel, notice patterns and build awareness of small daily factors that affect wellbeing.
                                     </p>
                                     <div className="mt-6 flex flex-wrap gap-2">
-                                        <span className="rounded-full bg-black/10 hover:bg-black/20 px-3 py-1 text-sm text-black">
+                                        <span className="rounded-full bg-black/10 hover:bg-black/20 px-3 py-1 text-xs text-black">
                                             Quick check-ins
                                         </span>
-                                        <span className="rounded-full bg-black/10 hover:bg-black/20 px-3 py-1 text-sm text-black">
+                                        <span className="rounded-full bg-black/10 hover:bg-black/20 px-3 py-1 text-xs text-black">
                                             Private on-device data
                                         </span>
-                                        <span className="rounded-full bg-black/10 hover:bg-black/20 px-3 py-1 text-sm text-black">
+                                        <span className="rounded-full bg-black/10 hover:bg-black/20 px-3 py-1 text-xs text-black">
                                             Pattern tracking
                                         </span>
-                                        <span className="rounded-full bg-black/10 hover:bg-black/20 px-3 py-1 text-sm text-black">
+                                        <span className="rounded-full bg-black/10 hover:bg-black/20 px-3 py-1 text-xs text-black">
                                             Exportable history
+                                        </span>
+                                        <span className="rounded-full bg-black/10 hover:bg-black/20 px-3 py-1 text-xs text-black">
+                                            Biometrick Privacy Lock
                                         </span>
                                     </div>
 
@@ -364,7 +481,7 @@ export default function ProjectsPage() {
                                 </div>
 
                                 <div className="flex justify-center md:justify-end">
-                                    <div className="w-full max-w-[260px] rounded-[2.5rem] border border-black/10 bg-neutral-900 p-2 shadow-[0_20px_60px_rgba(0,0,0,0.35)]">
+                                    <div className="w-full max-w-[210px] rounded-[2.5rem] border border-black/10 bg-neutral-900 p-2 shadow-[0_20px_60px_rgba(0,0,0,0.35)]">
                                         <div className="aspect-[9/19] overflow-hidden rounded-[2rem] bg-black">
                                             <video
                                                 src="/images/mindful-check-in.mp4"
@@ -384,6 +501,8 @@ export default function ProjectsPage() {
                         </div>
 
                     </article>
+
+
 
                     <div className="grid gap-6 md:grid-cols-2">
                         <article className="rounded-3xl border border-white/10 bg-gradient-to-br from-black to-neutral-800 p-6 shadow-lg">
@@ -513,29 +632,29 @@ export default function ProjectsPage() {
 
                                     </div>
 
-                                    <p className="mt-4 max-w-xl text-base leading-7 text-white/90">
+                                    <p className="mt-4 max-w-xl text-sm leading-6 text-white/90">
                                         An information management system for a fictional veterinary practice, co-developed with a classmate as a Windows Forms application in C# using .NET Framework 4.7.2 and SQL Server LocalDB. Built with ADO.NET and a centralized DatabaseHelper, it supports appointment scheduling, customer and pet records, invoicing and payment tracking, inventory and supplier management, and searchable reporting workflows.
                                     </p>
                                     <div className="mt-6 flex flex-wrap gap-2">
-                                        <span className="rounded-full border border-[#1b76c6] bg-[#1b76c6] px-3 py-1 text-sm text-white transition hover:bg-[#155f9f]">
+                                        <span className="rounded-full border border-[#1b76c6] bg-[#1b76c6] px-3 py-1 text-xs text-white transition hover:bg-[#155f9f]">
                                             Customer Management
                                         </span>
-                                        <span className="rounded-full border border-[#1b76c6] bg-[#1b76c6] px-3 py-1 text-sm text-white transition hover:bg-[#155f9f]">
+                                        <span className="rounded-full border border-[#1b76c6] bg-[#1b76c6] px-3 py-1 text-xs text-white transition hover:bg-[#155f9f]">
                                             Appointment Scheduling
                                         </span>
-                                        <span className="rounded-full border border-[#1b76c6] bg-[#1b76c6] px-3 py-1 text-sm text-white transition hover:bg-[#155f9f]">
+                                        <span className="rounded-full border border-[#1b76c6] bg-[#1b76c6] px-3 py-1 text-xs text-white transition hover:bg-[#155f9f]">
                                             Pet Health Records
                                         </span>
-                                        <span className="rounded-full border border-[#1b76c6] bg-[#1b76c6] px-3 py-1 text-sm text-white transition hover:bg-[#155f9f]">
+                                        <span className="rounded-full border border-[#1b76c6] bg-[#1b76c6] px-3 py-1 text-xs text-white transition hover:bg-[#155f9f]">
                                             Stock & Suppliers
                                         </span>
-                                        <span className="rounded-full border border-[#1b76c6] bg-[#1b76c6] px-3 py-1 text-sm text-white transition hover:bg-[#155f9f]">
+                                        <span className="rounded-full border border-[#1b76c6] bg-[#1b76c6] px-3 py-1 text-xs text-white transition hover:bg-[#155f9f]">
                                             Invoicing & Payments
                                         </span>
-                                        <span className="rounded-full border border-[#1b76c6] bg-[#1b76c6] px-3 py-1 text-sm text-white transition hover:bg-[#155f9f]">
+                                        <span className="rounded-full border border-[#1b76c6] bg-[#1b76c6] px-3 py-1 text-xs text-white transition hover:bg-[#155f9f]">
                                             Reporting
                                         </span>
-                                        <span className="rounded-full border border-[#1b76c6] bg-[#1b76c6] px-3 py-1 text-sm text-white transition hover:bg-[#155f9f]">
+                                        <span className="rounded-full border border-[#1b76c6] bg-[#1b76c6] px-3 py-1 text-xs text-white transition hover:bg-[#155f9f]">
                                             Search, Filter & Sort
                                         </span>
                                     </div>
