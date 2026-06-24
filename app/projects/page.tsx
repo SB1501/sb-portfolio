@@ -797,28 +797,24 @@ export default function ProjectsPage() {
                 <div className="mt-7 grid gap-4 xl:grid-cols-3">
                     <FutureProjectCard
                         label="Idea"
-                        title="Meditation Timer"
-                        description="A barebones meditation timer with Apple Intelligence local AI model suggestions to infinitely inspire focused mindful sessions without the fluff of subscriptions or in app purchases or making accounts."
-                        status="Planning"
-                        icon={Flower2}
-                    />
-
-                    <FutureProjectCard
-                        label="Idea"
                         title="Freelance Expense Tracker"
                         description="A financial tracking app for frequent use that prepares a simple, payable time saving package to send to your accountant each tax year."
-                        status="Planning"
+                        status="In Development"
                         icon={ReceiptText}
                     />
-
                     <FutureProjectCard
-                        label="Upcoming Release"
-                        title="Mindful Check-In v.1.1 Update"
-                        description="A FaceID / passcode lock when opening the app if desired, optional daily check in reminder local notifications."
+                        label="Planning"
+                        title="Mindful Check-In v1.2"
+                        description="Adding of an AI derived 'Mindful Score' based on the users check-in history. A Mac, iPad and tvOS version of the app. Notification reminders."
                         status="In Development"
-                        logoSrc="/images/textlogo.svg"
-                        logoAlt="Mindful Check-In logo"
-                        logoClassName="h-15 self-start"
+                        icon={Code}
+                    />
+                    <FutureProjectCard
+                        label="Planning"
+                        title="Mindful Timer v1.1"
+                        description="Mac version of the app. tvOS and watchOS simple timer companion apps. Optional saving of session history and prompts generated."
+                        status="In Development"
+                        icon={Code}
                     />
                 </div>
             </div>
