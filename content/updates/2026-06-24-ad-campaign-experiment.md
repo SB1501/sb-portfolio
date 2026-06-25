@@ -1,5 +1,5 @@
 ---
-title: "Promiting Mindful Timer"
+title: "Promoting Mindful Timer"
 date: "2026-06-24"
 tags: ["developer", "development", "swift", "mindful timer", "app store", "marketing"]
 excerpt: "Running an advertisement campaign on Apple's App Store Ad platform to promote Mindful Timer."
