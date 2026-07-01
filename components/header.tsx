@@ -10,8 +10,7 @@ type NavLink = {
 const navLinks: NavLink[] = [
   { href: "/", label: "Updates" },
   { href: "/projects", label: "Projects" },
-  { href: "/cv", label: "Public CV" },
-  { href: "/cv-private", label: "Private CV", prefetch: false },
+  { href: "/cv", label: "CV" },
 ];
 
 export default function Header() {

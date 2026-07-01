@@ -8,6 +8,8 @@ coverImage: "/images/2026-03-06.webp"
 
 ---
 
+> **Note (July 2026):** This article was written when the site launched in March 2026. The private CV feature described below has since been removed — the public CV page now contains the full career history and detail.
+
 ## An in depth look at this Portfolio Website
 I decided after writing the initial post covering the tech stack that I'd write more about what exactly each bit of each notable file does as this was my key learning whilst putting together this site. 
 

@@ -7,13 +7,12 @@ import {
     Building2,
     CalendarDays,
     ExternalLink,
-    Flag,
     GraduationCap,
     LayoutGrid,
     Link as LinkIcon,
+    MapPin,
     Sparkles,
     Star,
-    UserRound,
     Wrench,
 } from "lucide-react";
 
@@ -28,59 +27,74 @@ export const metadata: Metadata = {
     },
 };
 
-const skills = [
-    "JavaScript / TypeScript",
-    "React / Next.js",
-    "Swift / SwiftUI",
-    "AWS Cloud",
-    "C# / .NET",
-    "Git / GitLab",
-    "CI/CD workflows",
-    "Application support",
-    "Deployments & test environments",
-    "Python",
-    "SQL / REST APIs",
-    "Technical communication",
-    "HTML / CSS",
-    "Amazon Web Services (AWS)"
-];
+const skills = {
+    technical: [
+        { category: "Cloud & Infrastructure", items: "AWS (Lambda, DynamoDB, EventBridge, SNS), CI/CD pipelines, Docker" },
+        { category: "Middleware & Connectivity", items: "IBM MQ configuration, SFTP, message format validation, queue monitoring" },
+        { category: "Version Control & Deployment", items: "Git, GitLab, VS Code" },
+        { category: "Languages", items: "Swift / SwiftUI, Python, C#, Java, TypeScript, JavaScript" },
+        { category: "Web Development", items: "React, Next.js, Node.js, Tailwind CSS, WordPress, HTML/CSS" },
+        { category: "Microsoft 365", items: "Administration, deployment, end-user support" },
+        { category: "Databases", items: "SQL, DynamoDB, Microsoft Access, SwiftData" },
+        { category: "Operating Systems & Devices", items: "Windows configuration & upgrade, Linux WSL, macOS / Apple ecosystem" },
+        { category: "iOS Development (Hobbyist)", items: "Published apps on the App Store, SwiftUI, SwiftData" },
+    ],
+    professional: [
+        "Agile working practices including daily stand-ups and task management via Trello / Jira",
+        "Direct client and stakeholder liaison",
+        "Technical documentation and IT policy writing",
+        "Recruitment and candidate management",
+        "Mental Health First Aider",
+        "Full UK Driving Licence",
+        "Emergency First Aid at Work certified",
+    ],
+};
 
 const experience = [
     {
-        title: "Apprentice Software Support Engineer",
+        title: "Application Support Engineer",
         company: "Fujitsu",
         logoSrc: "/images/fujitsu-logo.svg",
-        period: "2023 - Present",
+        period: "Sep 2023 – Present",
         description:
-            "Supporting live and test environments across large-scale enterprise and government-facing work, with experience across AWS cloud services, GitLab, CI/CD processes, messaging middleware, connectivity, deployment support and day-to-day application management.",
-        highlights: ["AWS", "GitLab", "CI/CD", "Deployments", "Application Support"],
+            "Working within a connectivity team on a critical public sector account, onboarding external operators onto a messaging and data exchange infrastructure system. Responsibilities include configuring MQ and SFTP connections, validating message formats against specification documents, monitoring messages on pods, and reporting on rejected messages. Liaised directly with client contacts to guide them through the onboarding process and resolve configuration issues. Coordinated with IBM networking teams and managed deployments by creating configuration files, pushing to GitLab and refreshing environments via CI/CD pipelines. Previously on the O2/Virgin Media account, resolving point-of-sale system issues and contributing to a major store migration project as O2 transitioned from franchise to company-owned stores.",
+        highlights: ["MQ / SFTP", "GitLab CI/CD", "Deployments", "Application Support", "Public Sector"],
     },
     {
         title: "Internal Recruiter",
         company: "Fujitsu",
         logoSrc: "/images/fujitsu-logo.svg",
-        period: "2022 - 2023",
+        period: "Jun 2022 – Sep 2023",
         description:
-            "Partnered with hiring managers across multiple business areas to shape recruitment approaches, screen candidates and manage communication throughout the hiring process.",
+            "Worked with internal hiring managers to determine the most effective recruitment routes for vacancies across key business areas including core technology roles. Responsible for posting, promoting and processing applicants, screening candidates and maintaining relationships with both applicants and internal stakeholders throughout the recruitment process.",
         highlights: ["Stakeholder Communication", "Candidate Screening", "Hiring Coordination"],
     },
     {
         title: "Contract Administrator",
         company: "Fujitsu",
         logoSrc: "/images/fujitsu-logo.svg",
-        period: "2019 - 2022",
+        period: "Aug 2019 – Apr 2022",
         description:
-            "Managed support contract administration and renewals, coordinating across internal systems, stakeholders and external partners to keep services in place.",
+            "Managed the implementation and renewal of support contracts across various internal accounts using internal systems and databases to track opportunities. Communicated with internal managers and external partners to understand requirements and ensure timely support coverage.",
         highlights: ["Contracts", "Renewals", "Coordination"],
     },
     {
-        title: "Marketing & Communications Development Officer",
+        title: "Freelance IT & Business Consultant",
         company: "Global Horizon Skills",
         logoSrc: "/images/ghskills-logo.svg",
-        period: "2018 - 2019",
+        period: "2023 – Present",
         description:
-            "Delivered website updates, graphic design, desktop publishing, Office 365 setup, social media support and broader digital business administration.",
-        highlights: ["Web Updates", "Design", "Office 365", "Digital Content"],
+            "Retained on an ongoing basis to provide regular IT consultancy, administration and business support. Responsibilities have included end-user IT support, document template design, business administration, IT policy writing and marketing assistance. Project work has included supporting a cyber security audit involving MFA implementation, Microsoft 365 administration and the configuration and upgrade of on-site Windows machines.",
+        highlights: ["IT Consultancy", "Microsoft 365", "Cyber Security", "MFA"],
+    },
+    {
+        title: "IT, Marketing & Communications Development Officer",
+        company: "Global Horizon Skills",
+        logoSrc: "/images/ghskills-logo.svg",
+        period: "Jun 2018 – Jul 2019",
+        description:
+            "Developed two company websites during tenure, produced graphic design and desktop publishing materials, managed social media accounts and email marketing campaigns. Led the organisation-wide setup and deployment of Microsoft Office 365.",
+        highlights: ["Web Development", "Design", "Office 365", "Digital Content"],
     },
 ];
 
@@ -101,60 +115,44 @@ const projects = [
 
 const education = [
     {
-        award: "Higher Level Apprenticeship in Software Development",
+        award: "Software Development Foundation Degree (Part Time)",
         institution: "North West Regional College",
+        institutionNote: "Validated by Ulster University",
         logoSrc: "/images/nwrc-logo.svg",
-        period: "Completed",
-        dateRange: "2023-2026",
-        result: "Passed at Distinction Level",
+        dateRange: "Sep 2023 – May 2026",
+        result: "Distinction. Completed alongside full-time employment at Fujitsu.",
     },
     {
         award: "BSc (Hons) Business Studies with Marketing",
-        institution: "Ulster University",
+        institution: "Ulster University, Derry~Londonderry",
+        institutionNote: "",
         logoSrc: "/images/ulster-university-logo.svg",
-        period: "Completed",
-        dateRange: "2016-2019",
-        result: "First-class honours.",
+        dateRange: "Sep 2016 – Jul 2019",
+        result: "First-class honours (1:1).",
     },
 ];
 
-const courses = {
-    past: [
-        {
-            name: "AWS Cloud Practitioner",
-            source: "Amazon Web Services",
-            date: "April 2026",
-            grade: "PASS",
-            progress: "Studying and building small AWS projects alongside the material.",
-        },
-        {
-            name: "Certified C# Developer",
-            source: "W3 Schools",
-            date: "April 2023",
-            grade: "PASS",
-            progress: "Initial self-guided learning in 2023 prior to my HLA at Fujitsu",
-        },
+const earlierQualifications = [
+    { label: "A-Levels", detail: "ICT (A), Business Studies (B), Applied Science (B)" },
+    { label: "GCSEs / BTECs", detail: "GCSE English & Mathematics, Level 2 BTECs in Science, ICT and Art" },
+];
 
-    ],
-    current: [
-        {
-            name: "Dynatrace Associate",
-            source: "Dynatrace University",
-            date: "Summer 2026",
-            grade: "Commencing soon",
-            progress: "Next certification for a tool used at Fujitsu.",
-        },
-    ],
-    future: [
-        {
-            name: "Check back for future updates!",
-            source: "",
-            date: "",
-            grade: "Coming Soon",
-            progress: "",
-        }
-    ],
-};
+const courses = [
+    {
+        name: "AWS Cloud Practitioner",
+        source: "Amazon Web Services",
+        date: "April 2026",
+        grade: "PASS",
+        progress: "Studied alongside building small AWS projects to apply the material in practice.",
+    },
+    {
+        name: "Certified C# Developer",
+        source: "W3 Schools",
+        date: "April 2023",
+        grade: "PASS",
+        progress: "Initial self-guided learning in 2023 prior to my Foundation Degree at Fujitsu.",
+    },
+];
 
 export default function CvPage() {
     return (
@@ -173,11 +171,21 @@ export default function CvPage() {
                                 </h1>
                             </div>
                             <p className="mt-5 max-w-xl text-base leading-7 text-neutral-700 dark:text-neutral-300">
-                                Software support apprentice and developer with experience across application support, cloud and deployment environments, technical operations and digital project delivery. I am especially interested in building practical software, developing strong engineering habits and continuing to grow as a software developer across various platforms and technologies.
+                                Technically qualified professional with a distinction-grade HLA in Software Development and a 1:1 degree in Business Studies with Marketing. Experienced across application support, technical administration and commercial roles within large enterprise environments including a critical public-sector infrastructure project. Bringing a practical understanding of both technical and business operations with a self-motivated approach to learning and development. Seeking a remote-first or Northern Ireland-based role where there is genuine opportunity to grow, contribute and specialise over time.
                             </p>
 
+                            <div className="mt-4 flex flex-wrap gap-2">
+                                <span className="inline-flex items-center gap-1.5 rounded-full border border-neutral-200 bg-neutral-100 px-2.5 py-1 text-xs font-semibold text-neutral-700 dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-200">
+                                    <MapPin className="h-3.5 w-3.5" />
+                                    Derry~Londonderry, Northern Ireland
+                                </span>
+                                <span className="inline-flex items-center gap-1.5 rounded-full border border-neutral-200 bg-neutral-100 px-2.5 py-1 text-xs font-semibold text-neutral-700 dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-200">
+                                    <BadgeCheck className="h-3.5 w-3.5" />
+                                    SC Cleared
+                                </span>
+                            </div>
 
-                            <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+                            <div className="mt-5 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
                                 <a
                                     href="https://www.linkedin.com/in/shane-b-9ba978239/"
                                     target="_blank"
@@ -195,13 +203,6 @@ export default function CvPage() {
                                 >
                                     <ExternalLink className="h-4 w-4" />
                                     GitHub
-                                </a>
-                                <a
-                                    href="/cv-private"
-                                    className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-neutral-900 bg-neutral-900 px-4 py-2 text-sm font-semibold text-white transition hover:bg-neutral-800 sm:w-auto dark:border-white dark:bg-white dark:text-neutral-950 dark:hover:bg-neutral-200"
-                                >
-                                    <UserRound className="h-4 w-4" />
-                                    Private CV
                                 </a>
                             </div>
                         </div>
@@ -242,10 +243,10 @@ export default function CvPage() {
                     <div className="rounded-[1.75rem] border border-neutral-200 bg-white/90 p-5 shadow-sm dark:border-neutral-800 dark:bg-neutral-950 sm:p-6">
                         <div className="flex items-center gap-3">
                             <LayoutGrid className="h-6 w-6 text-black dark:text-white sm:h-7 sm:w-7" />
-                            <h2 className="text-lg font-semibold sm:text-xl">Welcome to my Public CV!</h2>
+                            <h2 className="text-lg font-semibold sm:text-xl">Open to Opportunities</h2>
                         </div>
                         <p className="mt-4 text-sm leading-7 text-neutral-700 dark:text-neutral-300">
-                            This page is intended as a concise public summary. More detailed career history, fuller context and private information are kept off the public-facing site. Only employers I have applied for a role with will be have the credentials to access this page, or you can request it by contacting me.
+                            I am actively looking for a remote-first or Northern Ireland-based role in software development or support engineering. If you would like to get in touch, please reach out via LinkedIn or email at <a href="mailto:sabunting@icloud.com" className="font-semibold underline underline-offset-4">sabunting@icloud.com</a>.
                         </p>
                     </div>
                 </section>
@@ -350,7 +351,7 @@ export default function CvPage() {
                         <div className="mt-5 space-y-4">
                             {education.map((item) => (
                                 <article
-                                    key={item.institution}
+                                    key={item.award}
                                     className="rounded-[1.25rem] border border-neutral-200 p-4 dark:border-neutral-800"
                                 >
                                     <div className="flex items-start gap-4">
@@ -372,16 +373,13 @@ export default function CvPage() {
                                                     <Building2 className="h-4 w-4" />
                                                     {item.institution}
                                                 </span>
+                                                {item.institutionNote && (
+                                                    <span className="text-xs text-neutral-500 dark:text-neutral-400">{item.institutionNote}</span>
+                                                )}
                                                 <span className="inline-flex items-center gap-1.5 rounded-full border border-neutral-200 bg-neutral-100 px-2.5 py-1 text-xs font-semibold text-neutral-700 dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-200">
                                                     <CalendarDays className="h-3.5 w-3.5" />
-                                                    {item.period}
+                                                    {item.dateRange}
                                                 </span>
-                                                {"dateRange" in item && (
-                                                    <span className="inline-flex items-center gap-1.5 rounded-full border border-neutral-200 bg-neutral-100 px-2.5 py-1 text-xs font-semibold text-neutral-700 dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-200">
-                                                        <CalendarDays className="h-3.5 w-3.5" />
-                                                        {item.dateRange}
-                                                    </span>
-                                                )}
                                             </div>
                                             <p className="mt-3 text-sm leading-7 text-neutral-700 dark:text-neutral-300">
                                                 {item.result}
@@ -390,6 +388,17 @@ export default function CvPage() {
                                     </div>
                                 </article>
                             ))}
+                            <div className="mt-2 rounded-[1.25rem] border border-neutral-200 p-4 dark:border-neutral-800">
+                                <p className="text-xs font-semibold uppercase tracking-widest text-neutral-500 dark:text-neutral-400">Earlier Qualifications</p>
+                                <div className="mt-3 space-y-2">
+                                    {earlierQualifications.map((q) => (
+                                        <div key={q.label} className="flex flex-wrap gap-x-2 text-sm">
+                                            <span className="font-semibold text-neutral-900 dark:text-white">{q.label}</span>
+                                            <span className="text-neutral-600 dark:text-neutral-400">{q.detail}</span>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </section>
@@ -400,87 +409,27 @@ export default function CvPage() {
                         <h2 className="text-lg font-semibold sm:text-xl">Short Courses</h2>
                     </div>
 
-                    <div className="mt-5 grid gap-6 xl:grid-cols-3">
-
-
-                        <div className="space-y-4">
-                            <div className="flex items-center gap-2 text-base font-semibold text-neutral-900 dark:text-white">
-                                <Star className="h-4 w-4" />
-                                Past
-                            </div>
-                            {courses.past.map((course) => (
-                                <article
-                                    key={course.name}
-                                    className="rounded-[1.25rem] border border-neutral-200 p-4 dark:border-neutral-800 bg-black/10 dark:bg-neutral-900/50"
-                                >
-                                    <h3 className="text-base font-semibold text-neutral-950 dark:text-white">
-                                        {course.name}
-                                    </h3>
-                                    <div className="mt-2 space-y-2 text-sm text-neutral-600 dark:text-neutral-400">
-                                        <p className="font-semibold text-neutral-900 dark:text-white">{course.source}</p>
-                                        <p>{course.date}</p>
-                                        <p className="inline-flex rounded-full border border-emerald-300 bg-emerald-50 px-2.5 py-1 text-xs font-semibold text-emerald-800 dark:border-emerald-800 dark:bg-emerald-950/50 dark:text-emerald-200">
-                                            {course.grade}
-                                        </p>
-                                    </div>
-                                    <p className="mt-3 text-sm leading-7 text-neutral-700 dark:text-neutral-300">
-                                        {course.progress}
+                    <div className="mt-5 grid gap-4 sm:grid-cols-2">
+                        {courses.map((course) => (
+                            <article
+                                key={course.name}
+                                className="rounded-[1.25rem] border border-neutral-200 p-4 dark:border-neutral-800 bg-black/10 dark:bg-neutral-900/50"
+                            >
+                                <h3 className="text-base font-semibold text-neutral-950 dark:text-white">
+                                    {course.name}
+                                </h3>
+                                <div className="mt-2 space-y-2 text-sm text-neutral-600 dark:text-neutral-400">
+                                    <p className="font-semibold text-neutral-900 dark:text-white">{course.source}</p>
+                                    <p>{course.date}</p>
+                                    <p className="inline-flex rounded-full border border-emerald-300 bg-emerald-50 px-2.5 py-1 text-xs font-semibold text-emerald-800 dark:border-emerald-800 dark:bg-emerald-950/50 dark:text-emerald-200">
+                                        {course.grade}
                                     </p>
-                                </article>
-                            ))}
-                        </div>
-                        <div className="space-y-4">
-                            <div className="flex items-center gap-2 text-base font-semibold text-neutral-900 dark:text-white">
-                                <BadgeCheck className="h-4 w-4" />
-                                Current
-                            </div>
-                            {courses.current.map((course) => (
-                                <article
-                                    key={course.name}
-                                    className="rounded-[1.25rem] border border-neutral-200 p-4 dark:border-neutral-800 bg-black/10 dark:bg-neutral-900/50"
-                                >
-                                    <h3 className="text-base font-semibold text-neutral-950 dark:text-white">
-                                        {course.name}
-                                    </h3>
-                                    <div className="mt-2 space-y-2 text-sm text-neutral-600 dark:text-neutral-400">
-                                        <p className="font-semibold text-neutral-900 dark:text-white">{course.source}</p>
-                                        <p>{course.date}</p>
-                                        <p className="inline-flex rounded-full border border-amber-300 bg-amber-50 px-2.5 py-1 text-xs font-semibold text-amber-800 dark:border-amber-800 dark:bg-amber-950/50 dark:text-amber-200">
-                                            {course.grade}
-                                        </p>
-                                    </div>
-                                    <p className="mt-3 text-sm leading-7 text-neutral-700 dark:text-neutral-300">
-                                        {course.progress}
-                                    </p>
-                                </article>
-                            ))}
-                        </div>
-                        <div className="space-y-4">
-                            <div className="flex items-center gap-2 text-base font-semibold text-neutral-900 dark:text-white">
-                                <Flag className="h-4 w-4" />
-                                Future
-                            </div>
-                            {courses.future.map((course) => (
-                                <article
-                                    key={course.name}
-                                    className="rounded-[1.25rem] border border-neutral-200 p-4 dark:border-neutral-800 bg-black/10 dark:bg-neutral-900/50"
-                                >
-                                    <h3 className="text-base font-semibold text-neutral-950 dark:text-white">
-                                        {course.name}
-                                    </h3>
-                                    <div className="mt-2 space-y-2 text-sm text-neutral-600 dark:text-neutral-400">
-                                        <p className="font-semibold text-neutral-900 dark:text-white">{course.source}</p>
-                                        <p>{course.date}</p>
-                                        <p className="inline-flex rounded-full border border-neutral-300 bg-neutral-50 px-2.5 py-1 text-xs font-semibold text-neutral-700 dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-200">
-                                            {course.grade}
-                                        </p>
-                                    </div>
-                                    <p className="mt-3 text-sm leading-7 text-neutral-700 dark:text-neutral-300">
-                                        {course.progress}
-                                    </p>
-                                </article>
-                            ))}
-                        </div>
+                                </div>
+                                <p className="mt-3 text-sm leading-7 text-neutral-700 dark:text-neutral-300">
+                                    {course.progress}
+                                </p>
+                            </article>
+                        ))}
                     </div>
                 </section>
 
@@ -489,15 +438,29 @@ export default function CvPage() {
                         <Sparkles className="h-6 w-6 text-black dark:text-white sm:h-7 sm:w-7" />
                         <h2 className="text-lg font-semibold sm:text-xl">Skills</h2>
                     </div>
-                    <div className="mt-5 flex flex-wrap gap-2">
-                        {skills.map((skill) => (
-                            <span
-                                key={skill}
-                                className="rounded-full border border-neutral-200 px-3 py-1.5 text-sm text-neutral-700 dark:border-neutral-800 dark:text-neutral-300"
-                            >
-                                {skill}
-                            </span>
-                        ))}
+                    <div className="mt-5 grid gap-6 md:grid-cols-2">
+                        <div>
+                            <p className="text-xs font-semibold uppercase tracking-widest text-neutral-500 dark:text-neutral-400">Technical</p>
+                            <div className="mt-3 space-y-3">
+                                {skills.technical.map((row) => (
+                                    <div key={row.category}>
+                                        <p className="text-sm font-semibold text-neutral-900 dark:text-white">{row.category}</p>
+                                        <p className="mt-0.5 text-sm text-neutral-600 dark:text-neutral-400">{row.items}</p>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                        <div>
+                            <p className="text-xs font-semibold uppercase tracking-widest text-neutral-500 dark:text-neutral-400">Professional</p>
+                            <ul className="mt-3 space-y-2">
+                                {skills.professional.map((item) => (
+                                    <li key={item} className="flex items-start gap-2 text-sm text-neutral-700 dark:text-neutral-300">
+                                        <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-neutral-400 dark:bg-neutral-600" />
+                                        {item}
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
                     </div>
                 </section>
             </div>
